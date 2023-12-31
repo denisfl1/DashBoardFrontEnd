@@ -1,0 +1,33 @@
+.App{
+    display: flex;
+
+}
+
+.LateralBarContainer{
+    height: 100vh;
+    width: 300px;
+    background-color:#FFF1DF;
+    display: flex;
+}
+
+.LateralBar li{
+    list-style: none;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.Header{
+    height: 80px;
+    width: 100%;
+    background-color: antiquewhite;
+    top:0;
+    display: flex;
+}
+
+
+.HomePageContainer{
+    width: 100%;
+    height: 100vh;
+
+}
+

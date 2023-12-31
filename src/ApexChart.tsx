@@ -3,9 +3,9 @@ import ReactApexChart from "react-apexcharts";
 import { API } from "./Api"
 
 
-function Chart(){
+const Chart:React.FC=()=>{
 
-    const [Options,setOptions] = useState<any>('')
+    const [Options,setOptions] = useState<String>('')
     const GetData:String|null = localStorage.getItem('apex') 
 
     let Dates:String[] = []
@@ -54,11 +54,12 @@ function Chart(){
 
     },[Options])
 
-    const HandleClick = (e:any)=>{
+    const HandleClick:React.ChangeEventHandler<HTMLSelectElement> = (e)=>{
+        const Event = e.target.value
 
         setOptions(e.target.value)
-        localStorage.setItem('apex',JSON.stringify(e.target.value))
-        console.log(e.target.value)
+        localStorage.setItem('apex',JSON.stringify(Event))
+        console.log(Event)
     }
     
 
@@ -81,11 +82,12 @@ function Chart(){
             style:{
                 fontSize:"40px"
             }
-        },
+        }
+        // ,
 
-        chart: {
-            type: GetData
-          }
+        // chart: {
+        //     type: Options
+        //   }
     }
 
 for (let i = 0; i < DATES.length; i++) {
@@ -97,7 +99,16 @@ for (let i = 0; i < DATES.length; i++) {
   DATAObjects.push(dataObject);
 }
 
-    const series= [44, 55, 41, 17, 15]
+    const series= [
+        
+        // 44, 55, 41, 17, 15
+        {
+        data:DATAObjects
+    
+        }
+    
+    
+    ]
 
 const GraphiceType =
 
@@ -126,7 +137,7 @@ return(
     <ReactApexChart 
     options={options} 
     series={series}
-    type={'pie'}
+    type={"candlestick"}
     height={'450'}
     width={"100%"}
   
@@ -143,4 +154,5 @@ return(
  
 )
 
-}export default Chart
+}
+export default Chart
