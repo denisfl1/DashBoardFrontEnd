@@ -1,6 +1,5 @@
 .App{
     display: flex;
-
 }
 
 .LateralBarContainer{
@@ -8,6 +7,17 @@
     width: 300px;
     background-color:#FFF1DF;
     display: flex;
+}
+
+.LateralBarList{
+    display:flex;
+    align-items: baseline;
+}
+
+.LateralBarList img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
 .LateralBar li{

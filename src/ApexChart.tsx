@@ -77,17 +77,13 @@ const Chart:React.FC=()=>{
             }
         },
         title:{
-            text: "Gráfico",
+            text: "IBM Grafic",
             align:'center',
             style:{
                 fontSize:"40px"
             }
         }
-        // ,
-
-        // chart: {
-        //     type: Options
-        //   }
+       
     }
 
 for (let i = 0; i < DATES.length; i++) {
