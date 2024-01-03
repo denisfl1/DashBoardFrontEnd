@@ -2,25 +2,113 @@
     display: flex;
 }
 
+.LoginContainer{
+    min-height: 100vh;
+    min-width: 100%;
+    align-items: center;    
+    display: flex;
+    justify-content: center;
+}
+
+.LoginContent{
+    background-color:#ffffff;
+    /* border: 1px solid  rgb(193, 192, 192); */
+    width: 500px;
+    height: 600px;
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    margin: auto;
+
+}
+
+.LoginContent form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    font-size: 20px;
+    width: 100%;
+}
+
+.LoginContent form img{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.LoginContent label{
+    margin-bottom: 5px;
+}
+
+.LoginContent input{
+    height: 40px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border:1px solid #c1c0c0
+}
+
+.LoginContent button{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+    border-radius: 10px;
+    border:1px solid black;
+    background-color: #484545;
+    color: #ffffff;
+    font-size: 15px;
+
+}
+
+.HRContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.HrLeft{
+    width: calc((100%/8) * 3.5)
+}
+
+.HrRight {
+    width: calc((100%/8) * 3.5)
+}
+
+.ORDiv{
+    width: 50px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.HRContainer hr{
+    height: 1px;
+    border: none;
+    background: #666;
+}
+
+
 .LateralBarContainer{
     height: 100vh;
     width: 300px;
     background-color:#ffffff;
     display: flex;
-    border-right: 1px solid rgb(193, 192, 192);
+    border-right: 1px solid #c1c0c0;
     overflow-x: hidden;
     transition: width 450ms ease;
-}
-
-.LateralBarContainer li{
-    opacity: 1;
-    transition: ease-in-out 1s ;
 }
 
 .LateralBarContainer.hide{
     width: 80px;
 }
 
+
+.LateralBarContainer li{
+    opacity: 1;
+    transition: ease-in-out 1s ;
+}
 
 .LateralBarContainer.hide li{
     opacity: 0;
@@ -35,29 +123,34 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    transition: all 1s;
+    height: 125px;
 }
 
-
-.LateralBarHeader img{
-   width: 25px;
-   height: 25px;
+.LateralBarImg{
+    width: 25px;
+    height: 25px;
 }
+
 
 .LateralBar ul{
- margin-top: 40px;
- padding-inline-start:20px;
+ margin-top:20px;
+ padding-inline-start:0;
 }
 
 .LateralBarList{
     display:flex;
     align-items: baseline;
+    border-radius: 5px;
 }
 
 .LateralBarList img{
     width: 25px;
     height: 25px;
     margin-right: 18px;
+    margin-left: 20px;
 }
 
 .LateralBarImg{
@@ -71,7 +164,12 @@ transition: all 500ms;
 .LateralBar li{
     list-style: none;
     font-size: 20px;
-    margin-bottom: 40px;
+    line-height: 60px;
+}
+
+.LateralBarList:hover{
+ background-color: #dcdcdc;
+ cursor: pointer;
 }
 
 .Header{

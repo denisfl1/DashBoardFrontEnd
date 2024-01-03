@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import logo from '../Icons/logo.png'
 import logout from '../Icons/sair.png'
 import config from '../Icons/configuracoes.png'
-import grafic from '../Icons/grafico.png'
+import agend from '../Icons/agenda.png'
 import home from '../Icons/home.png'
 import categories_icon from '../Icons/categories.png'
 import leftArrow from '../Icons/left-arrow.png'
@@ -33,12 +34,13 @@ return(
         <div className="LateralBar">
 
                 <div className="LateralBarHeader">
-             <img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
+                 <img width='100px' height='100px' src={logo}></img><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
                 </div>
 
             <ul>
+
                 <div className="LateralBarList"><img src={home}></img><li>Home</li></div>
-                <div className="LateralBarList"><img src={grafic}></img><li>Dashboard</li></div>
+                <div className="LateralBarList"><img src={agend}></img><li>Agenda</li></div>
                 <div className="LateralBarList"><img src={categories_icon }></img><li>Categories</li></div>
                 <div className="LateralBarList"><img src={config}></img><li>Settings</li></div>
                 <div className="LateralBarList"><img src={logout}></img><li>Sair</li></div>
