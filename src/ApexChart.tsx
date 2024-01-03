@@ -97,11 +97,11 @@ for (let i = 0; i < DATES.length; i++) {
 
     const series= [
         
-        // 44, 55, 41, 17, 15
-        {
-        data:DATAObjects
+        44, 55, 41, 17, 15
+        // {
+        // data:DATAObjects
     
-        }
+        // }
     
     
     ]
@@ -130,22 +130,22 @@ const GraphiceType =
 
 return(
     <>
-    <ReactApexChart 
+    {/* <ReactApexChart 
     options={options} 
     series={series}
-    type={"candlestick"}
+    type={"pie"}
     height={'450'}
     width={"100%"}
   
     
-    />
-    <select onChange={HandleClick}  >
+    /> */}
+    {/* <select onChange={HandleClick}  >
     {GraphiceType.map((it)=>{
         return(
         <option value={it}>{it}</option>
         )
     })}
-    </select>
+    </select> */}
     </>
  
 )

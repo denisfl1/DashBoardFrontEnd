@@ -5,8 +5,48 @@
 .LateralBarContainer{
     height: 100vh;
     width: 300px;
-    background-color:#FFF1DF;
+    background-color:#ffffff;
     display: flex;
+    border-right: 1px solid rgb(193, 192, 192);
+    overflow-x: hidden;
+    transition: width 450ms ease;
+}
+
+.LateralBarContainer li{
+    opacity: 1;
+    transition: ease-in-out 1s ;
+}
+
+.LateralBarContainer.hide{
+    width: 80px;
+}
+
+
+.LateralBarContainer.hide li{
+    opacity: 0;
+    transition:ease-in-out 300ms;
+}
+
+.LateralBar{
+    width: 100%;
+}
+
+.LateralBarHeader{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.LateralBarHeader img{
+   width: 25px;
+   height: 25px;
+}
+
+.LateralBar ul{
+ margin-top: 40px;
+ padding-inline-start:20px;
 }
 
 .LateralBarList{
@@ -15,9 +55,17 @@
 }
 
 .LateralBarList img{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    width: 25px;
+    height: 25px;
+    margin-right: 18px;
+}
+
+.LateralBarImg{
+transition: all 500ms;
+}
+
+.LateralBarContainer.hide .LateralBarImg{
+    transform: rotateY(180deg);
 }
 
 .LateralBar li{
@@ -27,11 +75,12 @@
 }
 
 .Header{
-    height: 80px;
+    height: 65px;
     width: 100%;
-    background-color: antiquewhite;
+    background-color: #ffffff;
     top:0;
     display: flex;
+    border-bottom: 1px solid rgb(218, 218, 218);
 }
 
 
@@ -41,3 +90,6 @@
 
 }
 
+.Dashboard1{
+    width: 600px;
+}

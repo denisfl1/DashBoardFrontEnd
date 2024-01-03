@@ -12,7 +12,11 @@ return(
 
     <div className="HomePageContainer">
              <Header></Header>
-        <Chart></Chart>
+
+            <div className="Dashboard1">
+            <Chart></Chart>
+            </div>
+     
        
     </div>
 
