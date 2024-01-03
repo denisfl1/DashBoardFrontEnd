@@ -12,7 +12,6 @@
 
 .LoginContent{
     background-color:#ffffff;
-    /* border: 1px solid  rgb(193, 192, 192); */
     width: 500px;
     height: 600px;
     border-radius: 5px;
@@ -22,7 +21,17 @@
 
 }
 
-.LoginContent form{
+.RegisterContent{
+    background-color:#ffffff;
+    width: 500px;
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    margin: auto;
+    margin-left: 50px;
+}
+
+.LoginContent form,.RegisterContent form{
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -31,26 +40,30 @@
     width: 100%;
 }
 
-.LoginContent form img{
+.LoginContent form img,.RegisterContent img{
     width: 200px;
     height: 200px;
     margin: auto;
 }
 
-.LoginContent label{
+.LoginContent label,.RegisterContent label{
     margin-bottom: 5px;
 }
 
-.LoginContent input{
+.LoginContent input,.RegisterContent input{
     height: 40px;
     margin-bottom: 15px;
     border-radius: 4px;
-    border:1px solid #c1c0c0
+    border:1px solid #c1c0c0;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+    
 }
 
-.LoginContent button{
+.LoginContent button,.RegisterContent button{
     width: 100%;
-    height: 40px;
+    height: 50px;
     margin: auto;
     border-radius: 10px;
     border:1px solid black;
@@ -77,7 +90,7 @@
     width: calc((100%/8) * 3.5)
 }
 
-.ORDiv{
+.OR_Div{
     width: 50px;
     text-align: center;
     font-size: 15px;
@@ -89,9 +102,12 @@
     background: #666;
 }
 
+.RegisterIMG{   
+    height: 100%;
+}
 
 .LateralBarContainer{
-    height: 100vh;
+    height: 100;
     width: 300px;
     background-color:#ffffff;
     display: flex;
