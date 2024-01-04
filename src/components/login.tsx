@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import logo from '../Icons/logo.png'
-import{ useParams} from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import { API } from "../Api";
 
 
 const Login:React.FC=()=>{
-    const url = useParams ()
+
     const navigate = useNavigate()
+    const [email,setEmail]= useState<string>()
+    const [password,setPassword]= useState<string>()
+
 
     const HandleRegister:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
         e.preventDefault()
@@ -14,20 +17,40 @@ const Login:React.FC=()=>{
 
     }
 
+    const SendLogin= async(e:React.MouseEvent<HTMLButtonElement>)=>{
+
+        e.preventDefault()
+
+        await API.post('/login',{email,password}).then(
+            res=>{
+                if(res.status == 200){
+                 
+                    alert("Logado com sucesso")
+                }
+                console.log(res.data)
+                console.log(email,password)
+            },error=>{
+                alert(error.response.data.error)
+            }
+        )
+
+
+    }
+
     return( 
 
         <div className="LoginContainer">
 
-                {url.type == "login" && <div className="LoginContent">
+               <div className="LoginContent">
                   
                     <form>
                     <img src={logo}></img>
                     <label>E-mail</label>
-                    <input></input>
+                    <input type="email" name="email" onChange={(e)=>setEmail(e.target.value)}></input>
                     <label>Senha</label>
-                    <input></input>
+                    <input type="password" name="password" onChange={(e)=>setPassword(e.target.value)}></input>
 
-                    <button>Login</button>
+                    <button onClick={SendLogin}>Login</button>
                     
                     <div className="HRContainer">
                         <div className="HrLeft"><hr></hr></div><div className="OR_Div">OU</div><div className="HrRight"><hr></hr></div>
@@ -35,39 +58,8 @@ const Login:React.FC=()=>{
                     <button onClick={HandleRegister}>Registre-se</button>
                     </form>
 
-                </div>}
-                {
-                    url.type === 'register' &&
-                <>
-                
-                <div className="RegisterIMG"> <img style={{width:'500px',height:'500px'}} src={logo}></img></div>
-                <div className="RegisterContent">
-                  
-                    <form>
-             
-                    <label>Nome</label>
-                    <input required type="text" name="name"></input>
-
-                    <label>Sobrenome</label>
-                    <input required type="text" name="surname"></input>
-
-                    <label>E-mail</label>
-                    <input required type="email" name="email"></input>
-                 
-                    <label>Senha</label>
-                    <input required type="password" name="password"></input>
-
-                    <label>Repita sua Senha</label>
-                    <input required type="password" name="password"></input>
-
-                    <button style={{marginTop:'20px'}}>Registrar</button>
-    
-    
-                    </form>
-
                 </div>
-                </>
-                }
+             
 
 
         </div>

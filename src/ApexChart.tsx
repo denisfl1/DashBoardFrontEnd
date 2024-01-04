@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import ReactApexChart from "react-apexcharts";
 import { API } from "./Api"
 
 

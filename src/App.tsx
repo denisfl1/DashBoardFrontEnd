@@ -3,6 +3,7 @@ import LateralBar from './components/LatateralBar'
 import HomePage from './Homepage';
 import Login from './components/login'
 import {Routes,Route,BrowserRouter} from 'react-router-dom'
+import Register from './components/register';
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
         <Routes>     
         <Route path='/home' element={<HomePage></HomePage>}></Route>
         <Route path='/:type' element={<Login></Login>}></Route>
-        <Route path='/authenticate' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
         </Routes>
         </BrowserRouter>
     </div>
