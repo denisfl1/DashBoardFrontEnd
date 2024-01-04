@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from '../Icons/logo.png'
 import{ useParams} from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 
 
 const Login:React.FC=()=>{
-    const {param} = useParams()
-    const [RorL ,setRorL] = useState(false)
-    
+    const url = useParams ()
+    const navigate = useNavigate()
 
     const HandleRegister:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
         e.preventDefault()
-        console.log(param)
-        setRorL(true)
+        navigate('/register')
 
     }
-
 
     return( 
 
         <div className="LoginContainer">
 
-                {!RorL ?<div className="LoginContent">
+                {url.type == "login" && <div className="LoginContent">
                   
                     <form>
                     <img src={logo}></img>
@@ -38,25 +35,30 @@ const Login:React.FC=()=>{
                     <button onClick={HandleRegister}>Registre-se</button>
                     </form>
 
-                </div>:
+                </div>}
+                {
+                    url.type === 'register' &&
                 <>
-                <div className="RegisterIMG"> <img style={{width:'400px',height:'400px'}} src={logo}></img></div>
+                
+                <div className="RegisterIMG"> <img style={{width:'500px',height:'500px'}} src={logo}></img></div>
                 <div className="RegisterContent">
                   
                     <form>
              
                     <label>Nome</label>
-                    <input type="text" name="name"></input>
+                    <input required type="text" name="name"></input>
+
                     <label>Sobrenome</label>
-                    <input type="text" name="surname"></input>
+                    <input required type="text" name="surname"></input>
+
                     <label>E-mail</label>
-                    <input type="email" name="email"></input>
+                    <input required type="email" name="email"></input>
                  
                     <label>Senha</label>
-                    <input type="password" name="password"></input>
+                    <input required type="password" name="password"></input>
 
                     <label>Repita sua Senha</label>
-                    <input  type="password" name="password"></input>
+                    <input required type="password" name="password"></input>
 
                     <button style={{marginTop:'20px'}}>Registrar</button>
     

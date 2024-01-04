@@ -6,18 +6,18 @@ import agend from '../Icons/agenda.png'
 import home from '../Icons/home.png'
 import categories_icon from '../Icons/categories.png'
 import leftArrow from '../Icons/left-arrow.png'
+import { useNavigate } from "react-router-dom";
 
     const LateralBar:React.FC=()=>{
 
     const [OPEN_BAR,setOPEN_BAR] = useState(false)
-
+    const navigate = useNavigate()
 
 
     const Handle_Window:React.MouseEventHandler<HTMLImageElement> = (e)=>{
         
         if(e.target instanceof HTMLElement){
-            console.log(e.target.className)
-            console.log(OPEN_BAR)
+
             if(!OPEN_BAR){        
                 setOPEN_BAR(true)
             }else{
