@@ -54,18 +54,7 @@ const Chart:React.FC=()=>{
 
     },[Options])
 
-    const HandleClick:React.ChangeEventHandler<HTMLSelectElement> = (e)=>{
-        const Event = e.target.value
 
-        setOptions(e.target.value)
-        localStorage.setItem('apex',JSON.stringify(Event))
-        console.log(Event)
-    }
-    
-
-
-
-   
 
     const options:object = {
         xaxis:{
