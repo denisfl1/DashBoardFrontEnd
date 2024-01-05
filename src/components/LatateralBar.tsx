@@ -6,13 +6,10 @@ import agend from '../Icons/agenda.png'
 import home from '../Icons/home.png'
 import categories_icon from '../Icons/categories.png'
 import leftArrow from '../Icons/left-arrow.png'
-import { useNavigate } from "react-router-dom";
 
     const LateralBar:React.FC=()=>{
 
     const [OPEN_BAR,setOPEN_BAR] = useState(false)
-    const navigate = useNavigate()
-
 
     const Handle_Window:React.MouseEventHandler<HTMLImageElement> = (e)=>{
         
@@ -31,10 +28,10 @@ import { useNavigate } from "react-router-dom";
 return(
     <div className={ !OPEN_BAR ? "LateralBarContainer": "LateralBarContainer hide"}>
 
-        <div className="LateralBar">
+        <div  className="LateralBar">
 
-                <div className="LateralBarHeader">
-                 <img width='100px' height='100px' src={logo}></img><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
+                <div style={{overflow:"hidden"}}  className="LateralBarHeader">
+                 <img width='100px' height='100px' style={{minWidth:"100px"}} src={logo}></img><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
                 </div>
 
             <ul>

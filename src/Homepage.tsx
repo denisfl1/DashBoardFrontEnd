@@ -1,7 +1,5 @@
 import React from "react";
-import Chart from './ApexChart';
-import Header from "./components/Header";
-import Login from "./components/login";
+import LateralBar from "./components/LatateralBar";
 
 
 
@@ -12,14 +10,9 @@ function HomePage(){
 return(
 
     <div className="HomePageContainer">
-             {/* <Header></Header> */}
-            
-            {/* <div className="Dashboard1">
-            <Chart></Chart> */}
-            <Login></Login>
-            {/* </div> */}
-     
-       
+  
+        <LateralBar></LateralBar>
+    
     </div>
 
 

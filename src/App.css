@@ -71,6 +71,7 @@
     background-color: #484545;
     color: #ffffff;
     font-size: 15px;
+    cursor: pointer;
 
 }
 
@@ -113,7 +114,6 @@
     background-color:#ffffff;
     display: flex;
     border-right: 1px solid #c1c0c0;
-    overflow-x: hidden;
     transition: width 450ms ease;
 }
 
@@ -134,10 +134,11 @@
 
 .LateralBar{
     width: 100%;
+
 }
 
+
 .LateralBarHeader{
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
