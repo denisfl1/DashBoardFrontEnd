@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from '../Icons/logo.png'
 import { useNavigate } from "react-router-dom";
 import { API } from "../Api";
+import { AuthContext } from "../contexts/authContext";
 
 
 const Login:React.FC=()=>{
@@ -9,6 +10,8 @@ const Login:React.FC=()=>{
     const navigate = useNavigate()
     const [email,setEmail]= useState<string>()
     const [password,setPassword]= useState<string>()
+
+    const {Logged} = useContext(AuthContext)
 
 
     const HandleRegister:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
@@ -27,8 +30,8 @@ const Login:React.FC=()=>{
                  
                     alert("Logado com sucesso")
                 }
+                Logged && Logged(res.data)
                 console.log(res.data)
-                console.log(email,password)
             },error=>{
                 alert(error.response.data.error)
             }
