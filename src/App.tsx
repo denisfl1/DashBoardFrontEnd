@@ -16,8 +16,18 @@ function App() {
       children:ReactNode
     }
 
+    const Private:React.FC<IPrivate>=({children})=>{
+      const {Authenticated} = useContext(AuthContext)
+
+      if(!Authenticated){
+        return <Navigate to="/login"/>
+      }
+
+      return <>{children}</>
+    }
+
     const Redirect:React.FC<IPrivate>= ({children})=>{
-      const {Authenticated}= useContext(AuthContext)
+      const {Authenticated} = useContext(AuthContext)
 
       if(Authenticated){
         return <Navigate to="/home"/>
@@ -34,7 +44,7 @@ function App() {
         <BrowserRouter>
         <AuthProvider>
         <Routes>     
-        <Route path='/home' element={<HomePage></HomePage>}></Route>
+        <Route path='/home' element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         </Routes>

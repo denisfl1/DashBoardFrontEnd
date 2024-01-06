@@ -6,6 +6,7 @@ interface IAuthContext{
 children:React.ReactNode;
 Authenticated?:boolean;
 Logged?:(data:any)=>void;
+Logout?:()=>void;
 
 }
 
@@ -27,9 +28,15 @@ const Logged = (data:any)=>{
 
 }
 
+const Logout = ()=>{
+
+setUser(null)
+
+}
+
 return(
 
-    <AuthContext.Provider value={{Authenticated:!!user,Logged,children}}>
+    <AuthContext.Provider value={{Authenticated:!!user,Logged,Logout,children}}>
           
     {children}
 
