@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 
 
@@ -18,12 +18,24 @@ export const AuthContext = createContext<IAuthContext>(
 export const AuthProvider:React.FC<IAuthContext> = ({children})=>{
 
 const [user,setUser] = useState(null)
+const UserDATA = localStorage.getItem('user')
+
+
+useEffect(()=>{
+
+    if(UserDATA){
+
+    setUser(JSON.parse(UserDATA))
+    
+    }
+
+},[])
 
 
 const Logged = (data:any)=>{
 
     const LoggedDATA = data.user
-    // const token = data.token
+    localStorage.setItem('user',JSON.stringify(LoggedDATA))
     setUser(data.user)
 
 }

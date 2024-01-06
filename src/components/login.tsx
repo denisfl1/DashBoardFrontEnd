@@ -27,11 +27,9 @@ const Login:React.FC=()=>{
         await API.post('/login',{email,password}).then(
             res=>{
                 if(res.status == 200){
-                 
-                    alert("Logado com sucesso")
+                    Logged && Logged(res.data)
                 }
-                Logged && Logged(res.data)
-                console.log(res.data)
+            
             },error=>{
                 alert(error.response.data.error)
             }

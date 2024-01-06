@@ -7,6 +7,7 @@ import {Routes,Route,BrowserRouter,Navigate} from 'react-router-dom'
 import Register from './components/register';
 import { useContext } from 'react';
 import { AuthContext, AuthProvider } from './contexts/authContext';
+import Header from './components/Header';
 
 
 
@@ -43,7 +44,8 @@ function App() {
 
         <BrowserRouter>
         <AuthProvider>
-        <Routes>     
+        <LateralBar></LateralBar>
+        <Routes>
         <Route path='/home' element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>

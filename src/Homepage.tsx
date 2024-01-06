@@ -1,6 +1,5 @@
 import React from "react";
-import LateralBar from "./components/LatateralBar";
-
+import Menu from "./components/menu"
 
 
 function HomePage(){
@@ -10,9 +9,14 @@ function HomePage(){
 return(
 
     <div className="HomePageContainer">
-  
-        <LateralBar></LateralBar>
-    
+
+
+            <div className="HomePageContent">
+
+                <Menu></Menu>
+                
+            </div>   
+
     </div>
 
 
