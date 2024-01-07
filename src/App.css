@@ -1,7 +1,7 @@
 .App{
-    display: flex;
     height: 100vh;
     width: 100%;
+    display: flex;
 }
 
 .LoginContainer{
@@ -118,6 +118,7 @@
     border-right: 1px solid #c1c0c0;
     transition: width 450ms ease;
     left: 0;
+    z-index: 1;
 }
 
 .HomePageContent{
@@ -205,14 +206,15 @@ transition: all 500ms;
     top:0;
     display: flex;
     border-bottom: 1px solid rgb(218, 218, 218);
+    margin: auto;
     position: relative;
 }
 
 
 .HomePageContainer{
-    display: flex;
     width: 100%;
     height: 100%;
+    display: flex;
 }
 
 .HomePageContent{
@@ -235,13 +237,18 @@ transition: all 500ms;
 
 
 .schedulingContainer{
-    height: 250px;
+    height: 280px;
     border: 1px solid #c1c0c0;
     border-radius: 8px;
     width: 300px;
     margin-left: 10px;
     position: relative;
+    align-items: center;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
     text-align: center;
+      
 }
 
 .schedulingContainer h1{

@@ -44,7 +44,6 @@ function App() {
 
         <BrowserRouter>
         <AuthProvider>
-        <LateralBar></LateralBar>
         <Routes>
         <Route path='/home' element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>
