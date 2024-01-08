@@ -1,4 +1,3 @@
-import React from "react";
 import Menu from "./components/menu"
 import Header from "./components/Header";
 import LateralBar from "./components/LatateralBar";
@@ -14,7 +13,7 @@ return(
             <LateralBar></LateralBar>
           
             <div className="HomePageContent">
-                
+                <Header></Header>
                 <Menu></Menu>
                 
             </div>   
