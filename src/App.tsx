@@ -24,7 +24,10 @@ function App() {
         return <Navigate to="/login"/>
       }
 
-      return <>{children}</>
+      return <div style={{display:'flex',width:"100%"}}>
+      <LateralBar></LateralBar>
+
+      {children}</div>
     }
 
     const Redirect:React.FC<IPrivate>= ({children})=>{
@@ -44,6 +47,7 @@ function App() {
 
         <BrowserRouter>
         <AuthProvider>
+     
         <Routes>
         <Route path='/home' element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>

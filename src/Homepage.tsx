@@ -10,7 +10,7 @@ function HomePage(){
 return(
 
     <div className="HomePageContainer">
-            <LateralBar></LateralBar>
+       
           
             <div className="HomePageContent">
                 <Header></Header>
