@@ -118,22 +118,6 @@
     z-index: 1;
 }
 
-.HomePageContainer{
-    height: 100vh;
-    display: flex;
-}
-
-.HomePageContent{
-    min-height: 100%;
-    width: 100%;
-    overflow-y: scroll;
-}
-
-.LateralBarContainer.hide{
-    width: 80px;
-}
-
-
 .LateralBarContainer li{
     opacity: 1;
     transition: ease-in-out 1s ;
@@ -144,11 +128,22 @@
     transition:ease-in-out 300ms;
 }
 
-.LateralBar{
-    width: 100%;
 
+.HomePageContainer{
+    height: 100vh;
+    min-height: 100%;
+    display: flex;
 }
 
+.LateralBarContainer.hide{
+    width: 80px;
+}
+
+.HomePageContent{
+    min-height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
 
 .LateralBarHeader{
     display: flex;
@@ -157,6 +152,10 @@
     flex-wrap: wrap;
     transition: all 1s;
     height: 125px;
+}
+
+.LateralBar{
+    width: 100%;
 }
 
 .LateralBarImg{
@@ -214,10 +213,6 @@ transition: all 500ms;
 }
 
 
-.HomePageContainer{
-   min-height: 100%;
-}
-
 .ConsultsContainerMenu{
     width: 100%;
     height: 100%;
@@ -238,14 +233,19 @@ transition: all 500ms;
     border-radius: 8px;
     width: 300px;
     margin-left: 10px;
-
     align-items: center;
     display: flex;
     flex-wrap:wrap;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
       
+}
+
+.schedulingContainer:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .schedulingContainer h1{

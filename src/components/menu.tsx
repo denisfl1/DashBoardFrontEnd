@@ -46,36 +46,6 @@ return(
             </div>
 
 
-            
-            <div className="schedulingContainer">
-
-            <img width="150px" src={addUser}></img>
-                <h1>Cadastro de Funcionários</h1>
-
-            </div>
-
-
-                 
-            <div className="schedulingContainer">
-
-            <img width="150px" src={addUser}></img>
-                <h1>Cadastro de Funcionários</h1>
-
-            </div>
-
-                 
-            <div className="schedulingContainer">
-
-            <img width="150px" src={addUser}></img>
-                <h1>Cadastro de Funcionários</h1>
-
-            </div>
-
-            
-
-            
-
-
 
       
        </div>
