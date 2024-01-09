@@ -11,6 +11,7 @@ function CreateEmplyee(){
     const [name,setName] = useState<string>()
     const [crm,setCRM] = useState<string>()
     const [specialty,setSpecialty] = useState<string>()
+    const [number,setNumber] = useState<string>()
 
 
     const SPECIALTY = [
@@ -41,7 +42,7 @@ function CreateEmplyee(){
         e.preventDefault()
             if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
 
-            await API.post('/newdoctor',{name,email,crm,specialty}).then(
+            await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
                 res=>{
                     if(res.status == 200){
                         alert("Registrado com sucesso")
@@ -72,6 +73,10 @@ return(
 
         <label>CRM</label>
         <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
+
+        <label>Número</label>
+        <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+
 
         <label>Especialidade</label>
 

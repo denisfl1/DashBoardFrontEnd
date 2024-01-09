@@ -3,6 +3,7 @@ import Agendado from '../Icons/agendado.png'
 import ConsultasAgendas from '../Icons/adicionar-evento.png'
 import addPacient from "../Icons/adicionar-amigo.png"
 import addUser from "../Icons/equipe-medica.png"
+import UserList from "../Icons/lista-de-usuarios.png"
 import { Link } from "react-router-dom";
 
 const Menu = ()=>{
@@ -42,11 +43,25 @@ return(
             <div className="schedulingContainer" >
             <Link to='/createEmployee' style={{textDecoration:"none",color:"black"}}>
             <img width="150px" src={addUser}></img>
-                <h1>Cadastro de Funcionários</h1>
+                <h1>Cadastro de Médicos</h1>
             </Link>
             </div>
 
 
+            
+            <div className="schedulingContainer">
+            <img width="180px" src={UserList}></img>
+                <h1>Lista de Pacientes</h1>
+
+            </div>
+
+
+
+            <div className="schedulingContainer" >        
+            <img width="150px" src={UserList}></img>
+                <h1>Lista de Médicos</h1>
+            </div>
+            
 
       
        </div>
