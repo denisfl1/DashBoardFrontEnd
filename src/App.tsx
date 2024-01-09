@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { AuthContext, AuthProvider } from './contexts/authContext';
 import Header from './components/Header';
 import CreateEmplyee from './createEmployees';
+import CreatePatient from './createPatient';
 
 
 
@@ -54,6 +55,7 @@ function App() {
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/createEmployee' element={<Private><CreateEmplyee/></Private>}></Route>
+        <Route path='/createPatient' element={<Private><CreatePatient/></Private>}></Route>
         </Routes>
         </AuthProvider>
         </BrowserRouter>

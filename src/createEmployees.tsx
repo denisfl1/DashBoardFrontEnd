@@ -60,7 +60,7 @@ function CreateEmplyee(){
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Novo Cadastro</h1><img  style={{marginLeft:"10px"}} height={"40px"} src={folha}></img></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos{">"}Novo Cadastro</h1><img  style={{marginLeft:"10px"}} height={"40px"} src={folha}></img></div>
     <div className="RegisterContent" >
       
         <form>
@@ -74,7 +74,7 @@ return(
         <label>CRM</label>
         <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
 
-        <label>Número</label>
+        <label>Número de Contato</label>
         <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
 
 

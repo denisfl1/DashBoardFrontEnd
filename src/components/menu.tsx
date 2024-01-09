@@ -33,9 +33,10 @@ return(
 
 
             <div className="schedulingContainer">
+            <Link to='/createPatient' style={{textDecoration:"none",color:"black"}}>
             <img width="180px" src={addPacient}></img>
                 <h1>Cadastro de Pacientes</h1>
-
+            </Link>
             </div>
 
 

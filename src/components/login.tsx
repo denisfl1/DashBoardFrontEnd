@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import logo from '../Icons/logo.png'
+import folha from "../Icons/folha.jpg"
 import { useNavigate } from "react-router-dom";
 import { API } from "../Api";
 import { AuthContext } from "../contexts/authContext";
@@ -45,7 +46,7 @@ const Login:React.FC=()=>{
                <div className="LoginContent">
                   
                     <form>
-                    <img src={logo}></img>
+                    <img src={folha}></img>
                     <label>E-mail</label>
                     <input type="email" name="email" onChange={(e)=>setEmail(e.target.value)}></input>
                     <label>Senha</label>
