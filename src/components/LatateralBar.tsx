@@ -8,6 +8,7 @@ import categories_icon from '../Icons/categories.png'
 import leftArrow from '../Icons/left-arrow.png'
 import Swal from "sweetalert2";
 import { AuthContext } from "../contexts/authContext";
+import { Link } from "react-router-dom";
 
     const LateralBar:React.FC=()=>{
 
@@ -57,9 +58,9 @@ return(
 
             <ul>
 
-                <div className="LateralBarList"><img src={home}></img><li>Home</li></div>
+            <Link to='/home' style={{textDecoration:"none",color:"black"}}><div className="LateralBarList"><img src={home}></img><li>Home</li></div></Link>   
                 <div className="LateralBarList"><img src={agend}></img><li>Agenda</li></div>
-                <div className="LateralBarList"><img src={categories_icon }></img><li>Categories</li></div>
+                {/* <div className="LateralBarList"><img src={categories_icon }></img><li>Categories</li></div> */}
                 <div className="LateralBarList"><img src={config}></img><li>Settings</li></div>
                 <div className="LateralBarList" onClick={HandleLogout}><img src={logout}></img><li>Sair</li></div>
 

@@ -8,6 +8,7 @@ import Register from './components/register';
 import { useContext } from 'react';
 import { AuthContext, AuthProvider } from './contexts/authContext';
 import Header from './components/Header';
+import CreateEmplyee from './createEmployees';
 
 
 
@@ -52,6 +53,7 @@ function App() {
         <Route path='/home' element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path='/login' element={<Redirect><Login></Login></Redirect>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/createEmployee' element={<Private><CreateEmplyee/></Private>}></Route>
         </Routes>
         </AuthProvider>
         </BrowserRouter>

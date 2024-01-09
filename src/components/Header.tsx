@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Menu from '../Icons/options.png'
+
 import { AuthContext } from "../contexts/authContext";
 import folha from "../Icons/folha.jpg"
 
@@ -11,7 +11,7 @@ return(
 
     <div className="Header">
 
-        <h1>{'> '}Bem vindo {UserName}</h1>
+        <h1>Bem vindo {UserName}</h1> <img style={{marginLeft:"10px"}} height={"40px"} src={folha}></img>
 
     </div>
 
