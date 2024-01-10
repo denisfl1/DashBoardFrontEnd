@@ -11,6 +11,7 @@ function CreatePatient(){
     const [email,setEmail]= useState<string>()
     const [name,setName] = useState<string>()
     const [crm,setCRM] = useState<string>()
+    const [contact_number,setContactNumber] = useState<string>()
     const [number,setNumber] = useState<string>()
     const [cep,setCEP] = useState<string>()
     const [adress,setAdress] = useState<string>()
@@ -38,8 +39,7 @@ function CreatePatient(){
 
 
     useEffect(()=>{
-        console.log(cep?.length)
-
+  
         if(cep?.length === 8){
 
       
@@ -50,7 +50,7 @@ function CreatePatient(){
                     if(res && res.status == 200){
                     setAdress(res.data.logradouro)
                     setNeighborhood(res.data.bairro)
-                    setNumber(`(${res.data.ddd})`)
+                    setContactNumber(`(${res.data.ddd})`)
                     console.log(res.data)
      
                 }
@@ -84,7 +84,7 @@ return(
     <input required type="text"  name="adress" onChange={(e)=>setCEP(e.target.value)}></input>
 
     <label>Número de Contato</label>
-    <input value={number} required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+    <input value={contact_number} required type="text"  name="number" onChange={(e)=>setContactNumber(e.target.value)}></input>
 
 
     </form>
@@ -100,7 +100,7 @@ return(
 
     
     <label>Número</label>
-    <input required type="text"  name="adress" ></input>
+    <input required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
 
           
     <button type={"submit"} style={{marginTop:'26px'}} onClick={SendData}>Registrar</button>
