@@ -2,56 +2,53 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import folha from "./Icons/folha.jpg"
 import axios from "axios";
-
+import {API} from "./Api"
 
 
 function CreatePatient(){
 
-
     const [email,setEmail]= useState<string>()
     const [name,setName] = useState<string>()
-    const [crm,setCRM] = useState<string>()
     const [contact_number,setContactNumber] = useState<string>()
-    const [number,setNumber] = useState<string>()
-    const [cep,setCEP] = useState<string>()
+    const [number_adress,setNumber] = useState<string>()
+    const [zipCode,setZipCode] = useState<string>()
     const [adress,setAdress] = useState<string>()
     const [neighborhood,setNeighborhood] = useState<string>()
-
 
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
-            if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
+        console.log(name,email,contact_number,number_adress,zipCode,adress,neighborhood)
+            if(!email?.trim() || !name?.trim() || !contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim())return alert("Preencha os campos em branco!")
 
-            // await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
-            //     res=>{
-            //         if(res.status == 200){
-            //             alert("Registrado com sucesso")
-            //         }
+            await API.post('/registerAdmin',{name,email,contact_number,number_adress,zipCode,adress,neighborhood}).then(
+                res=>{
+                    if(res.status == 200){
+                        alert("Registrado com sucesso")
+                    }
             
 
-            //     },error=>{
-            //       alert(error.response.data.error)
-            //     }
-            // )
+                },error=>{
+                  alert(error.response.data.error)
+                }
+            )
 
     }
 
 
     useEffect(()=>{
   
-        if(cep?.length === 8){
+        if(zipCode?.length === 8){
 
       
         (async()=>{
 
-           await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then(
+           await axios.get(`https://viacep.com.br/ws/${zipCode}/json/`).then(
                 res=>{
                     if(res && res.status == 200){
                     setAdress(res.data.logradouro)
                     setNeighborhood(res.data.bairro)
                     setContactNumber(`(${res.data.ddd})`)
-                    console.log(res.data)
      
                 }
                 },error=>{
@@ -63,7 +60,7 @@ function CreatePatient(){
     }
 
     
-    },[cep])
+    },[zipCode])
 
 
 return(
@@ -81,7 +78,7 @@ return(
     <input required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
 
     <label>CEP</label>
-    <input required type="text"  name="adress" onChange={(e)=>setCEP(e.target.value)}></input>
+    <input required type="text"  name="adress" onChange={(e)=>setZipCode(e.target.value)}></input>
 
     <label>Número de Contato</label>
     <input value={contact_number} required type="text"  name="number" onChange={(e)=>setContactNumber(e.target.value)}></input>
@@ -100,7 +97,7 @@ return(
 
     
     <label>Número</label>
-    <input required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
+    <input value={number_adress} required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
 
           
     <button type={"submit"} style={{marginTop:'26px'}} onClick={SendData}>Registrar</button>
