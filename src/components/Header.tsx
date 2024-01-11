@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 
 import { AuthContext } from "../contexts/authContext";
-import folha from "../Icons/folha.jpg"
 
 function Header(){
 
@@ -11,7 +10,7 @@ return(
 
     <div className="Header">
 
-        <h1>{UserName}</h1> <img style={{marginLeft:"10px"}} height={"40px"} src={folha}></img>
+        <h1>{UserName}</h1> <img style={{marginLeft:"10px"}} height={"40px"} ></img>
 
     </div>
 

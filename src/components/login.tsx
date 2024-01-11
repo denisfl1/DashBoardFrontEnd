@@ -29,7 +29,7 @@ const Login:React.FC=()=>{
             res=>{
                 if(res && res.status == 200){
                     Logged && Logged(res.data)
-                    console.log(res.data)
+  
                 }
             
             },error=>{

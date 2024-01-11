@@ -9,12 +9,15 @@ import { AuthContext } from "../contexts/authContext";
 function FirtTimePage(){
 
     const [password,setPassword]= useState<string>()
+    const [password_Confirm,setPasswordConfirm]= useState<string>()
     const {Logged,user}= useContext(AuthContext)
 
 
     const SendLogin= async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
+
+        if(password !== password_Confirm)return alert("Senhas Diferentes")
         
         const email =  "denisfl3@hotmail.com"
 
@@ -62,7 +65,7 @@ return(
 
                
          <label>Repita a senha</label>
-         <input type="password" name="password" onChange={(e)=>setPassword(e.target.value)}></input>
+         <input type="password" name="password" onChange={(e)=>setPasswordConfirm(e.target.value)}></input>
 
 
          <button onClick={SendLogin}>Salvar</button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
-
+import {API} from "../Api"
 
 interface IAuthContext{
 children:React.ReactNode;
@@ -22,6 +22,7 @@ export const AuthProvider:React.FC<IAuthContext> = ({children})=>{
 const [user,setUser] = useState(null)
 const UserDATA:any = localStorage.getItem('user')
 const UserNAME:any = localStorage.getItem('userName')
+const token = localStorage.getItem('token')
 const [UserName,setUserName] = useState()
 const [firstTime,setFirstTime] = useState()
 
@@ -38,12 +39,16 @@ useEffect(()=>{
 
 },[])
 
+API.defaults.headers.Authorization = token
+
 
 const Logged = (data:any)=>{
 
     const LoggedDATA = data.user
     localStorage.setItem('user',JSON.stringify(LoggedDATA))
     localStorage.setItem('userName',JSON.stringify(data.user.name))
+    localStorage.setItem('firstTime',JSON.stringify(data.user.firstTime))
+    localStorage.setItem('token',data.token)
     setUser(data.user)
     setUserName(data.user.name)
     setFirstTime(data.user.firstTime)
@@ -52,6 +57,11 @@ const Logged = (data:any)=>{
 const Logout = ()=>{
 
 setUser(null)
+localStorage.removeItem('user')
+localStorage.removeItem('token')
+localStorage.removeItem('userName')
+localStorage.removeItem('firstTime')
+
 
 }
 
