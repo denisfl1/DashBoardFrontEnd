@@ -7,9 +7,9 @@ import {Routes,Route,BrowserRouter,Navigate} from 'react-router-dom'
 import Register from './components/register';
 import { useContext } from 'react';
 import { AuthContext, AuthProvider } from './contexts/authContext';
-import Header from './components/Header';
-import CreateEmplyee from './createEmployees';
+import CreateEmplyee from './createDoctor';
 import CreatePatient from './createPatient';
+import FirtTimePage from './components/firstTimePage';
 
 
 
@@ -20,10 +20,18 @@ function App() {
     }
 
     const Private:React.FC<IPrivate>=({children})=>{
-      const {Authenticated} = useContext(AuthContext)
+      const {Authenticated,firstTime} = useContext(AuthContext)
 
-      if(!Authenticated){
-        return <Navigate to="/login"/>
+      if(!Authenticated)return <Navigate to="/login"/>
+      
+
+      if(Authenticated && firstTime){
+          return <div style={{display:'flex',width:"100%"}}>
+          <LateralBar></LateralBar>
+          <FirtTimePage/>
+      
+          </div> 
+              
       }
 
       return <div style={{display:'flex',width:"100%"}}>
@@ -56,6 +64,7 @@ function App() {
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/createEmployee' element={<Private><CreateEmplyee/></Private>}></Route>
         <Route path='/createPatient' element={<Private><CreatePatient/></Private>}></Route>
+        <Route path='/firstTimePage' element={<FirtTimePage/>}></Route>
         </Routes>
         </AuthProvider>
         </BrowserRouter>

@@ -29,7 +29,7 @@ function CreatePatient(){
             
 
                 },error=>{
-                  alert(error.response.data.error)
+                    alert(error.response.data.message)
                 }
             )
 
@@ -52,7 +52,8 @@ function CreatePatient(){
      
                 }
                 },error=>{
-        
+                    
+                   
                 }
                )
 

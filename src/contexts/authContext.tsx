@@ -7,7 +7,9 @@ children:React.ReactNode;
 Authenticated?:boolean;
 Logged?:(data:any)=>void;
 Logout?:()=>void;
-UserName?:string
+user?:any;
+UserName?:string;
+firstTime?:boolean;
 }
 
 
@@ -21,6 +23,7 @@ const [user,setUser] = useState(null)
 const UserDATA:any = localStorage.getItem('user')
 const UserNAME:any = localStorage.getItem('userName')
 const [UserName,setUserName] = useState()
+const [firstTime,setFirstTime] = useState()
 
 
 useEffect(()=>{
@@ -31,6 +34,7 @@ useEffect(()=>{
     setUserName(JSON.parse(UserNAME))
 
     }
+    
 
 },[])
 
@@ -42,7 +46,7 @@ const Logged = (data:any)=>{
     localStorage.setItem('userName',JSON.stringify(data.user.name))
     setUser(data.user)
     setUserName(data.user.name)
-
+    setFirstTime(data.user.firstTime)
 }
 
 const Logout = ()=>{
@@ -53,7 +57,7 @@ setUser(null)
 
 return(
 
-    <AuthContext.Provider value={{Authenticated:!!user,Logged,Logout,children,UserName}}>
+    <AuthContext.Provider value={{Authenticated:!!user,Logged,Logout,children,UserName,firstTime}}>
           
     {children}
 
