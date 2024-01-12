@@ -65,7 +65,7 @@ function App() {
         <Route path='/createEmployee' element={<Private><CreateEmplyee/></Private>}></Route>
         <Route path='/createPatient' element={<Private><CreatePatient/></Private>}></Route>
         <Route path='/firstTimePage' element={<FirtTimePage/>}></Route>
-        <Route path='/doctorlist' element={<DoctorsList/>}></Route>
+        <Route path='/doctorlist' element={<Private><DoctorsList/></Private>}></Route>
         </Routes>
         </AuthProvider>
         </BrowserRouter>

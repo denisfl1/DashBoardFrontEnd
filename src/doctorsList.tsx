@@ -8,6 +8,28 @@ function DoctorsList(){
 
 const [doctorList,setDoctorList] = useState([])
 const [search,setSearch] = useState<string[]>([])
+const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>data.name.toLowerCase().includes(search)|| data.name.includes(search) ||data.crm.includes(search)):doctorList
+
+
+    const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
+        if(e.target instanceof HTMLButtonElement){
+        const id = e.target.id 
+        const question = window.confirm("Você deseja excluir este médico?")
+            
+            if(question){
+                API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
+                    res=>{
+                    
+                        alert(res.data)
+                    },error=>{
+                        alert(error.response.data)
+                    }
+                )
+            }
+
+    }
+    }
+
 useEffect(()=>{
 
     (async()=>{
@@ -19,7 +41,7 @@ useEffect(()=>{
  
             },error=>{
 
-                console.log(error)
+                console.log(error.response)
             }
         )
 
@@ -28,7 +50,6 @@ useEffect(()=>{
 
 },[])
 
-const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>data.name.toLowerCase().includes(search)|| data.name.includes(search) ||data.crm.includes(search)):doctorList
 
 return(
 
@@ -67,7 +88,7 @@ return(
                         <td>{data.crm}</td>
                         <td>{" (11) " + data.number}</td>
                         <td>{data.email}</td>
-                        <td><button style={{marginRight:"5px"}} >Editar</button><button>Excluir</button></td>
+                        <td><button style={{marginRight:"5px"}} >Editar</button><button id={data.id} onClick={handleDelete}>Excluir</button></td>
                         </tr>
                     )
                 })}

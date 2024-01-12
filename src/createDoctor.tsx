@@ -10,7 +10,7 @@ function CreateEmplyee(){
     const [email,setEmail]= useState<string>()
     const [name,setName] = useState<string>()
     const [crm,setCRM] = useState<string>()
-    const [specialty,setSpecialty] = useState<string>()
+    const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
 
 
