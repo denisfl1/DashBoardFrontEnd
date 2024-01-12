@@ -14,6 +14,7 @@ function CreatePatient(){
     const [zipCode,setZipCode] = useState<string>()
     const [adress,setAdress] = useState<string>()
     const [neighborhood,setNeighborhood] = useState<string>()
+    const [cpf,setCPF] = useState<string>()
 
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
@@ -21,7 +22,7 @@ function CreatePatient(){
         console.log(name,email,contact_number,number_adress,zipCode,adress,neighborhood)
             if(!email?.trim() || !name?.trim() || !contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim())return alert("Preencha os campos em branco!")
 
-            await API.post('/registerAdmin',{name,email,contact_number,number_adress,zipCode,adress,neighborhood}).then(
+            await API.post('/registerAdmin',{name,email,contact_number,number_adress,zipCode,adress,neighborhood,cpf}).then(
                 res=>{
                     if(res.status == 200){
                         alert("Registrado com sucesso")
@@ -84,6 +85,10 @@ return(
     <label>Número de Contato</label>
     <input value={contact_number} required type="text"  name="number" onChange={(e)=>setContactNumber(e.target.value)}></input>
 
+      
+    <label>CPF</label>
+    <input  type="text" onChange={(e)=>setCPF(e.target.value)}  name="cpf" ></input>
+
 
     </form>
 
@@ -92,6 +97,7 @@ return(
         
     <label>Endereço Residencial</label>
     <input value={adress} required type="text"  name="adress" onChange={(e)=>setAdress(e.target.value)}></input>
+
 
     <label>Bairro</label>
     <input value={neighborhood} required type="text"  name="adress" onChange={(e)=>setNeighborhood(e.target.value)}></input>
