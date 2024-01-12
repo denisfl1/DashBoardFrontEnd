@@ -9,25 +9,29 @@ function doctorsList(){
 
 return(
 
-    <div>
+    <div className="containerTable">
 
-        <table>
+        <table className="table-Subcontainer">
 
             <thead>
 
                 <tr>
+                <th>Nome</th>
 
-                <th>
+                <th>Especialidade</th>
 
+                <th>CRM</th>
 
-                </th>
-
+                <th>Número</th>
 
                 </tr>
-
-
             </thead>
-         
+
+            <tbody>
+
+
+
+            </tbody>
 
 
 
