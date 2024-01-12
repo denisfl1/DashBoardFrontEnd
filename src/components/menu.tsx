@@ -42,7 +42,7 @@ return(
 
 
             <div className="schedulingContainer" >
-            <Link to='/createEmployee' style={{textDecoration:"none",color:"black"}}>
+            <Link to='/createEmployee' >
             <img width="150px" src={addUser}></img>
                 <h1>Cadastro de Médicos</h1>
             </Link>
@@ -58,9 +58,11 @@ return(
 
 
 
-            <div className="schedulingContainer" >        
+            <div className="schedulingContainer" > 
+            <Link to='/doctorlist'>    
             <img width="150px" src={UserList}></img>
                 <h1>Lista de Médicos</h1>
+            </Link>  
             </div>
             
 
