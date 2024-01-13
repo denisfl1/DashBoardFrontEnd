@@ -51,9 +51,10 @@ return(
 
             
             <div className="schedulingContainer">
+            <Link to='/patientlist'>    
             <img width="180px" src={UserList}></img>
                 <h1>Lista de Pacientes</h1>
-
+                </Link>  
             </div>
 
 

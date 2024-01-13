@@ -11,6 +11,7 @@ import CreateEmplyee from './createDoctor';
 import CreatePatient from './createPatient';
 import FirtTimePage from './components/firstTimePage';
 import DoctorsList from './doctorsList';
+import PatientList from './patientList';
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
         <Route path='/createEmployee' element={<Private><CreateEmplyee/></Private>}></Route>
         <Route path='/createPatient' element={<Private><CreatePatient/></Private>}></Route>
         <Route path='/firstTimePage' element={<FirtTimePage/>}></Route>
+        <Route path='/patientlist' element={<Private><PatientList/></Private>}></Route>
         <Route path='/doctorlist' element={<Private><DoctorsList/></Private>}></Route>
         </Routes>
         </AuthProvider>

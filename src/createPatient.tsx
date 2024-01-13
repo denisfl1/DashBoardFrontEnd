@@ -68,7 +68,7 @@ function CreatePatient(){
 return(
 
     <div className="EmployeeContainer" >
-    <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Paciente{"> "}Novo Cadastro</h1><img  style={{marginLeft:"10px"}} height={"40px"} src={folha}></img></div>
+    <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Paciente{"> "}Novo Cadastro</h1></div>
 <div className="RegisterContent" style={{width:"90%",marginTop:"50px"}}>
   
     <form>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import logo from '../Icons/logo.png'
+import folha from "../Icons/folha.jpg"
 import logout from '../Icons/sair.png'
 import config from '../Icons/configuracoes.png'
 import agend from '../Icons/agenda.png'
@@ -53,7 +54,7 @@ return(
         <div  className="LateralBar">
 
                 <div style={{overflow:"hidden"}}  className="LateralBarHeader">
-                 <img width='100px' height='100px' style={{minWidth:"100px"}} src={logo}></img><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
+                 <div style={{width:'100px',height:'100px',display:"flex",justifyContent:"center",alignItems:"center"}}><img  width={"30px"} height={"55px"} src={folha}></img></div><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
                 </div>
 
             <ul>

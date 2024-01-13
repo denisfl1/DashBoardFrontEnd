@@ -6,10 +6,10 @@ import { API } from "./Api";
 
 function DoctorsList(){
 
-const [doctorList,setDoctorList] = useState([])
+const [doctorList,setDoctorList] = useState<any>([])
 const [search,setSearch] = useState<string[]>([])
-const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>data.name.toLowerCase().includes(search)|| data.name.includes(search) ||data.crm.includes(search)):doctorList
-
+const key = ["name","crm"]
+const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
         if(e.target instanceof HTMLButtonElement){
@@ -19,7 +19,7 @@ const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>data
             if(question){
                 API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
                     res=>{
-                    
+                        
                         alert(res.data)
                     },error=>{
                         alert(error.response.data)
@@ -36,9 +36,7 @@ useEffect(()=>{
 
         await API.get("http://localhost:5000/getDoctors").then(
             res=>{
-
                 setDoctorList(res.data)
- 
             },error=>{
 
                 console.log(error.response)
@@ -56,7 +54,8 @@ return(
     <div className="containerTable">
         <h1 style={{marginLeft:"160px"}}>Lista de Médicos</h1>
         <div className="container_Input_DoctorList"><input placeholder="Nome ou CRM" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
-        <table className="table-Subcontainer">
+        <div className="table-Subcontainer">
+        <table>
 
             <thead>
 
@@ -100,7 +99,7 @@ return(
 
         </table>
 
-
+        </div>
 
     </div>
 
