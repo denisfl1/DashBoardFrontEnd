@@ -19,8 +19,12 @@ const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.
             if(question){
                 API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
                     res=>{
-                        
-                        alert(res.data)
+                        if(res.status == 200){
+                            alert(res.data)
+                            setDoctorList((prev:any)=>prev.filter((data:any)=>data.id != id))
+                        }
+                      
+
                     },error=>{
                         alert(error.response.data)
                     }

@@ -13,22 +13,23 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
 
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
-    //     if(e.target instanceof HTMLButtonElement){
-    //     const id = e.target.id 
-    //     const question = window.confirm("Você deseja excluir este médico?")
+        if(e.target instanceof HTMLButtonElement){
+        const id = e.target.id
+        const question = window.confirm("Você deseja excluir este usuário?")
             
-    //         if(question){
-    //             API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
-    //                 res=>{
+            if(question){
+                API.delete(`http://localhost:5000/deleteuser/${id}`).then(
+                    res=>{
                     
-    //                     alert(res.data)
-    //                 },error=>{
-    //                     alert(error.response.data)
-    //                 }
-    //             )
-    //         }
+                        alert(res.data)
+                        setPatientList((data:any)=>data.filter((it:any)=>it.id != id))
+                    },error=>{
+                        alert(error.response.data)
+                    }
+                )
+            }
 
-    // }
+    }
     }
 
 useEffect(()=>{
@@ -39,7 +40,7 @@ useEffect(()=>{
             res=>{
 
                 setPatientList(res.data)
-                // console.log(res.data)
+          
             },error=>{
 
                 console.log(error.response)
