@@ -2,15 +2,14 @@ import React, { useContext } from "react";
 import folha from "../Icons/folha.jpg"
 import { useState } from "react";
 import {API} from "../Api"
-import { AuthContext } from "../contexts/authContext";
-
+import { AuthContext } from "../contexts/authContext"
 
 
 function FirtTimePage(){
 
     const [password,setPassword]= useState<string>()
     const [password_Confirm,setPasswordConfirm]= useState<string>()
-    const {Logged,user}= useContext(AuthContext)
+    const {Logged}= useContext(AuthContext)
 
 
     const SendLogin= async(e:React.MouseEvent<HTMLButtonElement>)=>{
@@ -39,20 +38,6 @@ function FirtTimePage(){
 
 return(
 
-    // <div className="FirstTimePageContainer">
-
-    //     <div className="FirstTimeContent">
-
-                
-
-                
-
-
-    //     </div>
-
-
-
-    // </div>
     <div className="LoginContainer" style={{fontFamily:"Poppins"}}>
 
     <div className="LoginContent" >

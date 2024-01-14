@@ -42,7 +42,7 @@ return(
 
 
             <div className="schedulingContainer" >
-            <Link to='/createEmployee' >
+            <Link to='/createDoctor' >
             <img width="150px" src={addUser}></img>
                 <h1>Cadastro de Médicos</h1>
             </Link>

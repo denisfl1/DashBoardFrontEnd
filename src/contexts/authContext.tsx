@@ -7,9 +7,10 @@ children:React.ReactNode;
 Authenticated?:boolean;
 Logged?:(data:any)=>void;
 Logout?:()=>void;
-user?:any;
 UserName?:string;
 firstTime?:boolean;
+user?:any
+Loading?:boolean
 }
 
 
@@ -20,20 +21,24 @@ export const AuthContext = createContext<IAuthContext>(
 export const AuthProvider:React.FC<IAuthContext> = ({children})=>{
 
 const [user,setUser] = useState(null)
-const UserDATA:any = localStorage.getItem('user')
-const UserNAME:any = localStorage.getItem('userName')
+const UserDATA = localStorage.getItem('user')
+const UserNAME = localStorage.getItem('userName')
 const token = localStorage.getItem('token')
 const [UserName,setUserName] = useState()
 const [firstTime,setFirstTime] = useState()
-
+const [Loading,setLoading] = useState(true)
 
 useEffect(()=>{
-
-    if(UserDATA){
+    
+    
+    if(UserDATA && UserNAME){
 
     setUser(JSON.parse(UserDATA))
     setUserName(JSON.parse(UserNAME))
-
+    setLoading(false)
+    }else{
+        setUser(null)
+        setLoading(false)
     }
     
 
@@ -44,12 +49,11 @@ API.defaults.headers.Authorization = token
 
 const Logged = (data:any)=>{
 
-    const LoggedDATA = data.user
-    localStorage.setItem('user',JSON.stringify(LoggedDATA))
+    setUser(data.user)
+    localStorage.setItem('user',JSON.stringify(data.user))
     localStorage.setItem('userName',JSON.stringify(data.user.name))
     localStorage.setItem('firstTime',JSON.stringify(data.user.firstTime))
     localStorage.setItem('token',data.token)
-    setUser(data.user)
     setUserName(data.user.name)
     setFirstTime(data.user.firstTime)
 }
@@ -67,7 +71,7 @@ localStorage.removeItem('firstTime')
 
 return(
 
-    <AuthContext.Provider value={{Authenticated:!!user,Logged,Logout,children,UserName,firstTime}}>
+    <AuthContext.Provider value={{Authenticated:!!user,user,Logged,Logout,children,UserName,firstTime,Loading}}>
           
     {children}
 
