@@ -65,9 +65,14 @@ function EditDoctor(){
                 res=>{
                     
                     console.log(res.data)
+                    setName(res.data.crm)
+                    setEmail(res.data.email)
+                    setCRM(res.data.crm)
+                    setSpecialty(res.data.specialty)
+                    setNumber(res.data.number)
 
                 },error=>{
-                    console.log(error.response.data)
+                    alert(error.response.data)
                 }
             )
 
