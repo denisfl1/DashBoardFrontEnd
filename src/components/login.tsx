@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import logo from '../Icons/logo.png'
 import folha from "../Icons/folha.jpg"
 import { useNavigate } from "react-router-dom";
 import { API } from "../Api";

@@ -33,25 +33,25 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
     }
     }
 
-useEffect(()=>{
+    useEffect(()=>{
 
-    (async()=>{
+        (async()=>{
 
-        await API.get("http://localhost:5000/getUsers").then(
-            res=>{
+            await API.get("http://localhost:5000/getUsers").then(
+                res=>{
 
-                setPatientList(res.data)
-          
-            },error=>{
+                    setPatientList(res.data)
+                
+                },error=>{
 
-                console.log(error.response)
-            }
-        )
+                    console.log(error.response)
+                }
+            )
 
-    })()
+        })()
 
 
-},[])
+    },[])
 
 
 return(

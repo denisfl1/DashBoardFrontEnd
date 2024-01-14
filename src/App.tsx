@@ -12,6 +12,7 @@ import FirtTimePage from './components/firstTimePage';
 import DoctorsList from './doctorsList';
 import PatientList from './patientList';
 import EditPatient from './editPatient';
+import EditDoctor from './editDoctor';
 
 
 function App() {
@@ -87,6 +88,8 @@ function App() {
         <Route path="/patientlist" element={<Private><PatientList></PatientList></Private>}></Route>
         <Route path="/edituser/:id" element={<Private><EditPatient/></Private>}></Route>
         <Route path="/doctorlist" element={<Private><DoctorsList></DoctorsList></Private>}></Route>
+        <Route path="/editdoctor/:id" element={<Private><EditDoctor/></Private>}></Route>
+
         </Routes>
         </AuthProvider>
         </BrowserRouter>

@@ -1,10 +1,7 @@
 import Menu from "./components/menu"
 import Header from "./components/Header";
-import LateralBar from "./components/LatateralBar";
-
 
 function HomePage(){
-
 
 
 return(

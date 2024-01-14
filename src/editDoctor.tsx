@@ -3,7 +3,7 @@ import { useState } from "react";
 import { API } from "./Api";
 
 
-function  CreateDoctor(){
+function EditDoctor(){
 
     const [email,setEmail]= useState<string>()
     const [name,setName] = useState<string>()
@@ -40,17 +40,17 @@ function  CreateDoctor(){
         e.preventDefault()
             if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
 
-            await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
-                res=>{
-                    if(res.status == 200){
-                        alert("Registrado com sucesso")
-                    }
+            // await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
+            //     res=>{
+            //         if(res.status == 200){
+            //             alert("Registrado com sucesso")
+            //         }
             
 
-                },error=>{
-                  alert(error.response.data.error)
-                }
-            )
+            //     },error=>{
+            //       alert(error.response.data.error)
+            //     }
+            // )
 
     }
 
@@ -64,21 +64,21 @@ return(
         <form>
  
         <label>Nome Completo</label>
-        <input required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
+        <input value={name} required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
 
         <label>E-mail</label>
-        <input required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
+        <input value={email} required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
 
         <label>CRM</label>
-        <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
+        <input value={crm} required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
 
         <label>Número de Contato</label>
-        <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+        <input value={number} required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
 
 
         <label>Especialidade</label>
 
-        <select onChange={(e)=>setSpecialty(e.target.value)}>
+        <select value={specialty} onChange={(e)=>setSpecialty(e.target.value)}>
             {SPECIALTY.map((it)=>{
                 return(
                     <option value={it}>{it}</option>
@@ -102,4 +102,4 @@ return(
 
 }
 
-export default CreateDoctor
+export default EditDoctor
