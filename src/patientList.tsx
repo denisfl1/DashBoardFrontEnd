@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
+import { Link } from "react-router-dom";
 
 
 function PatientList(){
@@ -98,7 +99,7 @@ return(
                         <td>{data.neighborhood}</td>
                         <td>{data.zipCode}</td>
                         <td>{data.contact_number}</td> 
-                        <td><button style={{marginRight:"5px"}} >Editar</button><button id={data.id} onClick={handleDelete}>Excluir</button></td>
+                        <td><Link to={`/edituser/${data.id}`}><button  style={{marginRight:"5px"}} >Editar</button></Link><button id={data.id} onClick={handleDelete}>Excluir</button></td>
                         </tr>
                     )
                 })}
