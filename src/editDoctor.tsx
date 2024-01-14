@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { API } from "./Api";
+import { useParams } from "react-router-dom";
 
 
 function EditDoctor(){
@@ -11,6 +12,8 @@ function EditDoctor(){
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
 
+    const param = useParams()
+    const id = param.id
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -53,6 +56,26 @@ function EditDoctor(){
             // )
 
     }
+
+    useEffect(()=>{
+
+        (async()=>{
+
+            await API.get(`/getdoctor/${id}`).then(
+                res=>{
+                    
+                    console.log(res.data)
+
+                },error=>{
+                    console.log(error.response.data)
+                }
+            )
+
+
+        })()
+
+
+    },[])
 
 
 return(

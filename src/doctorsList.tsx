@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
+import {Link} from "react-router-dom";
 
 
 function DoctorsList(){
@@ -10,6 +11,7 @@ const [doctorList,setDoctorList] = useState<any>([])
 const [search,setSearch] = useState<string[]>([])
 const key = ["name","crm"]
 const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList
+
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
         if(e.target instanceof HTMLButtonElement){
@@ -91,7 +93,7 @@ return(
                         <td>{data.crm}</td>
                         <td>{" (11) " + data.number}</td>
                         <td>{data.email}</td>
-                        <td><button style={{marginRight:"5px"}} >Editar</button><button id={data.id} onClick={handleDelete}>Excluir</button></td>
+                        <td><Link to={`/editdoctor/${data.id}`}><button style={{marginRight:"5px"}} >Editar</button></Link><button id={data.id} onClick={handleDelete}>Excluir</button></td>
                         </tr>
                     )
                 })}
