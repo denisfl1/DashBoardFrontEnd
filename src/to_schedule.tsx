@@ -33,25 +33,19 @@ function To_schedule(){
 
         let times = []
 
-
-        for(let i=7;i<=18;i++){
-  
-            if(i <10){
-                
-                times.push( `0${i}:00 às 0${i+1}:00`)
- 
-            }   
-          
-            else{
-                times.push( `${i}:00 às ${i+1}:00`)
+        for (let i = 7; i <= 18; i++) {
+            if (i < 9) {
+                times.push(`0${i}:00 às 0${i + 1}:00`);
+            } else if (i === 9) {
+                times.push(`0${i}:00 às ${i + 1}:00`);
+            } else {
+                times.push(`${i}:00 às ${i + 1}:00`);
             }
-         
-             
         }
 
             console.log(times)
         
-    
+
 
 return(
 
@@ -77,9 +71,7 @@ return(
             <label>Horário:</label>
             <select>
                 {times.map((data)=>{
-                    if(data == "09:00 às 010:00"){
-                        data = "09:00 às 10:00"
-                    }
+    
                     return (
                         <option>{data}</option>
                     )
