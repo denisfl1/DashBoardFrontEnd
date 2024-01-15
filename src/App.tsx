@@ -13,6 +13,7 @@ import DoctorsList from './doctorsList';
 import PatientList from './patientList';
 import EditPatient from './editPatient';
 import EditDoctor from './editDoctor';
+import To_schedule from './to_schedule';
 
 
 function App() {
@@ -89,6 +90,8 @@ function App() {
         <Route path="/edituser/:id" element={<Private><EditPatient/></Private>}></Route>
         <Route path="/doctorlist" element={<Private><DoctorsList></DoctorsList></Private>}></Route>
         <Route path="/editdoctor/:id" element={<Private><EditDoctor/></Private>}></Route>
+        <Route path="/to_schedule" element={<Private><To_schedule/></Private>}></Route>
+
 
         </Routes>
         </AuthProvider>

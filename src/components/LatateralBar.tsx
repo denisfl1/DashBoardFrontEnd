@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import logo from '../Icons/logo.png'
+import logo from '../Icons/logo.jpg'
 import folha from "../Icons/folha.jpg"
 import logout from '../Icons/sair.png'
 import config from '../Icons/configuracoes.png'

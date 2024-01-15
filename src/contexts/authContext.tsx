@@ -53,6 +53,7 @@ const Logged = (data:any)=>{
     localStorage.setItem('token',data.token)
     setUserName(data.user.name)
     setFirstTime(data.user.firstTime)
+    setLoading(false)
 }
 
 const Logout = ()=>{

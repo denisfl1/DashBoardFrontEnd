@@ -25,10 +25,10 @@ return(
             </div>
 
             <div className="schedulingContainer">
-
+            <Link to="/to_schedule">
                 <img height={'180px'} width="180px" src={ConsultasAgendas}></img>
                 <h1>Agendar Consulta</h1>
-
+            </Link>
             </div>
 
 

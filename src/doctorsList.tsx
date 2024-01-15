@@ -59,7 +59,7 @@ return(
 
     <div className="containerTable">
         <h1 style={{marginLeft:"160px"}}>Lista de Médicos</h1>
-        <div className="container_Input_DoctorList"><input placeholder="Nome ou CRM" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
+        <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
         <div className="table-Subcontainer">
         <table>
 

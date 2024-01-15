@@ -68,23 +68,24 @@ return(
 
         <label>E-mail</label>
         <input required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
-
-        <label>CRM</label>
-        <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
-
-        <label>Número de Contato</label>
-        <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
-
-
+    
         <label>Especialidade</label>
 
-        <select onChange={(e)=>setSpecialty(e.target.value)}>
+        <select onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
             {SPECIALTY.map((it)=>{
                 return(
                     <option value={it}>{it}</option>
                 )
             })}
         </select>
+
+        <label>{specialty != "Psicologia" ?'CRM' : "CRP"}</label>
+        <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
+
+        <label>Número de Contato</label>
+        <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+
+
 
 
         <button type={"submit"} style={{marginTop:'20px'}} onClick={SendData}>Registrar</button>

@@ -86,7 +86,7 @@ function EditDoctor(){
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos{">"}Novo Cadastro</h1></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos{">"}Editar Dados</h1></div>
     <div className="RegisterContent" >
       
         <form>
@@ -97,16 +97,10 @@ return(
         <label>E-mail</label>
         <input value={email} required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
 
-        <label>CRM</label>
-        <input value={crm} required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
-
-        <label>Número de Contato</label>
-        <input value={number} required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
-
-
+        
         <label>Especialidade</label>
 
-        <select value={specialty} onChange={(e)=>setSpecialty(e.target.value)}>
+        <select value={specialty} onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
             {SPECIALTY.map((it)=>{
                 return(
                     <option value={it}>{it}</option>
@@ -115,7 +109,15 @@ return(
         </select>
 
 
-        <button type={"submit"} style={{marginTop:'20px'}} onClick={SendData}>Registrar</button>
+        <label>{specialty != "Psicologia" ?'CRM' : "CRP"}</label>
+        <input value={crm} required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
+
+        <label>Número de Contato</label>
+        <input value={number} required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+
+
+
+        <button type={"submit"} style={{marginTop:'20px'}} onClick={SendData}>Alterar</button>
 
 
         </form>
