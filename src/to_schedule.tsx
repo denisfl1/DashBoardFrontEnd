@@ -4,10 +4,7 @@ import { useState } from "react";
 function To_schedule(){
 
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
-    const [date,setDate] = useState<any>()
-    const [time,setTime] = useState<any>()
-
-    console.log(date)
+    const [date,setDate] = useState<string>()
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -51,7 +48,7 @@ return(
 
 <div className="To_scheduleContainer">
        <div style={{display:"flex",marginLeft:"100px"}}><h1 >Agendar Consulta</h1></div>
-    <div className="To_scheduleContent">
+    <div className="To_scheduleContent" style={{display:"flex"}}>
 
 
             <div className="InputsContent">
@@ -66,7 +63,7 @@ return(
 
 
             <label>Data de Agendamento:</label>
-            <input onChange={(e)=>setDate(e.target.value)} type="date" id="birthday" name="birthday"></input>
+            <input onChange={(e)=>setDate(e.target.value)} type="date" id="calendary" name="calendary"></input>
             
             <label>Horário:</label>
             <select>
@@ -78,12 +75,35 @@ return(
                 
                 })}
             </select>
-            
-            </div>
-
+                
 
             
         
+            
+            </div>
+
+            <div style={{width:"700px"}}>
+            <h1>Disponibilidade</h1>
+            <table>
+              
+                <thead>
+                    <tr>
+                    <th>Médico</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>      
+                        <td>Dr.Julio</td>
+                    </tr>
+                    <tr>      
+                        <td>Dr.Julio</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            </div>
     </div>
 
 

@@ -371,7 +371,7 @@ table {
 }
 
 .To_scheduleContent select{
-   width: 400px;
+   width: 600px;
    height: 40px;
    font-size: 20px;
 }
@@ -382,7 +382,7 @@ table {
 }
 
 .InputsContent input{
-    width: 400px;
+    width: 600px;
     height: 40px;
 }
 
