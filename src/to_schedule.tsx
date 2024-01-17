@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ButtonHTMLAttributes, useCallback, useEffect, useState } from "react";
 import {API} from "./Api"
 
 function To_schedule(){
@@ -9,9 +9,13 @@ function To_schedule(){
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
     const [patientList,setPatientList] = useState<any>([])
+    const [patientSelected,setPatientSelected] = useState<any>()
+    const [doctorSelected,setDoctorSelected] = useState<any>()
     const key = ["name","cpf"]
+
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
     data[keys].includes(search))):""
+   
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -52,7 +56,7 @@ function To_schedule(){
         (async()=>{
         await API.post('/getschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
-                console.log(res.data)
+                // console.log(res.data)
                 setDoctors(res.data)
             }  
         )
@@ -81,6 +85,45 @@ function To_schedule(){
 
     },[])
      
+   
+    const selectDoctor = (data:any,e:any)=>{
+
+
+        const verify = typeof doctorSelected === 'undefined'    
+
+        if(verify){
+            setDoctorSelected(data)
+            
+        }
+        else if(!verify && doctorSelected.id != e.target.id){
+            setDoctorSelected(data)
+        }else{
+            setDoctorSelected("undefined")
+        }   
+      
+        
+        
+    }
+
+    const selectPatient = (data:any,e:any)=>{
+
+
+        const verify = typeof patientSelected === 'undefined'    
+
+        if(verify){
+            setPatientSelected(data)
+            
+        }
+        else if(!verify && patientSelected.id != e.target.id){
+            setPatientSelected(data)
+        }else{
+            setPatientSelected("undefined")
+        }   
+      
+        
+        
+    }
+  
 
 return(
 
@@ -116,18 +159,20 @@ return(
 
             <label>Paciente</label>        
             <input placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
-             {search && <ul>
+             
+             {/* {search && <ul>
                {search2.map((data:any)=>{
                 return(
                     <li>{data.name}</li>
                 )
                })}
 
-            </ul> }  
+            </ul> } */}
+               <button >Prosseguir</button>
             </div>
 
-            <div style={{width:"500px"}}>
-            {/* <h1 style={{marginLeft:"50px"}}>Disponibilidade:</h1> */}
+            <div style={{width:"600px"}}>
+       
             <table>
               
                 <thead>
@@ -150,7 +195,7 @@ return(
                              
                             <td>{data.crm}</td>
     
-                            <td style={{textAlign:"center"}}><button style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px"}}>Selecionar</button></td>
+                            <td style={{textAlign:"center"}}><button onClick={(e)=>selectDoctor(data,e)} id={data.id}style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px",cursor:'pointer'}}>{typeof doctorSelected !== "undefined" && doctorSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
     
                     
                         </tr>
@@ -161,8 +206,36 @@ return(
                   
                   
                 </tbody>
-
+                       
             </table>
+
+                    {search &&<table style={{width:"550px",marginLeft:"45px"}}>
+                        <thead>
+                        <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th></th>
+                    </tr>
+                        </thead>
+
+                        <tbody>
+                            {search && search2.map((data:any)=>{
+                                return(
+                                  <tr>
+                                  <td>{data.name}</td>
+                                  <td>{data.cpf}</td>
+                                  <td>{data.email}</td>
+                                  <td style={{textAlign:"center"}}><button id={data.id} onClick={(e)=>selectPatient(data,e)} style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px",cursor:'pointer'}}>{typeof patientSelected !== "undefined" && patientSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
+                              </tr>
+                              )
+                            })}
+                          
+                           
+                        </tbody>
+
+                    </table>}
+        
             </div>
     </div>
 

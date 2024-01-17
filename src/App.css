@@ -295,13 +295,13 @@ transition: all 500ms;
 }
 
 .table-Subcontainer button{
-width: 80px;
-background-color: #ffffff;
-color:black;
-border:none;
-border-radius: 5px;
-border: 1px solid black;
-cursor: pointer;
+    width: 80px;
+    background-color: #ffffff;
+    color:black;
+    border:none;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
 
 }
 
@@ -322,6 +322,7 @@ table {
 
   th {
     background-color: #b7decd;
+
   }
 
   .container_Input_DoctorList{
@@ -363,9 +364,10 @@ table {
 }
 
 .To_scheduleContent{
-    width: 80%;
+    width: 100%;
     margin: auto;
     margin-top: 50px;
+    justify-content: center;
 }
 
 .To_scheduleContent select{
@@ -381,6 +383,8 @@ table {
     display: flex;
     flex-direction: column;
     width: 600px;
+    position: relative;
+    height: 600px;
 }
 
 .InputsContent input{
@@ -405,6 +409,8 @@ table {
     padding-inline-start: 0;
     border-bottom-left-radius: 5px;  
     border-bottom-right-radius: 5px;
+    z-index: 1;
+
 }
 
 .InputsContent li{
@@ -416,6 +422,21 @@ table {
 
 .InputsContent li:hover{
     background-color: #b7decd;
+    cursor: pointer;
  }
 
+ .InputsContent button{
+    width: 120px;
+    height: 35px;
+    background-color: black;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    position: absolute;
+    bottom: 200px;
+    right:20px;
+    font-weight: bold;
+ }
 
