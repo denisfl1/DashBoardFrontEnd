@@ -1,10 +1,17 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import {API} from "./Api"
 
 function To_schedule(){
 
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [date,setDate] = useState<string>()
+    const [timeSchedule,setTimeSchedule] = useState<string>()
+    const [search,setSearch] = useState<string>()
+    const [doctors,setDoctors] = useState([])
+    const [patientList,setPatientList] = useState<any>([])
+    const key = ["name","cpf"]
+    const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
+    data[keys].includes(search))):""
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -40,9 +47,40 @@ function To_schedule(){
             }
         }
 
-            console.log(times)
-        
+       useEffect(()=>{
 
+        (async()=>{
+        await API.post('/getschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
+            res=>{
+                console.log(res.data)
+                setDoctors(res.data)
+            }  
+        )
+        })()    
+
+       },[timeSchedule,date,specialty])
+
+
+       useEffect(()=>{
+
+        (async()=>{
+
+            await API.get("http://localhost:5000/getUsers").then(
+                res=>{
+
+                    setPatientList(res.data)
+                
+                },error=>{
+
+                    console.log(error.response)
+                }
+            )
+
+        })()
+
+
+    },[])
+     
 
 return(
 
@@ -63,10 +101,10 @@ return(
 
 
             <label>Data de Agendamento:</label>
-            <input onChange={(e)=>setDate(e.target.value)} type="date" id="calendary" name="calendary"></input>
+            <input  onChange={(e)=>setDate(e.target.value)} type="date" id="calendary" name="calendary"></input>
             
             <label>Horário:</label>
-            <select>
+            <select onChange={(e)=>setTimeSchedule(e.target.value)}>
                 {times.map((data)=>{
     
                     return (
@@ -75,31 +113,53 @@ return(
                 
                 })}
             </select>
-                
 
-            
-        
-            
+            <label>Paciente</label>        
+            <input placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
+             {search && <ul>
+               {search2.map((data:any)=>{
+                return(
+                    <li>{data.name}</li>
+                )
+               })}
+
+            </ul> }  
             </div>
 
-            <div style={{width:"700px"}}>
-            <h1>Disponibilidade</h1>
+            <div style={{width:"500px"}}>
+            {/* <h1 style={{marginLeft:"50px"}}>Disponibilidade:</h1> */}
             <table>
               
                 <thead>
                     <tr>
                     <th>Médico</th>
+                    <th>{specialty != "Psicologia" ? "CRM" : "CRP"}</th>
+                    <th></th>
                     </tr>
+                    
                 </thead>
 
 
                 <tbody>
-                    <tr>      
-                        <td>Dr.Julio</td>
-                    </tr>
-                    <tr>      
-                        <td>Dr.Julio</td>
-                    </tr>
+                    
+                    
+                    {doctors && doctors.map((data:any)=>{
+                        return(
+                            <tr>      
+                            <td>{data.name}</td>
+                             
+                            <td>{data.crm}</td>
+    
+                            <td style={{textAlign:"center"}}><button style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px"}}>Selecionar</button></td>
+    
+                    
+                        </tr>
+                        )
+
+                    })}
+                   
+                  
+                  
                 </tbody>
 
             </table>
