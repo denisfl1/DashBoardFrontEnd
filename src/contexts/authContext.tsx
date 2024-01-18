@@ -36,6 +36,8 @@ useEffect(()=>{
     setUser(JSON.parse(UserDATA))
     setUserName(JSON.parse(UserNAME))
     setLoading(false)
+    }else{
+        setLoading(false)
     }
     
 

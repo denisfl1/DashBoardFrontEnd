@@ -325,6 +325,7 @@ table {
 
   }
 
+
   .container_Input_DoctorList{
     display: flex;
     width: 500px;
@@ -399,31 +400,6 @@ table {
     font-size: 25px;
 }
 
-.InputsContent ul{
-    background-color: #fff;
-    margin-top: 0px;
-    border-left: 1px  solid #c1c0c0;
-    border-right: 1px  solid #c1c0c0;
-    border-bottom: 1px  solid #c1c0c0;
-    height: auto;
-    padding-inline-start: 0;
-    border-bottom-left-radius: 5px;  
-    border-bottom-right-radius: 5px;
-    z-index: 1;
-
-}
-
-.InputsContent li{
-   line-height: 50px;
-   list-style: none;
-   font-size: 20px;
-   padding-left: 10px;
-}
-
-.InputsContent li:hover{
-    background-color: #b7decd;
-    cursor: pointer;
- }
 
  .InputsContent button{
     width: 120px;

@@ -9,13 +9,13 @@ function To_schedule(){
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
     const [patientList,setPatientList] = useState<any>([])
-    const [patientSelected,setPatientSelected] = useState<any>()
+    const [patientSelected,setPatientSelected] = useState<any>(undefined)
     const [doctorSelected,setDoctorSelected] = useState<any>()
     const key = ["name","cpf"]
-
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
     data[keys].includes(search))):""
-   
+    const [display1,setDisplay1] = useState<boolean>()
+    const [display2,setDisplay2] = useState<boolean>()
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -98,30 +98,39 @@ function To_schedule(){
         else if(!verify && doctorSelected.id != e.target.id){
             setDoctorSelected(data)
         }else{
-            setDoctorSelected('')
+            setDoctorSelected(undefined)
         }   
       
-        
         
     }
 
     const selectPatient = (data:any,e:any)=>{
 
 
-        const verify = typeof patientSelected === 'undefined'    
-
+        const verify = typeof patientSelected === 'undefined'
+       
+      
         if(verify){
+    
             setPatientSelected(data)
-            
+    
         }
         else if(!verify && patientSelected.id != e.target.id){
+
             setPatientSelected(data)
-        }else{
-            setPatientSelected('')
-        }   
-      
-        
-        
+           
+        }
+        else{
+
+            setPatientSelected(undefined)
+           
+        } 
+
+
+        if(!verify && patientSelected.id == e.target.id){
+            setDisplay2(true)
+        }
+     
     }
 
 
@@ -189,13 +198,14 @@ return(
                     
                     
                     {doctors && doctors.map((data:any)=>{
+                        const SorD = typeof doctorSelected !== "undefined" && doctorSelected.id == data.id 
                         return(
-                            <tr>      
+                            <tr style={{backgroundColor:SorD ?"#eeeeee":""}}>      
                             <td>{data.name}</td>
                              
                             <td>{data.crm}</td>
     
-                            <td style={{textAlign:"center"}}><button onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorSelected !== "undefined" && doctorSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
+                            <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}} onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorSelected !== 'undefined' &&  data.id == doctorSelected.id ? "Desfazer" :"Selecionar"}</button></td>
     
                     
                         </tr>
@@ -221,12 +231,14 @@ return(
 
                         <tbody>
                             {search && search2.map((data:any)=>{
+                                const SorD = typeof patientSelected !== 'undefined' &&  data.id == patientSelected.id 
+
                                 return(
-                                  <tr>
+                                  <tr style={{backgroundColor:SorD ?"#eeeeee": ""}}>
                                   <td>{data.name}</td>
                                   <td>{data.cpf}</td>
                                   <td>{data.email}</td>
-                                  <td style={{textAlign:"center"}}><button className="TableScheduleButton" id={data.id} onClick={(e)=>selectPatient(data,e)}>{typeof patientSelected !== "undefined" && patientSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
+                                  <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}}  className="TableScheduleButton" id={data.id} onClick={(e)=>selectPatient(data,e)}>{SorD ?"Desfazer" :"Selecionar"}</button></td>
                               </tr>
                               )
                             })}
