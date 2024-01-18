@@ -440,3 +440,13 @@ table {
     font-weight: bold;
  }
 
+
+ .TableScheduleButton{
+    margin:auto;
+    background-color:#fff;
+    border:1px solid black;
+    border-radius:5px;
+    height: 30px;
+    cursor:pointer;
+    width: 85px;
+ }

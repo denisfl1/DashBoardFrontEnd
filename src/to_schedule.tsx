@@ -98,7 +98,7 @@ function To_schedule(){
         else if(!verify && doctorSelected.id != e.target.id){
             setDoctorSelected(data)
         }else{
-            setDoctorSelected("undefined")
+            setDoctorSelected('')
         }   
       
         
@@ -117,13 +117,13 @@ function To_schedule(){
         else if(!verify && patientSelected.id != e.target.id){
             setPatientSelected(data)
         }else{
-            setPatientSelected("undefined")
+            setPatientSelected('')
         }   
       
         
         
     }
-  
+
 
 return(
 
@@ -195,7 +195,7 @@ return(
                              
                             <td>{data.crm}</td>
     
-                            <td style={{textAlign:"center"}}><button onClick={(e)=>selectDoctor(data,e)} id={data.id}style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px",cursor:'pointer'}}>{typeof doctorSelected !== "undefined" && doctorSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
+                            <td style={{textAlign:"center"}}><button onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorSelected !== "undefined" && doctorSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
     
                     
                         </tr>
@@ -226,7 +226,7 @@ return(
                                   <td>{data.name}</td>
                                   <td>{data.cpf}</td>
                                   <td>{data.email}</td>
-                                  <td style={{textAlign:"center"}}><button id={data.id} onClick={(e)=>selectPatient(data,e)} style={{margin:"auto",backgroundColor:"white",border:"1px solid black",borderRadius:"5px",cursor:'pointer'}}>{typeof patientSelected !== "undefined" && patientSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
+                                  <td style={{textAlign:"center"}}><button className="TableScheduleButton" id={data.id} onClick={(e)=>selectPatient(data,e)}>{typeof patientSelected !== "undefined" && patientSelected.id == data.id ? "Desfazer":"Selecionar"}</button></td>
                               </tr>
                               )
                             })}
