@@ -76,7 +76,6 @@ function  EditPatient(){
            await API.get(`/getuser/${id}`).then(
             res=>{
 
-                console.log(res.data)
                 setName(res.data.name)
                 setEmail(res.data.email)
                 setCPF(res.data.cpf)

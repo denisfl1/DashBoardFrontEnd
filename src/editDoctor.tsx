@@ -64,7 +64,6 @@ function EditDoctor(){
             await API.get(`/getdoctor/${id}`).then(
                 res=>{
                     
-                    console.log(res.data)
                     setName(res.data.crm)
                     setEmail(res.data.email)
                     setCRM(res.data.crm)

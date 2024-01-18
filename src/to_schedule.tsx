@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {API} from "./Api"
 
 function To_schedule(){
@@ -8,14 +8,13 @@ function To_schedule(){
     const [timeSchedule,setTimeSchedule] = useState<string>()
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
-    const [patientList,setPatientList] = useState<any>([])
-    const [patientSelected,setPatientSelected] = useState<any>(undefined)
-    const [doctorSelected,setDoctorSelected] = useState<any>()
+    const [patientList,setPatientList] = useState<object[]>([])
+    const [patientName,setPatientName] = useState<any>(undefined)
+    const [doctorName,setDoctorName] = useState<any>(undefined)
     const key = ["name","cpf"]
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
-    data[keys].includes(search))):""
-    const [display1,setDisplay1] = useState<boolean>()
-    const [display2,setDisplay2] = useState<boolean>()
+    data[keys].includes(search))):patientList
+
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -42,6 +41,9 @@ function To_schedule(){
         let times = []
 
         for (let i = 7; i <= 18; i++) {
+            if(i == 7){
+                times.push("Selecionar")
+            }
             if (i < 9) {
                 times.push(`0${i}:00 às 0${i + 1}:00`);
             } else if (i === 9) {
@@ -53,14 +55,16 @@ function To_schedule(){
 
        useEffect(()=>{
 
+
         (async()=>{
         await API.post('/getschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
-                // console.log(res.data)
+              
                 setDoctors(res.data)
             }  
         )
-        })()    
+        })() 
+
 
        },[timeSchedule,date,specialty])
 
@@ -89,16 +93,16 @@ function To_schedule(){
     const selectDoctor = (data:any,e:any)=>{
 
 
-        const verify = typeof doctorSelected === 'undefined'    
+        const verify = typeof doctorName === 'undefined'    
 
         if(verify){
-            setDoctorSelected(data)
+            setDoctorName(data)
             
         }
-        else if(!verify && doctorSelected.id != e.target.id){
-            setDoctorSelected(data)
+        else if(!verify && doctorName.id != e.target.id){
+            setDoctorName(data)
         }else{
-            setDoctorSelected(undefined)
+            setDoctorName(undefined)
         }   
       
         
@@ -107,32 +111,51 @@ function To_schedule(){
     const selectPatient = (data:any,e:any)=>{
 
 
-        const verify = typeof patientSelected === 'undefined'
+        const verify = typeof patientName === 'undefined'
        
       
         if(verify){
     
-            setPatientSelected(data)
+            setPatientName(data)
     
         }
-        else if(!verify && patientSelected.id != e.target.id){
+        else if(!verify && patientName.id != e.target.id){
 
-            setPatientSelected(data)
+            setPatientName(data)
            
         }
         else{
 
-            setPatientSelected(undefined)
+            setPatientName(undefined)
            
         } 
-
-
-        if(!verify && patientSelected.id == e.target.id){
-            setDisplay2(true)
-        }
      
     }
 
+
+    const sendSchedule= async()=>{
+
+        if(!doctorName)return alert("Selecione um Médico")
+        if(!patientName)return alert("Selecione um Paciente!")
+        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return alert("Preencha os campos em branco")
+        const doctor = doctorName.name
+        const crm = doctorName.crm
+        const patient_Name = patientName.name
+        const patient_Email = patientName.email
+   
+
+        console.log(doctor,specialty,date,timeSchedule,doctorName,crm,patient_Name,patient_Email )
+        
+        await API.post("/newschedule",{doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
+            res=>{
+                console.log(res.data)
+            },error=>{
+                console.log(error.response.data)
+            }
+        )
+
+
+    }
 
 return(
 
@@ -157,10 +180,10 @@ return(
             
             <label>Horário:</label>
             <select onChange={(e)=>setTimeSchedule(e.target.value)}>
-                {times.map((data)=>{
-    
+                {times.map((data:any)=>{
+                     
                     return (
-                        <option>{data}</option>
+                        <option value={data}>{data}</option>
                     )
                 
                 })}
@@ -169,21 +192,14 @@ return(
             <label>Paciente</label>        
             <input placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
              
-             {/* {search && <ul>
-               {search2.map((data:any)=>{
-                return(
-                    <li>{data.name}</li>
-                )
-               })}
-
-            </ul> } */}
-               <button >Prosseguir</button>
+         
+               <button onClick={sendSchedule}>Prosseguir</button>
             </div>
 
             <div style={{width:"600px"}}>
-       
+            <h1 style={{marginLeft:"60px"}}>Disponibilidade:</h1>
             <table>
-              
+
                 <thead>
                     <tr>
                     <th>Médico</th>
@@ -198,14 +214,14 @@ return(
                     
                     
                     {doctors && doctors.map((data:any)=>{
-                        const SorD = typeof doctorSelected !== "undefined" && doctorSelected.id == data.id 
+                        const SorD = typeof doctorName !== "undefined" && doctorName.id == data.id 
                         return(
                             <tr style={{backgroundColor:SorD ?"#eeeeee":""}}>      
                             <td>{data.name}</td>
                              
                             <td>{data.crm}</td>
     
-                            <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}} onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorSelected !== 'undefined' &&  data.id == doctorSelected.id ? "Desfazer" :"Selecionar"}</button></td>
+                            <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}} onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorName !== 'undefined' &&  data.id == doctorName.id ? "Desfazer" :"Selecionar"}</button></td>
     
                     
                         </tr>
@@ -218,8 +234,9 @@ return(
                 </tbody>
                        
             </table>
-
-                    {search &&<table style={{width:"550px",marginLeft:"45px"}}>
+            <h1 style={{marginLeft:"50px"}}>Selecione um Paciente:</h1>   
+                    {patientList && <table style={{width:"550px",marginLeft:"45px"}}>
+                   
                         <thead>
                         <tr>
                     <th>Nome</th>
@@ -230,8 +247,8 @@ return(
                         </thead>
 
                         <tbody>
-                            {search && search2.map((data:any)=>{
-                                const SorD = typeof patientSelected !== 'undefined' &&  data.id == patientSelected.id 
+                            {patientList && search2.map((data:any)=>{
+                                const SorD = typeof patientName !== 'undefined' &&  data.id == patientName.id 
 
                                 return(
                                   <tr style={{backgroundColor:SorD ?"#eeeeee": ""}}>
@@ -242,8 +259,7 @@ return(
                               </tr>
                               )
                             })}
-                          
-                           
+                                                
                         </tbody>
 
                     </table>}
