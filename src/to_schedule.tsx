@@ -57,7 +57,7 @@ function To_schedule(){
 
 
         (async()=>{
-        await API.post('/getschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
+        await API.post('/findschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
               
                 setDoctors(res.data)
@@ -70,6 +70,7 @@ function To_schedule(){
 
 
        useEffect(()=>{
+
 
         (async()=>{
 
@@ -148,7 +149,8 @@ function To_schedule(){
         
         await API.post("/newschedule",{doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
             res=>{
-                console.log(res.data)
+    
+                alert(res.data)
             },error=>{
                 console.log(error.response.data)
             }
@@ -197,7 +199,7 @@ return(
             </div>
 
             <div style={{width:"600px"}}>
-            <h1 style={{marginLeft:"60px"}}>Disponibilidade:</h1>
+            <h1 style={{marginLeft:"60px",marginTop:"0"}}>Disponibilidade:</h1>
             <table>
 
                 <thead>
@@ -234,7 +236,7 @@ return(
                 </tbody>
                        
             </table>
-            <h1 style={{marginLeft:"50px"}}>Selecione um Paciente:</h1>   
+            <h1 style={{marginLeft:"50px",marginTop:"0"}}>Selecione um Paciente:</h1>   
                     {patientList && <table style={{width:"550px",marginLeft:"45px"}}>
                    
                         <thead>

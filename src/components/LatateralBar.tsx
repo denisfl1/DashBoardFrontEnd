@@ -5,7 +5,6 @@ import logout from '../Icons/sair.png'
 import config from '../Icons/configuracoes.png'
 import agend from '../Icons/agenda.png'
 import home from '../Icons/home.png'
-import categories_icon from '../Icons/categories.png'
 import leftArrow from '../Icons/left-arrow.png'
 import Swal from "sweetalert2";
 import { AuthContext } from "../contexts/authContext";

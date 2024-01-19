@@ -426,3 +426,8 @@ table {
     cursor:pointer;
     width: 85px;
  }
+
+ .SchedulesContainer{
+    min-height: 100vh;
+    width: 100%;
+ }
