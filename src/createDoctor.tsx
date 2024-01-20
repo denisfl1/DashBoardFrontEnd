@@ -64,10 +64,10 @@ return(
         <form>
  
         <label>Nome Completo</label>
-        <input required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
+        <input placeholder="Nome Completo" required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
 
         <label>E-mail</label>
-        <input required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
+        <input placeholder="Email" required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
     
         <label>Especialidade</label>
 
@@ -80,10 +80,10 @@ return(
         </select>
 
         <label>{specialty != "Psicologia" ?'CRM' : "CRP"}</label>
-        <input required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
+        <input placeholder="CRM ou CRP"  required type="text"  name="crm" onChange={(e)=>setCRM(e.target.value)}></input>
 
         <label>Número de Contato</label>
-        <input required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+        <input placeholder="Número de Contato" required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
 
 
 

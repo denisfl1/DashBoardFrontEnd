@@ -70,7 +70,7 @@ return(
 
                 <th>Especialidade</th>
 
-                <th>CRM</th>
+                <th>CRM/CRP</th>
 
                 <th>Número</th>
 

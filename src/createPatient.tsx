@@ -74,20 +74,20 @@ return(
     <form>
 
     <label>Nome Completo</label>
-    <input required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
+    <input placeholder="Nome Completo" required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
 
     <label>E-mail</label>
-    <input required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
+    <input placeholder="E-mail" required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
 
     <label>CEP</label>
-    <input required type="text"  name="adress" onChange={(e)=>setZipCode(e.target.value)}></input>
+    <input placeholder="CEP"  required type="text"  name="adress" onChange={(e)=>setZipCode(e.target.value)}></input>
 
     <label>Número de Contato</label>
-    <input value={contact_number} required type="text"  name="number" onChange={(e)=>setContactNumber(e.target.value)}></input>
+    <input placeholder="Número de Contato"  value={contact_number} required type="text"  name="number" onChange={(e)=>setContactNumber(e.target.value)}></input>
 
       
     <label>CPF</label>
-    <input  type="text" onChange={(e)=>setCPF(e.target.value)}  name="cpf" ></input>
+    <input placeholder="CPF" type="text" onChange={(e)=>setCPF(e.target.value)}  name="cpf" ></input>
 
 
     </form>
@@ -96,15 +96,15 @@ return(
 
         
     <label>Endereço Residencial</label>
-    <input value={adress} required type="text"  name="adress" onChange={(e)=>setAdress(e.target.value)}></input>
+    <input placeholder="Endereço Residencial"  value={adress} required type="text"  name="adress" onChange={(e)=>setAdress(e.target.value)}></input>
 
 
     <label>Bairro</label>
-    <input value={neighborhood} required type="text"  name="adress" onChange={(e)=>setNeighborhood(e.target.value)}></input>
+    <input placeholder="Bairro" value={neighborhood} required type="text"  name="adress" onChange={(e)=>setNeighborhood(e.target.value)}></input>
 
     
     <label>Número</label>
-    <input value={number_adress} required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
+    <input placeholder="Número" value={number_adress} required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
 
           
     <button type={"submit"} style={{marginTop:'26px'}} onClick={SendData}>Registrar</button>

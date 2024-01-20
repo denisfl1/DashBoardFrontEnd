@@ -43,17 +43,17 @@ function EditDoctor(){
         e.preventDefault()
             if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
 
-            // await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
-            //     res=>{
-            //         if(res.status == 200){
-            //             alert("Registrado com sucesso")
-            //         }
+            await API.put('/editdoctor',{id,name,email,crm,specialty,number}).then(
+                res=>{
+                    if(res.status == 200){
+                        alert("Registrado com sucesso")
+                    }
             
 
-            //     },error=>{
-            //       alert(error.response.data.error)
-            //     }
-            // )
+                },error=>{
+                  alert(error.response.data)
+                }
+            )
 
     }
 
@@ -64,7 +64,7 @@ function EditDoctor(){
             await API.get(`/getdoctor/${id}`).then(
                 res=>{
                     
-                    setName(res.data.crm)
+                    setName(res.data.name)
                     setEmail(res.data.email)
                     setCRM(res.data.crm)
                     setSpecialty(res.data.specialty)

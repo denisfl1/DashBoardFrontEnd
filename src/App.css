@@ -314,6 +314,7 @@ table {
     margin-bottom: 100px;
   }
 
+
   th, td {
     padding: 12px;
     text-align: left;
@@ -369,6 +370,7 @@ table {
     margin: auto;
     margin-top: 30px;
     justify-content: center;
+    height: 400px
 }
 
 .To_scheduleContent select{
@@ -385,7 +387,7 @@ table {
     flex-direction: column;
     width: 600px;
     position: relative;
-    height: 600px;
+    
 }
 
 .InputsContent input{
@@ -410,7 +412,7 @@ table {
     border-radius: 5px;
     border: 1px solid black;
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     bottom: 200px;
     right:20px;
     font-weight: bold;
@@ -430,4 +432,25 @@ table {
  .SchedulesContainer{
     min-height: 100vh;
     width: 100%;
+ }
+
+ .SchedulesContent{
+    margin-top: 20px;
+ }
+
+
+ .SchedulesContent table{
+    width: 85%;
+ }
+
+
+ .SchedulesContent button{
+    width: 80px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin-right: 5px;
  }

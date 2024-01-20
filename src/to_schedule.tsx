@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {API} from "./Api"
+import Swal from "sweetalert2";
 
 function To_schedule(){
 
@@ -61,6 +62,9 @@ function To_schedule(){
             res=>{
               
                 setDoctors(res.data)
+            },error=>{
+
+                  if(error.response.data)return setDoctors([])
             }  
         )
         })() 
@@ -80,7 +84,7 @@ function To_schedule(){
                     setPatientList(res.data)
                 
                 },error=>{
-
+                    
                     console.log(error.response)
                 }
             )
@@ -133,12 +137,23 @@ function To_schedule(){
      
     }
 
+    const Alert2 =(res:string)=>{                
+    return Swal.fire({
+    position: 'center',
+    icon: 'error',
+    title: `${res}`,
+    confirmButtonColor:'#3085d6',
+    // width:"400px",
+    customClass:'swal-wide',
+    confirmButtonText:"Fechar",
+ 
+  })} 
 
     const sendSchedule= async()=>{
 
-        if(!doctorName)return alert("Selecione um Médico")
-        if(!patientName)return alert("Selecione um Paciente!")
-        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return alert("Preencha os campos em branco")
+        if(!doctorName)return Alert2("Selecione um Médico!")
+        if(!patientName)return Alert2("Selecione um Paciente!")
+        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert2("Preencha os campos em branco!")
         const doctor = doctorName.name
         const crm = doctorName.crm
         const patient_Name = patientName.name
@@ -149,10 +164,24 @@ function To_schedule(){
         
         await API.post("/newschedule",{doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
             res=>{
-    
-                alert(res.data)
+                           
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${res.data}`,
+            confirmButtonColor:'#3085d6',
+            width:"400px",
+            customClass:'swal-wide',
+            confirmButtonText:"Fechar",
+            // showConfirmButton:false,
+            // timer:1500  
+         
+          })
+
+            setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
             },error=>{
-                console.log(error.response.data)
+                                
+                Alert2(error.response.data)
             }
         )
 
@@ -194,82 +223,90 @@ return(
             <label>Paciente</label>        
             <input placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
              
-         
-               <button onClick={sendSchedule}>Prosseguir</button>
+               
+            <div style={{position:"relative",display:"flex",justifyContent:"right",marginTop:"15px",alignItems:"center"}}><button onClick={sendSchedule}>Prosseguir</button></div>
             </div>
 
-            <div style={{width:"600px"}}>
-            <h1 style={{marginLeft:"60px",marginTop:"0"}}>Disponibilidade:</h1>
-            <table>
-
-                <thead>
-                    <tr>
-                    <th>Médico</th>
-                    <th>{specialty != "Psicologia" ? "CRM" : "CRP"}</th>
-                    <th></th>
-                    </tr>
-                    
-                </thead>
-
-
-                <tbody>
-                    
-                    
-                    {doctors && doctors.map((data:any)=>{
-                        const SorD = typeof doctorName !== "undefined" && doctorName.id == data.id 
-                        return(
-                            <tr style={{backgroundColor:SorD ?"#eeeeee":""}}>      
-                            <td>{data.name}</td>
-                             
-                            <td>{data.crm}</td>
-    
-                            <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}} onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorName !== 'undefined' &&  data.id == doctorName.id ? "Desfazer" :"Selecionar"}</button></td>
-    
-                    
-                        </tr>
-                        )
-
-                    })}
-                   
-                  
-                  
-                </tbody>
-                       
-            </table>
-            <h1 style={{marginLeft:"50px",marginTop:"0"}}>Selecione um Paciente:</h1>   
-                    {patientList && <table style={{width:"550px",marginLeft:"45px"}}>
-                   
-                        <thead>
-                        <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Email</th>
-                    <th></th>
-                    </tr>
-                        </thead>
-
-                        <tbody>
-                            {patientList && search2.map((data:any)=>{
-                                const SorD = typeof patientName !== 'undefined' &&  data.id == patientName.id 
-
-                                return(
-                                  <tr style={{backgroundColor:SorD ?"#eeeeee": ""}}>
-                                  <td>{data.name}</td>
-                                  <td>{data.cpf}</td>
-                                  <td>{data.email}</td>
-                                  <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}}  className="TableScheduleButton" id={data.id} onClick={(e)=>selectPatient(data,e)}>{SorD ?"Desfazer" :"Selecionar"}</button></td>
-                              </tr>
-                              )
-                            })}
-                                                
-                        </tbody>
-
-                    </table>}
-        
-            </div>
+           
     </div>
 
+    <div style={{width:"100%",display:"flex",marginBottom:"50px",justifyContent:"center"}}>
+            
+                <div>
+           <h1 >Disponibilidade:</h1>
 
+          <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
+           
+               <thead>
+                   <tr>
+                   <th>Médico</th>
+                   <th>{specialty != "Psicologia" ? "CRM" : "CRP"}</th>
+                   <th></th>
+                   </tr>
+                   
+               </thead>
+
+
+               <tbody>
+                   
+                   
+                   {doctors[0] ? doctors.map((data:any)=>{
+                       const SorD = typeof doctorName !== "undefined" && doctorName.id == data.id 
+                       return(
+                           <tr style={{backgroundColor:SorD ?"#eeeeee":""}}>      
+                           <td>{data.name}</td>
+                            
+                           <td>{data.crm}</td>
+   
+                           <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}} onClick={(e)=>selectDoctor(data,e)} className="TableScheduleButton" id={data.id}>{typeof doctorName !== 'undefined' &&  data.id == doctorName.id ? "Desfazer" :"Selecionar"}</button></td>
+   
+                   
+                       </tr>
+                       )
+
+                   }): <tr><td>Não há disponibilidade</td></tr>}
+                  
+                 
+                 
+               </tbody>
+                      
+           </table>
+           </div>
+
+
+            <div style={{width:"800px"}}>
+           <h1 style={{marginLeft:"80px"}}>Selecione um Paciente:</h1>   
+                   {patientList && <table style={{margin:"auto"}}>
+                  
+                       <thead>
+                       <tr>
+                   <th>Nome</th>
+                   <th>CPF</th>
+                   <th>Email</th>
+                   <th></th>
+                   </tr>
+                       </thead>
+
+                       <tbody>
+                           {patientList && search2.map((data:any)=>{
+                               const SorD = typeof patientName !== 'undefined' &&  data.id == patientName.id 
+
+                               return(
+                                 <tr style={{backgroundColor:SorD ?"#eeeeee": ""}}>
+                                 <td>{data.name}</td>
+                                 <td>{data.cpf}</td>
+                                 <td>{data.email}</td>
+                                 <td style={{textAlign:"center"}}><button style={SorD ?{backgroundColor: "black",color:"white"}:{}}  className="TableScheduleButton" id={data.id} onClick={(e)=>selectPatient(data,e)}>{SorD ?"Desfazer" :"Selecionar"}</button></td>
+                             </tr>
+                             )
+                           })}
+                                               
+                       </tbody>
+
+                   </table>}
+                   </div>
+
+           </div>
 
 </div>
 
