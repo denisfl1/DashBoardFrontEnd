@@ -63,63 +63,58 @@ function Edit_schedule(){
 
 
         (async()=>{
-        await API.get(`/findschedules/${id}`).then(
-            res=>{
-                setSearch(res.data.patient_Name)
-                setSchedule(res.data)
-                setDoctorName(res.data.doctor)
-                setPatientName(res.data.patient_Name)
-                setSpecialty(res.data.specialty)
-                setDate(res.data.date)
-                setTimeSchedule(res.data.hour)
-            
-                setSchedule(res.data)
-               
-               
-            },error=>{
 
-                console.log(error.response.data)
-                 
-            }  
+        const [promise1,promise2] = await Promise.allSettled(
+            [
+                API.get(`/findschedules/${id}`),
+                API.get("http://localhost:5000/getUsers")
+            ]
         )
+
+            console.log(promise2)
+        
+            if(promise1.status === 'fulfilled'){
+        
+                setSearch(promise1.value.data.patient_Name)
+                setSchedule(promise1.value.data)
+                setDoctorName(promise1.value.data.doctor)
+                setPatientName(promise1.value.data.patient_Name)
+                setSpecialty(promise1.value.data.specialty)
+                setDate(promise1.value.data.date)
+                setTimeSchedule(promise1.value.data.hour)
+            
+    
+            }else{
+                console.log(promise1.reason.response.data)
+                Alert2(promise1.reason.response.data)
+            }
+
+
+            if(promise2.status === 'fulfilled'){
+
+                setPatientList(promise2.value.data)
+
+            }else{
+                console.log(promise2.reason.response.data)
+                Alert2(promise2.reason.response.data)
+            }
+
+
+            if(promise1.status === 'fulfilled' && promise2.status === 'fulfilled'){
+                const name = promise1.value.data.patient_Name
+                const email = promise1.value.data.patient_Email
+                const findUser = promise2.value.data.find((data:any)=>data.email == email && data.name == name)
+            
+                setPatientName(findUser)
+            }
+        
+
         })() 
 
 
        },[])
     
 
-
-        useEffect(()=>{
-    
-            if(schedule && patientList){
-            const findUser = patientList.find((data:any)=>data.email == schedule.patient_Email && data.name == schedule.patient_Name)
-        
-            setPatientName(findUser)
-        }     
-
-        },[schedule,patientList])
-
-       useEffect(()=>{
-
-
-        (async()=>{
-
-            await API.get("http://localhost:5000/getUsers").then(
-                res=>{
-
-                    setPatientList(res.data)
-      
-                
-                },error=>{
-                    
-                    console.log(error.response.data)
-                }
-            )
-
-        })()
-
-
-    },[])
 
     useEffect(()=>{
 
