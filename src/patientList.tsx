@@ -3,7 +3,7 @@ import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
 
 function PatientList(){
 
@@ -12,23 +12,45 @@ const [search,setSearch] = useState<string[]>([])
 const key = ["name","email"]
 const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):patientList
 
+    const Alert2 =(res:string)=>{                
+        return Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `${res}`,
+        confirmButtonColor:'#3085d6',
+        // width:"400px",
+        customClass:'swal-wide',
+        confirmButtonText:"Fechar",
+    
+    })} 
+
+
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
         if(e.target instanceof HTMLButtonElement){
         const id = e.target.id
-        const question = window.confirm("Você deseja excluir este usuário?")
-            
-            if(question){
-                API.delete(`http://localhost:5000/deleteuser/${id}`).then(
+        
+        Swal.fire({
+            title: "Deseja excluir este usuário?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText:"Cancelar",
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                await API.delete(`http://localhost:5000/deleteuser/${id}`).then(
                     res=>{
-                    
-                        alert(res.data)
+                        Alert2(res.data)
                         setPatientList((data:any)=>data.filter((it:any)=>it.id != id))
                     },error=>{
-                        alert(error.response.data)
+
+                        Alert2(error.response.data)
                     }
-                )
+                 )
             }
+          });
 
     }
     }

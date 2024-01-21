@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import {API} from "./Api"
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
+import { setTimeout } from "timers/promises";
 
-function To_schedule(){
+function Edit_schedule(){
 
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [date,setDate] = useState<string>()
     const [timeSchedule,setTimeSchedule] = useState<string>()
+    const [schedule,setSchedule] = useState()
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
     const [patientList,setPatientList] = useState<object[]>([])
@@ -16,6 +19,8 @@ function To_schedule(){
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
     data[keys].includes(search))):patientList
 
+    const param = useParams()
+    const id = param.id
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -58,6 +63,68 @@ function To_schedule(){
 
 
         (async()=>{
+        await API.get(`/findschedules/${id}`).then(
+            res=>{
+                setSearch(res.data.patient_Name)
+                setSchedule(res.data)
+                setDoctorName(res.data.doctor)
+                setPatientName(res.data.patient_Name)
+                setSpecialty(res.data.specialty)
+                setDate(res.data.date)
+                setTimeSchedule(res.data.hour)
+            
+                setSchedule(res.data)
+                
+                if(res.data){
+                    
+                    const nome = res.data.patient_Name
+                    const email = res.data.patient_Email
+                    const search3 = patientList.find((data:any)=>data.email == email && data.name == nome)
+                                     
+                    
+                
+
+                }   
+            
+
+            },error=>{
+
+                 
+            }  
+        )
+        })() 
+
+
+       },[])
+   
+
+
+       useEffect(()=>{
+
+
+        (async()=>{
+
+            await API.get("http://localhost:5000/getUsers").then(
+                res=>{
+
+                    setPatientList(res.data)
+      
+                
+                },error=>{
+                    
+                    console.log(error.response)
+                }
+            )
+
+        })()
+
+
+    },[])
+
+    useEffect(()=>{
+
+
+        (async()=>{
         await API.post('/findschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
               
@@ -71,28 +138,6 @@ function To_schedule(){
 
 
        },[timeSchedule,date,specialty])
-
-
-       useEffect(()=>{
-
-
-        (async()=>{
-
-            await API.get("http://localhost:5000/getUsers").then(
-                res=>{
-
-                    setPatientList(res.data)
-                
-                },error=>{
-                    
-                    console.log(error.response)
-                }
-            )
-
-        })()
-
-
-    },[])
      
    
     const selectDoctor = (data:any,e:any)=>{
@@ -197,7 +242,7 @@ return(
 
             <div className="InputsContent">
             <label>Especialidade</label>   
-            <select onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
+            <select value={specialty} onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
             {SPECIALTY.map((it)=>{
                 return(
                     <option value={it}>{it}</option>
@@ -207,10 +252,10 @@ return(
 
 
             <label>Data de Agendamento:</label>
-            <input  onChange={(e)=>setDate(e.target.value)} type="date" id="calendary" name="calendary"></input>
+            <input value={date}  onChange={(e)=>setDate(e.target.value)} type="date" id="calendary" name="calendary"></input>
             
             <label>Horário:</label>
-            <select onChange={(e)=>setTimeSchedule(e.target.value)}>
+            <select value={timeSchedule} onChange={(e)=>setTimeSchedule(e.target.value)}>
                 {times.map((data:any)=>{
                      
                     return (
@@ -221,7 +266,7 @@ return(
             </select>
 
             <label>Paciente</label>        
-            <input placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
+            <input value={search} placeholder="Digite o Nome ou CPF" onChange={(e)=>setSearch(e.target.value)}></input>
              
                
             <div style={{position:"relative",display:"flex",justifyContent:"right",marginTop:"15px",alignItems:"center"}}><button onClick={sendSchedule}>Prosseguir</button></div>
@@ -233,7 +278,7 @@ return(
     <div style={{width:"100%",display:"flex",marginBottom:"50px",justifyContent:"center"}}>
             
                 <div>
-           <h1 >Disponibilidade:</h1>
+           <h1>Disponibilidade:</h1>
 
           <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
            
@@ -317,4 +362,4 @@ return(
 
 }
 
-export default To_schedule
+export default Edit_schedule

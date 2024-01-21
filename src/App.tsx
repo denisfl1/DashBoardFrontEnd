@@ -15,6 +15,7 @@ import EditPatient from './editPatient';
 import EditDoctor from './editDoctor';
 import To_schedule from './to_schedule';
 import Schedules from './schedules';
+import Edit_schedule from './editSchedules'
 
 
 function App() {
@@ -93,7 +94,7 @@ function App() {
         <Route path="/editdoctor/:id" element={<Private><EditDoctor/></Private>}></Route>
         <Route path="/to_schedule" element={<Private><To_schedule/></Private>}></Route>
         <Route path="/schedules" element={<Private><Schedules/></Private>}></Route>
-
+        <Route path="/editschedule/:id" element={<Private><Edit_schedule/></Private>}></Route>
 
 
         </Routes>

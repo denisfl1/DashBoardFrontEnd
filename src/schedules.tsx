@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import {API} from './Api'
 import lupa from "./Icons/lupa.png"
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 
 function Schedules(){
 
     const[AllSchedules,setAllSchudeles] = useState([])
     const [search,setSearch] = useState<string[]>([])
-
     const key = ["patient_Name","patient_Email"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
 
@@ -17,7 +17,7 @@ function Schedules(){
 
         (async()=>{
 
-            await API.get('/getsc').then(
+            await API.get('/getschedules').then(
             res=>{
                 console.log(res.data)
                 setAllSchudeles(res.data)
@@ -88,7 +88,7 @@ return(
 
         <div className="SchedulesContent">
 
-                <table>
+                {search2[0] ? <table>
 
                     <thead>
 
@@ -132,7 +132,7 @@ return(
                                  <td>{data.patient_Email}</td>
                                  <td>{data.date}</td>
                                  <td>{data.hour}</td>
-                                 <td><button>Editar</button><button id={data.id} onClick={handleDelete}>Excluir</button></td>
+                                 <td><Link to={`/editschedule/${data.id}`}><button>Editar</button></Link><button id={data.id} onClick={handleDelete}>Excluir</button></td>
                     
                                 </tr>
 
@@ -145,7 +145,7 @@ return(
                     </tbody>
 
 
-                </table>
+                </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
 

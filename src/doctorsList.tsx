@@ -3,7 +3,7 @@ import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
 import {Link} from "react-router-dom";
-
+import Swal from "sweetalert2";
 
 function DoctorsList(){
 
@@ -13,43 +13,64 @@ const key = ["name","crm"]
 const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList
 
 
+    
+  const Alert2 =(res:string)=>{                
+    return Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: `${res}`,
+    confirmButtonColor:'#3085d6',
+    // width:"400px",
+    customClass:'swal-wide',
+    confirmButtonText:"Fechar",
+
+})} 
+
+
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
         if(e.target instanceof HTMLButtonElement){
         const id = e.target.id 
-        const question = window.confirm("Você deseja excluir este médico?")
+      
             
-            if(question){
-                API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
+        Swal.fire({
+            title: "Deseja excluir este usuário?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText:"Cancelar",
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                await API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
                     res=>{
-                        if(res.status == 200){
-                            alert(res.data)
-                            setDoctorList((prev:any)=>prev.filter((data:any)=>data.id != id))
-                        }
-                      
-
+                        Alert2(res.data)
+                        setDoctorList((prev:any)=>prev.filter((data:any)=>data.id != id))
                     },error=>{
-                        alert(error.response.data)
+        
+                        Alert2(error.response.data)
                     }
-                )
+                 )
             }
+          });
 
     }
     }
 
-useEffect(()=>{
+    useEffect(()=>{
 
-    (async()=>{
+        (async()=>{
 
-        await API.get("http://localhost:5000/getDoctors").then(
-            res=>{
-                setDoctorList(res.data)
-            },error=>{
+            await API.get("http://localhost:5000/getDoctors").then(
+                res=>{
+                    setDoctorList(res.data)
+                },error=>{
 
-                console.log(error.response)
-            }
-        )
+                    console.log(error.response)
+                }
+            )
 
-    })()
+        })()
 
 
 },[])
