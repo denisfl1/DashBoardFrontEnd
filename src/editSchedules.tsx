@@ -78,6 +78,7 @@ function Edit_schedule(){
                
             },error=>{
 
+                console.log(error.response.data)
                  
             }  
         )
@@ -111,7 +112,7 @@ function Edit_schedule(){
                 
                 },error=>{
                     
-                    console.log(error.response)
+                    console.log(error.response.data)
                 }
             )
 
