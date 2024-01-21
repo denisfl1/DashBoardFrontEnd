@@ -19,7 +19,7 @@ function Schedules(){
 
             await API.get('/getschedules').then(
             res=>{
-                console.log(res.data)
+      
                 setAllSchudeles(res.data)
             },error=>{
                 

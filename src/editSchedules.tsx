@@ -9,7 +9,7 @@ function Edit_schedule(){
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [date,setDate] = useState<string>()
     const [timeSchedule,setTimeSchedule] = useState<string>()
-    const [schedule,setSchedule] = useState()
+    const [schedule,setSchedule] = useState<any>()
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
     const [patientList,setPatientList] = useState<object[]>([])
@@ -74,19 +74,8 @@ function Edit_schedule(){
                 setTimeSchedule(res.data.hour)
             
                 setSchedule(res.data)
-                
-                if(res.data){
-                    
-                    const nome = res.data.patient_Name
-                    const email = res.data.patient_Email
-                    const search3 = patientList.find((data:any)=>data.email == email && data.name == nome)
-                                     
-                    
-                
-
-                }   
-            
-
+               
+               
             },error=>{
 
                  
@@ -96,8 +85,18 @@ function Edit_schedule(){
 
 
        },[])
-   
+    
 
+
+        useEffect(()=>{
+    
+            if(schedule && patientList){
+            const findUser = patientList.find((data:any)=>data.email == schedule.patient_Email && data.name == schedule.patient_Name)
+        
+            setPatientName(findUser)
+        }     
+
+        },[schedule,patientList])
 
        useEffect(()=>{
 
