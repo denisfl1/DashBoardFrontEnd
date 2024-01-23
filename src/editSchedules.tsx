@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {API} from "./Api"
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setTimeout } from "timers/promises";
 
 function Edit_schedule(){
@@ -21,6 +21,7 @@ function Edit_schedule(){
 
     const param = useParams()
     const id = param.id
+    const navigate = useNavigate()
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -71,14 +72,14 @@ function Edit_schedule(){
             ]
         )
 
-            console.log(promise2)
         
             if(promise1.status === 'fulfilled'){
-        
+                const name = promise1.value.data.doctor
+                const crm = promise1.value.data.crm
+              
                 setSearch(promise1.value.data.patient_Name)
                 setSchedule(promise1.value.data)
-                setDoctorName(promise1.value.data.doctor)
-                setPatientName(promise1.value.data.patient_Name)
+                setDoctorName({name,crm})
                 setSpecialty(promise1.value.data.specialty)
                 setDate(promise1.value.data.date)
                 setTimeSchedule(promise1.value.data.hour)
@@ -87,6 +88,7 @@ function Edit_schedule(){
             }else{
                 console.log(promise1.reason.response.data)
                 Alert2(promise1.reason.response.data)
+                navigate('/schedules')
             }
 
 
@@ -136,7 +138,9 @@ function Edit_schedule(){
      
    
     const selectDoctor = (data:any,e:any)=>{
-
+        const name = schedule.doctor
+        const crm = schedule.crm
+        const specialty = schedule.specialty
 
         const verify = typeof doctorName === 'undefined'    
 
@@ -147,10 +151,10 @@ function Edit_schedule(){
         else if(!verify && doctorName.id != e.target.id){
             setDoctorName(data)
         }else{
-            setDoctorName(undefined)
+            setDoctorName({name,crm,specialty})
         }   
       
-        
+        console.log(doctorName)
     }
 
     const selectPatient = (data:any,e:any)=>{
@@ -194,36 +198,38 @@ function Edit_schedule(){
         if(!doctorName)return Alert2("Selecione um Médico!")
         if(!patientName)return Alert2("Selecione um Paciente!")
         if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert2("Preencha os campos em branco!")
+        
+        const id = schedule.id
         const doctor = doctorName.name
         const crm = doctorName.crm
         const patient_Name = patientName.name
         const patient_Email = patientName.email
    
 
-        console.log(doctor,specialty,date,timeSchedule,doctorName,crm,patient_Name,patient_Email )
+        console.log(id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email)
         
-        await API.post("/newschedule",{doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
-            res=>{
+        // await API.put("/editdoctor",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
+        //     res=>{
                            
-            Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: `${res.data}`,
-            confirmButtonColor:'#3085d6',
-            // width:"400px",
-            customClass:'swal-wide',
-            confirmButtonText:"Fechar",
-            // showConfirmButton:false,
-            // timer:1500  
+        //     Swal.fire({
+        //     position: 'center',
+        //     icon: 'success',
+        //     title: `${res.data}`,
+        //     confirmButtonColor:'#3085d6',
+        //     // width:"400px",
+        //     customClass:'swal-wide',
+        //     confirmButtonText:"Fechar",
+        //     // showConfirmButton:false,
+        //     // timer:1500  
          
-          })
+        //   })
 
-            setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
-            },error=>{
+        //     setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
+        //     },error=>{
                                 
-                Alert2(error.response.data)
-            }
-        )
+        //         Alert2(error.response.data)
+        //     }
+        // )
 
 
     }
