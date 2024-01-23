@@ -117,6 +117,15 @@ function Edit_schedule(){
        },[])
        
 
+       const handleSpeciality =(e:any)=>{
+
+        const event = e.target.value
+
+        setSpecialty(event)
+        setDoctorName('')
+
+       }
+
     useEffect(()=>{
 
 
@@ -124,16 +133,9 @@ function Edit_schedule(){
         await API.post('/findschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
            
-            if(typeof schedule == 'undefined')return setDoctors(res.data)
-            const list:any = {}   
-            list.name= schedule.doctor
-            list.crm  = schedule.crm
-            list.specialty = schedule.specialty
-                
-            const response = res.data
-            response.unshift(list)
-        
-            setDoctors(response)
+         
+               setDoctors(res.data)
+            
 
             },error=>{
 
@@ -285,7 +287,7 @@ return(
 
             <div className="InputsContent">
             <label>Especialidade</label>   
-            <select value={specialty} onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
+            <select value={specialty} onChange={(e)=>handleSpeciality(e)} style={{marginBottom:"10px"}}>
             {SPECIALTY.map((it)=>{
                 return(
                     <option value={it}>{it}</option>

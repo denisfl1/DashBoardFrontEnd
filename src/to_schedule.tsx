@@ -62,6 +62,8 @@ function To_schedule(){
             res=>{
               
                 setDoctors(res.data)
+                setDoctorName(undefined)
+                
             },error=>{
 
                   if(error.response.data)return setDoctors([])
@@ -154,6 +156,7 @@ function To_schedule(){
         if(!doctorName)return Alert2("Selecione um Médico!")
         if(!patientName)return Alert2("Selecione um Paciente!")
         if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert2("Preencha os campos em branco!")
+        
         const doctor = doctorName.name
         const crm = doctorName.crm
         const patient_Name = patientName.name

@@ -98,7 +98,7 @@ return(
 
                             <th>Especialidade</th>
 
-                            <th>CRM</th>
+                            <th>CRM/CRP</th>
 
                             <th>Nome do Paciente</th>
 
