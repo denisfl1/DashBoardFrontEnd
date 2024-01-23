@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {API} from "./Api"
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
-import { setTimeout } from "timers/promises";
+
 
 function Edit_schedule(){
 
@@ -68,7 +68,8 @@ function Edit_schedule(){
         const [promise1,promise2] = await Promise.allSettled(
             [
                 API.get(`/findschedules/${id}`),
-                API.get("http://localhost:5000/getUsers")
+                API.get("http://localhost:5000/getUsers"),
+
             ]
         )
 
@@ -83,7 +84,6 @@ function Edit_schedule(){
                 setSpecialty(promise1.value.data.specialty)
                 setDate(promise1.value.data.date)
                 setTimeSchedule(promise1.value.data.hour)
-              
     
             }else{
                 console.log(promise1.reason.response.data)
@@ -115,7 +115,7 @@ function Edit_schedule(){
 
 
        },[])
-    
+       
 
     useEffect(()=>{
 
@@ -123,8 +123,18 @@ function Edit_schedule(){
         (async()=>{
         await API.post('/findschedules',{specialty:specialty,date:date,timeSchedule:timeSchedule}).then(
             res=>{
-              
-                setDoctors(res.data)
+           
+            if(typeof schedule == 'undefined')return setDoctors(res.data)
+            const list:any = {}   
+            list.name= schedule.doctor
+            list.crm  = schedule.crm
+            list.specialty = schedule.specialty
+                
+            const response = res.data
+            response.unshift(list)
+        
+            setDoctors(response)
+
             },error=>{
 
                   if(error.response.data)return setDoctors([])
@@ -137,9 +147,12 @@ function Edit_schedule(){
      
    
     const selectDoctor = (data:any,e:any)=>{
-        const name = schedule.doctor
-        const crm = schedule.crm
-        const specialty = schedule.specialty
+ 
+        const list:any = {}
+
+        list.name = schedule.doctor
+        list.crm = schedule.crm
+        list.specialty = schedule.specialty
 
         const verify = typeof doctorName === 'undefined'    
 
@@ -150,7 +163,7 @@ function Edit_schedule(){
         else if(!verify && doctorName.id != e.target.id){
             setDoctorName(data)
         }else{
-            setDoctorName({name,crm,specialty})
+            setDoctorName(list)
         }   
       
   
