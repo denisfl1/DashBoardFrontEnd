@@ -208,28 +208,28 @@ function Edit_schedule(){
 
         console.log(id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email)
         
-        // await API.put("/editdoctor",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
-        //     res=>{
+        await API.put("/editscheduling",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
+            res=>{
                            
-        //     Swal.fire({
-        //     position: 'center',
-        //     icon: 'success',
-        //     title: `${res.data}`,
-        //     confirmButtonColor:'#3085d6',
-        //     // width:"400px",
-        //     customClass:'swal-wide',
-        //     confirmButtonText:"Fechar",
-        //     // showConfirmButton:false,
-        //     // timer:1500  
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${res.data}`,
+            confirmButtonColor:'#3085d6',
+            // width:"400px",
+            customClass:'swal-wide',
+            confirmButtonText:"Fechar",
+            // showConfirmButton:false,
+            // timer:1500  
          
-        //   })
+          })
 
-        //     setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
-        //     },error=>{
+            // setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
+            },error=>{
                                 
-        //         Alert2(error.response.data)
-        //     }
-        // )
+                Alert2(error.response.data)
+            }
+        )
 
 
     }
