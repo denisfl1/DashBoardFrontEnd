@@ -83,7 +83,7 @@ function Edit_schedule(){
                 setSpecialty(promise1.value.data.specialty)
                 setDate(promise1.value.data.date)
                 setTimeSchedule(promise1.value.data.hour)
-                // console.log(schedule)
+              
     
             }else{
                 console.log(promise1.reason.response.data)
@@ -116,7 +116,6 @@ function Edit_schedule(){
 
        },[])
     
-
 
     useEffect(()=>{
 
@@ -154,10 +153,13 @@ function Edit_schedule(){
             setDoctorName({name,crm,specialty})
         }   
       
-        console.log(doctorName)
+  
     }
 
     const selectPatient = (data:any,e:any)=>{
+        const name = schedule.patient_Name
+        const email = schedule.patient_Email
+        const findUser = patientList.find((data:any)=>data.email == email && data.name == name)
 
 
         const verify = typeof patientName === 'undefined'
@@ -175,7 +177,7 @@ function Edit_schedule(){
         }
         else{
 
-            setPatientName(undefined)
+            setPatientName(findUser)
            
         } 
      
@@ -249,7 +251,7 @@ function Edit_schedule(){
         // console.log(id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email)
 
         try {
-            let resp = await API.put("/editscheduling",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email})
+            const resp = await API.put("/editscheduling",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email})
             AlertQuestion(resp)
           
         } catch (error) {
