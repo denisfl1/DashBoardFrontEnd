@@ -52,7 +52,6 @@ function  EditPatient(){
                     if(res && res.status == 200){
                     setAdress(res.data.logradouro)
                     setNeighborhood(res.data.bairro)
-                    setContactNumber(`(${res.data.ddd})`)
      
                 }
                 },error=>{

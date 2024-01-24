@@ -6,10 +6,11 @@ import { API } from "./Api";
 function  CreateDoctor(){
 
     const [email,setEmail]= useState<string>()
-    const [name,setName] = useState<string>()
+    const [nameFull,setName] = useState<string>()
     const [crm,setCRM] = useState<string>()
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
+    const [sex,setSex] = useState<string>("Masculino")
 
 
     const SPECIALTY = [
@@ -38,7 +39,15 @@ function  CreateDoctor(){
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
-            if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() ||!sex.trim())return alert("Preencha os campos em branco!")
+            let name = ''
+            if(sex === "Masculino" && specialty !== "Psicologia"){
+            name = " Dr. " + nameFull
+            }else if(sex === "Feminino" && specialty !== "Psicologia"){
+            name = " Dra. " + nameFull
+            }else if(specialty === "Psicologia"){
+            name = "Psic. " + nameFull
+            }
 
             await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
                 res=>{
@@ -54,6 +63,8 @@ function  CreateDoctor(){
 
     }
 
+
+    console.log(sex)
 
 return(
 
@@ -84,8 +95,19 @@ return(
 
         <label>Número de Contato</label>
         <input placeholder="Número de Contato" required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
+        
+        <div> 
+        <legend>Sexo:</legend>  
+        <div style={{display:"flex",alignItems:"center"}}>
+        
+       
+        <input onClick={(e:any)=>setSex(e.target.value)} style={{marginLeft:"10px"}} type="radio"  name="sex" value="Masculino" />
+        <label>Masculino</label>
 
-
+        <input onClick={(e:any)=>{setSex(e.target.value)}} type="radio"  name="sex" value="Feminino" />
+        <label >Feminino</label>
+        </div> 
+    </div>
 
 
         <button type={"submit"} style={{marginTop:'20px'}} onClick={SendData}>Registrar</button>
