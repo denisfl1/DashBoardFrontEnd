@@ -42,9 +42,9 @@ function  CreateDoctor(){
             if(!email?.trim() || !nameFull?.trim() || !crm?.trim() ||!sex.trim())return alert("Preencha os campos em branco!")
             let name = ''
             if(sex === "Masculino" && specialty !== "Psicologia"){
-            name = " Dr. " + nameFull
+            name = "Dr. " + nameFull
             }else if(sex === "Feminino" && specialty !== "Psicologia"){
-            name = " Dra. " + nameFull
+            name = "Dra. " + nameFull
             }else if(specialty === "Psicologia"){
             name = "Psic. " + nameFull
             }
