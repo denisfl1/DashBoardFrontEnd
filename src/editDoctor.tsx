@@ -7,10 +7,11 @@ import { useParams } from "react-router-dom";
 function EditDoctor(){
 
     const [email,setEmail]= useState<string>()
-    const [name,setName] = useState<string>()
+    const [nameFull,setName] = useState<string>()
     const [crm,setCRM] = useState<string>()
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
+    const [sex,setSex] = useState<string>('')
 
     const param = useParams()
     const id = param.id
@@ -41,7 +42,16 @@ function EditDoctor(){
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
-            if(!email?.trim() || !name?.trim() || !crm?.trim() )return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() || !sex?.trim() )return alert("Preencha os campos em branco!")
+
+            let name = ''
+            if(sex === "Masculino" && specialty !== "Psicologia"){
+            name = "Dr. " + nameFull
+            }else if(sex === "Feminino" && specialty !== "Psicologia"){
+            name = "Dra. " + nameFull
+            }else if(specialty === "Psicologia"){
+            name = "Psic. " + nameFull
+            }
 
             await API.put('/editdoctor',{id,name,email,crm,specialty,number}).then(
                 res=>{
@@ -57,14 +67,24 @@ function EditDoctor(){
 
     }
 
+
+
     useEffect(()=>{
 
         (async()=>{
 
             await API.get(`/getdoctor/${id}`).then(
                 res=>{
-                    
-                    setName(res.data.name)
+
+                    const cut = res.data.name.split('')
+                    let position = []
+
+                    for(let i in cut){
+                    cut[i] === "." && position.push(parseInt(i)+2)
+                  
+                    }
+
+                    setName(cut.slice(position).join(''))
                     setEmail(res.data.email)
                     setCRM(res.data.crm)
                     setSpecialty(res.data.specialty)
@@ -91,7 +111,7 @@ return(
         <form>
  
         <label>Nome Completo</label>
-        <input value={name} required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
+        <input value={nameFull} required type="text"  name="name" onChange={(e)=>setName(e.target.value)}></input>
 
         <label>E-mail</label>
         <input value={email} required type="email"  name="email" onChange={(e)=>setEmail(e.target.value)}></input>
@@ -114,7 +134,18 @@ return(
         <label>Número de Contato</label>
         <input value={number} required type="text"  name="number" onChange={(e)=>setNumber(e.target.value)}></input>
 
+        <div> 
+        <legend>Sexo:</legend>  
+        <div style={{display:"flex",alignItems:"center"}}>
+        
+       
+        <input onClick={(e:any)=>setSex(e.target.value)} style={{marginLeft:"10px"}} type="radio"  name="sex" value="Masculino" />
+        <label>Masculino</label>
 
+        <input onClick={(e:any)=>{setSex(e.target.value)}} type="radio"  name="sex" value="Feminino" />
+        <label >Feminino</label>
+        </div> 
+    </div>
 
         <button type={"submit"} style={{marginTop:'20px'}} onClick={SendData}>Alterar</button>
 

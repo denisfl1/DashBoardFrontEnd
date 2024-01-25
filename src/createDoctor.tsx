@@ -10,7 +10,7 @@ function  CreateDoctor(){
     const [crm,setCRM] = useState<string>()
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
-    const [sex,setSex] = useState<string>("Masculino")
+    const [sex,setSex] = useState<string>('')
 
 
     const SPECIALTY = [
