@@ -53,7 +53,7 @@ function EditDoctor(){
             name = "Psic. " + nameFull
             }
 
-            await API.put('/editdoctor',{id,name,email,crm,specialty,number}).then(
+            await API.put('/editdoctor',{id,name,email,crm,specialty,number,sex}).then(
                 res=>{
                     if(res.status == 200){
                         alert("Registrado com sucesso")
@@ -84,11 +84,14 @@ function EditDoctor(){
                   
                     }
 
+
                     setName(cut.slice(position).join(''))
                     setEmail(res.data.email)
                     setCRM(res.data.crm)
                     setSpecialty(res.data.specialty)
                     setNumber(res.data.number)
+                    setSex(res.data.sex)
+                  
 
                 },error=>{
                     alert(error.response.data)
@@ -101,7 +104,7 @@ function EditDoctor(){
 
     },[])
 
-
+    console.log(sex)
 return(
 
     <div className="EmployeeContainer" >
@@ -139,10 +142,10 @@ return(
         <div style={{display:"flex",alignItems:"center"}}>
         
        
-        <input onClick={(e:any)=>setSex(e.target.value)} style={{marginLeft:"10px"}} type="radio"  name="sex" value="Masculino" />
+        <input checked={sex === "Masculino"} onClick={(e:any)=>setSex(e.target.value)} style={{marginLeft:"10px"}} type="radio"  name="sex" value="Masculino" />
         <label>Masculino</label>
 
-        <input onClick={(e:any)=>{setSex(e.target.value)}} type="radio"  name="sex" value="Feminino" />
+        <input checked={sex === "Feminino"} onClick={(e:any)=>{setSex(e.target.value)}} type="radio"  name="sex" value="Feminino" />
         <label >Feminino</label>
         </div> 
     </div>
