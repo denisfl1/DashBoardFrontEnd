@@ -9,7 +9,7 @@ function Schedules(){
 
     const[AllSchedules,setAllSchudeles] = useState([])
     const [search,setSearch] = useState<string[]>([])
-    const key = ["patient_Name","patient_Email"]
+    const key = ["patient_Name","patient_Email","status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
 
     useEffect(()=>{
@@ -80,13 +80,29 @@ function Schedules(){
     }
 
 
-
 return(
 
     <div className="SchedulesContainer">
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
+                        <div style={{display:"flex",alignItems:"center"}}>
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
-                     
+                  
+                        <div className="statusDescription">
+                            <ul>
+                             <div style={{display:"flex",alignItems:"center"}}><div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Active`}></div><li>Ativo</li> </div>
+                             <div style={{display:"flex",alignItems:"center"}}> <div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Finished`}></div> <li>Finalizado</li></div>
+                             <div style={{display:"flex",alignItems:"center"}}> <div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Canceled`}></div><li>Cancelado</li>  </div>
+                            </ul>
+                        </div>
+                        <select style={{width:"100px",fontSize:"20px"}}>
+
+                        <option value={"Active"}>Ativo</option>
+                        <option value={"Finished"}>Finalizado</option>
+                        <option value={"Canceled"}>Cancelado</option>
+
+                        </select>
+                        
+                        </div>
         <div className="SchedulesContent">
 
                 {search2[0] ? <table>

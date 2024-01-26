@@ -281,7 +281,7 @@ function Edit_schedule(){
 return(
 
 <div className="To_scheduleContainer">
-       <div style={{display:"flex",marginLeft:"100px"}}><h1 >Agendar Consulta</h1></div>
+       <div style={{display:"flex",marginLeft:"100px"}}><h1 >Editar Consulta</h1></div>
     <div className="To_scheduleContent" style={{display:"flex"}}>
 
 
