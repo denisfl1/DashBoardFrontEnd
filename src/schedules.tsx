@@ -19,8 +19,9 @@ function Schedules(){
 
             await API.get('/getschedules').then(
             res=>{
-      
+                if(res && res.status){
                 setAllSchudeles(res.data)
+            }
             },error=>{
                 
                 console.log(error)
@@ -54,7 +55,7 @@ function Schedules(){
         const id = e.target.id
                      
         Swal.fire({
-            title: "Deseja excluir este usuário?",
+            title: "Deseja excluir este agendamento?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -85,7 +86,7 @@ return(
     <div className="SchedulesContainer">
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
-
+                     
         <div className="SchedulesContent">
 
                 {search2[0] ? <table>
@@ -104,9 +105,11 @@ return(
 
                             <th>Email do Paciente</th>
 
-                            <th>Data de Agendamento</th>
+                            <th>Data</th>
 
-                            <th>Horários</th>
+                            <th>Horário</th>
+
+                            <th>Status</th>
 
                             <th></th>
 
@@ -129,10 +132,11 @@ return(
                                  <td>{data.specialty}</td>
                                  <td>{data.crm}</td>
                                  <td>{data.patient_Name}</td>
-                                 <td>{data.patient_Email}</td>
+                                 <td>{data.patient_Email}</td>                            
                                  <td>{data.date}</td>
                                  <td>{data.hour}</td>
-                                 <td><Link to={`/editschedule/${data.id}`}><button>Editar</button></Link><button id={data.id} onClick={handleDelete}>Excluir</button></td>
+                                 <td><div className={`statusSchedule ${data.status}`}></div></td>
+                                 <td><Link to={`/editschedule/${data.id}`}><button className="tableButton Edit" >Editar</button></Link><button className="tableButton Delete" id={data.id} onClick={handleDelete}>Excluir</button></td>
                     
                                 </tr>
 

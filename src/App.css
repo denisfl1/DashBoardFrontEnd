@@ -43,8 +43,8 @@
 }
 
 .LoginContent form img,.RegisterContent img{
-    width: 100px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     margin: auto;
 }
 
@@ -222,10 +222,9 @@ transition: all 500ms;
 .ConsultsContainerMenu{
     width: 80%;
     max-width: 100%;
-    height: 100%;
+    height: 85%;
     display: flex;
     flex-wrap: wrap;
-    /* margin-top: 50px; */
     border-radius: 8px;
     justify-content:space-around;
     align-items: center;
@@ -294,15 +293,25 @@ transition: all 500ms;
     min-height: 100vh;
 }
 
-.table-Subcontainer button{
+
+.tableButton{
     width: 80px;
-    background-color: #ffffff;
-    color:black;
+    height: 25px; 
     border:none;
     border-radius: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     cursor: pointer;
+    margin-right: 5px;
+}
 
+.Edit{
+    background-color: #2663c7;
+    color:rgb(255, 255, 255);
+}
+
+.Delete{
+    background-color: #e83e3e;
+    color:rgb(255, 255, 255);
 }
 
 table {
@@ -440,10 +449,10 @@ table {
 
 
  .SchedulesContent table{
-    width: 85%;
+    width: 95%;
  }
 
-
+/* 
  .SchedulesContent button{
     width: 80px;
     background-color: #ffffff;
@@ -453,4 +462,30 @@ table {
     border: 1px solid black;
     cursor: pointer;
     margin-right: 5px;
+ } */
+
+ .statusSchedule{
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border-radius: 50%;
+
  }
+
+ .Active{
+    background-color: rgb(22, 219, 84);
+    border: 1px solid (22, 219, 84);
+    box-shadow: 0px 0px 3px 3px rgb(116, 255, 146);
+ }
+
+
+ .Finished{
+    background-color: #373aff;
+    box-shadow: 0px 0px 3px 3px rgb(119, 187, 255);
+ }
+
+ .Canceled{
+    background-color: rgb(219, 22, 22);
+    box-shadow: 0px 0px 3px 3px rgb(186, 51, 51);
+ }
+

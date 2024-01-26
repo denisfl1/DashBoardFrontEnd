@@ -114,7 +114,7 @@ return(
                         <td>{data.crm}</td>
                         <td>{" (11) " + data.number}</td>
                         <td>{data.email}</td>
-                        <td><Link to={`/editdoctor/${data.id}`}><button style={{marginRight:"5px"}} >Editar</button></Link><button id={data.id} onClick={handleDelete}>Excluir</button></td>
+                        <td><Link to={`/editdoctor/${data.id}`}><button className="tableButton Edit"  >Editar</button></Link><button className="tableButton Delete" id={data.id} onClick={handleDelete}>Excluir</button></td>
                         </tr>
                     )
                 })}
