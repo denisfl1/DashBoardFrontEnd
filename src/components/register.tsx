@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from '../Icons/logo.png'
+import hand from "../Icons/hand.png"
 
 import { API } from "../Api";
 
@@ -38,7 +38,7 @@ const Register:React.FC=()=>{
         <div className="LoginContainer">
 
                 
-                <div className="RegisterIMG"> <img style={{width:'500px',height:'500px'}} src={logo}></img></div>
+                <div className="RegisterIMG"> <img style={{width:'500px',height:'500px'}} src={hand}></img></div>
                 <div className="RegisterContent">
                   
                     <form>

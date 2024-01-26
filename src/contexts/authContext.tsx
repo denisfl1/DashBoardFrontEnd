@@ -69,6 +69,7 @@ localStorage.removeItem('firstTime')
 
 }
 
+
 return(
 
     <AuthContext.Provider value={{Authenticated:!!user,user,Logged,Logout,children,UserName,firstTime,Loading}}>

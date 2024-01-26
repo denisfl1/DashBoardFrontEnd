@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import logo from '../Icons/logo.jpg'
-import folha from "../Icons/folha.jpg"
+import hand from "../Icons/hand.png"
 import logout from '../Icons/sair.png'
 import config from '../Icons/configuracoes.png'
 import agend from '../Icons/agenda.png'
@@ -53,11 +52,11 @@ return(
         <div  className="LateralBar">
 
                 <div style={{overflow:"hidden"}}  className="LateralBarHeader">
-                 <div style={{width:'100px',height:'100px',display:"flex",justifyContent:"center",alignItems:"center"}}><img  width={"30px"} height={"55px"} src={folha}></img></div><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
+                 <div style={{width:'100px',height:'100px',display:"flex",justifyContent:"center",alignItems:"center"}}><img  width={"80%"} height={"80%"} src={hand}></img></div><img className="LateralBarImg" onClick={Handle_Window} src={leftArrow}></img>
                 </div>
 
             <ul>
-
+                
             <Link to='/home' style={{textDecoration:"none",color:"black"}}><div className="LateralBarList"><img src={home}></img><li>Home</li></div></Link>   
                 <div className="LateralBarList"><img src={agend}></img><li>Agenda</li></div>
                 {/* <div className="LateralBarList"><img src={categories_icon }></img><li>Categories</li></div> */}

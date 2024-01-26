@@ -29,7 +29,7 @@ function Edit_schedule(){
         'Ortopedia',            
         'Dermatologia',
         'Neurologia',           
-        'GinecologiaObstetricia',
+        'Ginecologia Obstetricia',
         'Oftalmologia',         
         'Pediatria',
         'Psiquiatria',          

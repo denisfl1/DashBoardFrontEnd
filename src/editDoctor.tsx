@@ -22,7 +22,7 @@ function EditDoctor(){
         'Ortopedia',            
         'Dermatologia',
         'Neurologia',           
-        'GinecologiaObstetricia',
+        'Ginecologia Obstetricia',
         'Oftalmologia',         
         'Pediatria',
         'Psiquiatria',          
@@ -75,15 +75,15 @@ function EditDoctor(){
 
             await API.get(`/getdoctor/${id}`).then(
                 res=>{
-
+                   
                     const cut = res.data.name.split('')
                     let position = []
-
+                    
+                
                     for(let i in cut){
                     cut[i] === "." && position.push(parseInt(i)+2)
-                  
+                
                     }
-
 
                     setName(cut.slice(position).join(''))
                     setEmail(res.data.email)
@@ -104,11 +104,10 @@ function EditDoctor(){
 
     },[])
 
-    console.log(sex)
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos{">"}Editar Dados</h1></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Editar Dados</h1></div>
     <div className="RegisterContent" >
       
         <form>

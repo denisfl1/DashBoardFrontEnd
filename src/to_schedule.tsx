@@ -23,7 +23,7 @@ function To_schedule(){
         'Ortopedia',            
         'Dermatologia',
         'Neurologia',           
-        'GinecologiaObstetricia',
+        'Ginecologia Obstetricia',
         'Oftalmologia',         
         'Pediatria',
         'Psiquiatria',          
@@ -82,9 +82,11 @@ function To_schedule(){
 
             await API.get("http://localhost:5000/getUsers").then(
                 res=>{
-
+                    
+                    if(res && res.status == 200){
                     setPatientList(res.data)
-                
+                        
+                    }
                 },error=>{
                     
                     console.log(error.response)
@@ -237,7 +239,7 @@ return(
             
                 <div>
            <h1 >Disponibilidade:</h1>
-
+           
           <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
            
                <thead>

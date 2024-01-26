@@ -61,8 +61,10 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
 
             await API.get("http://localhost:5000/getUsers").then(
                 res=>{
-
-                    setPatientList(res.data)
+                    if(res && res.status == 200){
+                        setPatientList(res.data)
+                    }
+                    
                 
                 },error=>{
 
@@ -80,7 +82,7 @@ return(
 
     <div className="containerTable">
         <h1 style={{marginLeft:"160px"}}>Lista de Pacientes</h1>
-        <div className="container_Input_DoctorList"><input placeholder="Nome ou CRM" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
+        <div className="container_Input_DoctorList"><input placeholder="Nome ou Email" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
         <div className="table-Subcontainer">
         <table style={{width:"90%"}}>
 

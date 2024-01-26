@@ -19,7 +19,7 @@ function  CreateDoctor(){
         'Ortopedia',            
         'Dermatologia',
         'Neurologia',           
-        'GinecologiaObstetricia',
+        'Ginecologia Obstetricia',
         'Oftalmologia',         
         'Pediatria',
         'Psiquiatria',          
@@ -69,7 +69,7 @@ function  CreateDoctor(){
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos{">"}Novo Cadastro</h1></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Novo Cadastro</h1></div>
     <div className="RegisterContent" >
       
         <form>
