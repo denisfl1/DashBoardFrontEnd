@@ -98,8 +98,8 @@ return(
                         </div>
                         <select onChange={(e:any)=>setSearch(e.target.value)
                         
-                        } style={{width:"100px",fontSize:"20px"}}>
-
+                        } style={{width:"125px",fontSize:"20px"}}>
+                         <option selected value={[]}>Todos</option>
                         <option value="active">Ativo</option>
                         <option value="finished">Finalizado</option>
                         <option value="canceled">Cancelado</option>
