@@ -19,8 +19,10 @@ function Schedules(){
 
             await API.get('/getschedules').then(
             res=>{
+
                 if(res && res.status){
                 setAllSchudeles(res.data)
+                
             }
             },error=>{
                 
@@ -94,11 +96,13 @@ return(
                              <div style={{display:"flex",alignItems:"center"}}> <div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Canceled`}></div><li>Cancelado</li>  </div>
                             </ul>
                         </div>
-                        <select style={{width:"100px",fontSize:"20px"}}>
+                        <select onChange={(e:any)=>setSearch(e.target.value)
+                        
+                        } style={{width:"100px",fontSize:"20px"}}>
 
-                        <option value={"Active"}>Ativo</option>
-                        <option value={"Finished"}>Finalizado</option>
-                        <option value={"Canceled"}>Cancelado</option>
+                        <option value="active">Ativo</option>
+                        <option value="finished">Finalizado</option>
+                        <option value="canceled">Cancelado</option>
 
                         </select>
                         
