@@ -244,6 +244,7 @@ function Edit_schedule(){
                 AlertSuccess(data.data)
             }else{
                 Alert2(data.response.data)
+                console.log(data.response.data)
             }
            
         }
@@ -268,9 +269,11 @@ function Edit_schedule(){
         try {
             const resp = await API.put("/editscheduling",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email})
             AlertQuestion(resp)
+            
           
         } catch (error) {
             AlertQuestion(error)
+           
         }
         
 

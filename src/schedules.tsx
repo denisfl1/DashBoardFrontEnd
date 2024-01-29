@@ -3,7 +3,7 @@ import {API} from './Api'
 import lupa from "./Icons/lupa.png"
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-
+import  MyQRCODE from "./components/QRCodePage"
 
 function Schedules(){
 
@@ -172,9 +172,9 @@ return(
                 </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
-
+            <MyQRCODE/>
     </div>
-
+  
 
 )
 

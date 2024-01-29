@@ -182,11 +182,12 @@ function To_schedule(){
             // timer:1500  
          
           })
-
+         
             setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
             },error=>{
                                 
                 Alert2(error.response.data)
+                
             }
         )
 
