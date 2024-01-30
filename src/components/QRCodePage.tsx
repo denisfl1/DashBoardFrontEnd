@@ -42,13 +42,13 @@ return(
         <div className="QRCodeContent">
 
             <QRCode value={JSON.stringify(data)}/>
-            <QrReader 
+            {/* <QrReader 
              onResult={handleScan}
              
              constraints={{ facingMode: 'user' }}
              scanDelay={300}  // Tempo de espera entre as leituras em milissegundos
              containerStyle={{ width: '100%' }}  // Estilo do container
-          />
+          /> */}
          
 
         
