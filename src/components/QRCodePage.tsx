@@ -1,6 +1,6 @@
 import { useState } from "react";
 import QRCode from "react-qr-code";
-import { Html5Qrcode, Html5QrcodeScanner } from "html5-qrcode";
+import { QrReader } from "react-qr-reader";
 
 
 
@@ -11,19 +11,26 @@ idade:'30',
 cidade: 'ExemploCity'}
 
 
-  const [resultado, setResultado] = useState(null);
 
-  const handleScan = (data:any) => {
-    if (data) {
-      setResultado(data);
+  const [resul, setResul] = useState(null);
+
+
+
+const handleError = (error:any)=>{
+
+    console.log(error)
+
+}
+
+const handleScan = (result:any)=>{
+
+    if(result){
+        setResul(result)
+        alert(result)
     }
-  };
 
-  const handleError = (err:any) => {
-    console.error(err);
-  };
-
-
+    
+} 
 
 
 
@@ -35,6 +42,15 @@ return(
         <div className="QRCodeContent">
 
             <QRCode value={JSON.stringify(data)}/>
+            {/* <QrReader 
+             onResult={handleScan}
+             
+             constraints={{ facingMode: 'user' }}
+             scanDelay={300}  // Tempo de espera entre as leituras em milissegundos
+             containerStyle={{ width: '100%' }}  // Estilo do container
+          /> */}
+         
+
         
 
 
