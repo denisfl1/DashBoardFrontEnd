@@ -26,13 +26,16 @@ const handleScan = (result:any)=>{
     useEffect(()=>{
 
         if(resul){
-            const search = DATAs.filter((it:any)=>it.id == resul.id)
+            const search = DATAs.filter((it:any)=>it.id == 60)
 
             const x =  search.map(Object.values)[0].join('\n')
             const z  = [resul].map(Object.values)[0].join('\n')
             
             if(x === z){
-                return alert("Validado")
+              
+                alert("Validado")
+            }else{
+                alert("Dados diferentes")
             }
             
             

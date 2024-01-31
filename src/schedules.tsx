@@ -182,7 +182,7 @@ return(
 
             </div>
             <QRReader data={AllSchedules}/>
-            <MyQRCODE/>
+            {/* <MyQRCODE/> */}
     </div>
   
 
