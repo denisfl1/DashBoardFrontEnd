@@ -4,6 +4,9 @@ import lupa from "./Icons/lupa.png"
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import  MyQRCODE from "./components/QRCodePage"
+import QRReader from "./components/QRCodeReader";
+import qrCodeIMG from "./Icons/licensed-image.jpeg"
+import QRCode from "react-qr-code";
 
 function Schedules(){
 
@@ -21,6 +24,7 @@ function Schedules(){
             res=>{
 
                 if(res && res.status){
+                    console.log(res.data)
                 setAllSchudeles(res.data)
                 
             }
@@ -88,8 +92,13 @@ return(
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
                         <div style={{display:"flex",alignItems:"center"}}>
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
-                  
+                        <div style={{display:"flex",flexDirection:"column"}}>
+                                                   
+                                <img style={{height:"50px",width:"50px"}}src={qrCodeIMG}></img>
+                                                 
+                            </div>
                         <div className="statusDescription">
+                  
                             <ul>
                              <div style={{display:"flex",alignItems:"center"}}><div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Active`}></div><li>Ativo</li> </div>
                              <div style={{display:"flex",alignItems:"center"}}> <div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Finished`}></div> <li>Finalizado</li></div>
@@ -172,6 +181,7 @@ return(
                 </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
+            <QRReader data={AllSchedules}/>
             <MyQRCODE/>
     </div>
   
