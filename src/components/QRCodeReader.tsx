@@ -3,7 +3,7 @@ import { QrReader } from "react-qr-reader";
 
 
 
-function QRReader(props:{data:any}){
+function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateAction<any>>}){
 
 
 
@@ -26,7 +26,7 @@ const handleScan = (result:any)=>{
     useEffect(()=>{
 
         if(resul){
-            const search = DATAs.filter((it:any)=>it.id == 60)
+            const search = DATAs.filter((it:any)=>it.id == resul.id)
 
             const x =  search.map(Object.values)[0].join('\n')
             const z  = [resul].map(Object.values)[0].join('\n')
@@ -34,6 +34,7 @@ const handleScan = (result:any)=>{
             if(x === z){
               
                 alert("Validado")
+                props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
             }else{
                 alert("Dados diferentes")
             }

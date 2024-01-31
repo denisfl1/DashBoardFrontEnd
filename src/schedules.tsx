@@ -181,7 +181,7 @@ return(
                 </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
-            <QRReader data={AllSchedules}/>
+            <QRReader data={AllSchedules}   setAllSchudeles={setAllSchudeles}/>
             {/* <MyQRCODE/> */}
     </div>
   
