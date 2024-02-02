@@ -16,6 +16,7 @@ const handleScan = (result:any)=>{
 
     if(result){
         const data = JSON.parse(result)
+        console.log(data)
         setResul(data)
       
      return setDelayScan(false)
@@ -37,7 +38,6 @@ const handleScan = (result:any)=>{
             z.splice(9,1)
             const joinY = z.join('\n')
             
-
             if(joinX === joinY){
                      const id = resul.id
                     API.put("/validateSchedule",{id}).then(
@@ -54,11 +54,12 @@ const handleScan = (result:any)=>{
                             })
                           
                             props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
-                         
+                          
                         },error=>{
                             console.log(error.reponse.data)
                         }
                     )
+                 
                     return   props.setQRReaderOpen(false)          
                  
             }else if(joinX !== joinY){
@@ -80,6 +81,8 @@ const handleScan = (result:any)=>{
 
     },[resul])
 
+
+
  
    
 
@@ -93,7 +96,7 @@ return(
                 
             {props.QRReaderOpen &&<QrReader 
              onResult={handleScan}
-                  
+            
              constraints={{ facingMode: 'user' }}
              scanDelay={500}  // Tempo de espera entre as leituras em milissegundos
              containerStyle={{ width: '100%' }}  // Estilo do container
