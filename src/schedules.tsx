@@ -14,6 +14,7 @@ function Schedules(){
     const [search,setSearch] = useState<string[]>([])
     const key = ["patient_Name","patient_Email","status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
+    const [QRReaderOpen,setQRReaderOpen] = useState<boolean>(false)
 
     useEffect(()=>{
 
@@ -86,6 +87,18 @@ function Schedules(){
     }
 
 
+    const Handle_QRReaderOpen = ()=>{
+
+        if(!QRReaderOpen){
+            setQRReaderOpen(true)
+        }else{
+            setQRReaderOpen(false)
+        }
+
+
+    }
+
+
 return(
 
     <div className="SchedulesContainer">
@@ -94,7 +107,7 @@ return(
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
                         <div style={{display:"flex",flexDirection:"column"}}>
                                                    
-                                <img style={{height:"50px",width:"50px"}}src={qrCodeIMG}></img>
+                                <img onClick={Handle_QRReaderOpen} style={{height:"50px",width:"50px"}}src={qrCodeIMG}></img>
                                                  
                             </div>
                         <div className="statusDescription">
@@ -181,8 +194,8 @@ return(
                 </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
-            <QRReader data={AllSchedules}   setAllSchudeles={setAllSchudeles}/>
-            {/* <MyQRCODE/> */}
+           { <QRReader data={AllSchedules}  QRReaderOpen={QRReaderOpen}   setAllSchudeles={setAllSchudeles}  setQRReaderOpen={setQRReaderOpen}/>}
+            <MyQRCODE/>
     </div>
   
 
