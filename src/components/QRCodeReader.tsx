@@ -5,10 +5,10 @@ import {API} from "../Api"
 
 
 function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
-      const [delayScan,setDelayScan]= useState(false)
+ 
 
 
-  const [resul, setResul] = useState<any>();
+  const [resul, setResul] = useState<any>(undefined);
     const DATAs = props.data
 
 
@@ -16,19 +16,20 @@ const handleScan = (result:any)=>{
 
     if(result){
         const data = JSON.parse(result)
-        console.log(data)
+  
         setResul(data)
       
-     return setDelayScan(false)
+    
     }
 
-    
 } 
 
 
     useEffect(()=>{
-
-        if(resul){
+        const verify = resul != undefined
+        console.log(verify)
+  
+        if(verify){
             const search = DATAs.filter((it:any)=>it.id == resul.id)
 
             const x =  search.map(Object.values)[0]
@@ -52,17 +53,20 @@ const handleScan = (result:any)=>{
                                 confirmButtonText:"Fechar",
                             
                             })
-                          
+                        
                             props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
-                          
+                         
+                            return   props.setQRReaderOpen(false)   
                         },error=>{
                             console.log(error.reponse.data)
                         }
                     )
                  
-                    return   props.setQRReaderOpen(false)          
+     
                  
-            }else if(joinX !== joinY){
+            }
+         
+            if(joinX !== joinY){
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -73,18 +77,16 @@ const handleScan = (result:any)=>{
                     confirmButtonText:"Fechar",
                  
                   })
-              
+    
+             
             }
-            
+         
             
         }
 
     },[resul])
 
-
-
- 
-   
+  
 
 return(
 
@@ -98,7 +100,7 @@ return(
              onResult={handleScan}
             
              constraints={{ facingMode: 'user' }}
-             scanDelay={500}  // Tempo de espera entre as leituras em milissegundos
+             scanDelay={1000}  // Tempo de espera entre as leituras em milissegundos
              containerStyle={{ width: '100%' }}  // Estilo do container
             
           />}
