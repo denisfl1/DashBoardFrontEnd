@@ -6,7 +6,7 @@ import {API} from "../Api"
 
 function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
  
-
+const valor = "1"
 
   const [resul, setResul] = useState<any>(undefined);
     const DATAs = props.data
