@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 function PatientList(){
 
-const [patientList,setPatientList] = useState<any>([])
+const [patientList,setPatientList] = useState<Object[]>([])
 const [search,setSearch] = useState<string[]>([])
 const key = ["name","email"]
 const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):patientList

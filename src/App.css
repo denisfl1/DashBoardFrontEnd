@@ -502,14 +502,18 @@ margin-right: 10px;
 
  .QRCodeContainer{
     display:flex;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top:0;
     justify-content: center;
-
+    background-color: #00000090;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
  }
 
  .QRCodeContent{
-    background-color: white;
-    height: 500px;
     width: 500px;
  }
 

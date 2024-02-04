@@ -10,7 +10,7 @@ import QRCode from "react-qr-code";
 
 function Schedules(){
 
-    const[AllSchedules,setAllSchudeles] = useState([])
+    const[AllSchedules,setAllSchedules] = useState<Object[]>([])
     const [search,setSearch] = useState<string[]>([])
     const key = ["patient_Name","patient_Email","status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
@@ -26,7 +26,7 @@ function Schedules(){
 
                 if(res && res.status){
                     console.log(res.data)
-                setAllSchudeles(res.data)
+                    setAllSchedules(res.data)
                 
             }
             },error=>{
@@ -74,7 +74,7 @@ function Schedules(){
                 await API.delete(`/deleteSchedules/${id}`).then(
                     res=>{
                         Alert2(res.data)
-                        setAllSchudeles((data)=>data.filter((it:any)=>it.id !=id))
+                        setAllSchedules((data)=>data.filter((it:any)=>it.id !=id))
                     },error=>{
 
                         Alert2(error.response.data)
@@ -105,9 +105,9 @@ return(
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
                         <div style={{display:"flex",alignItems:"center"}}>
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
-                        <div style={{display:"flex",flexDirection:"column"}}>
+                        <div style={{display:"flex",flexDirection:"column",border:"1px solid black",marginLeft:"5px"}}>
                                                    
-                                <img onClick={Handle_QRReaderOpen} style={{height:"50px",width:"50px"}}src={qrCodeIMG}></img>
+                                <img onClick={Handle_QRReaderOpen} style={{height:"50px",width:"50px",cursor:"pointer"}}src={qrCodeIMG}></img>
                                                  
                             </div>
                         <div className="statusDescription">
@@ -194,8 +194,8 @@ return(
                 </table>:<h1 style={{marginLeft:"120px",marginTop:"60px"}}>Não há consultas agendadas...</h1>}
 
             </div>
-           { <QRReader data={AllSchedules}  QRReaderOpen={QRReaderOpen}   setAllSchudeles={setAllSchudeles}  setQRReaderOpen={setQRReaderOpen}/>}
-            <MyQRCODE/>
+           { <QRReader data={AllSchedules}  QRReaderOpen={QRReaderOpen}   setAllSchedules={setAllSchedules}  setQRReaderOpen={setQRReaderOpen}/>}
+            {/* <MyQRCODE/> */}
     </div>
   
 

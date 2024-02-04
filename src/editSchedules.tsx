@@ -12,7 +12,7 @@ function Edit_schedule(){
     const [schedule,setSchedule] = useState<any>()
     const [search,setSearch] = useState<string>()
     const [doctors,setDoctors] = useState([])
-    const [patientList,setPatientList] = useState<object[]>([])
+    const [patientList,setPatientList] = useState([])
     const [patientName,setPatientName] = useState<any>(undefined)
     const [doctorName,setDoctorName] = useState<any>(undefined)
     const key = ["name","cpf"]

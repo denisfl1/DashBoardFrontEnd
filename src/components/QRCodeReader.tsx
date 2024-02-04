@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import {API} from "../Api"
 
 
-function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
+function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
 
 
   const [resul, setResul] = useState<any>(undefined);
@@ -68,7 +68,7 @@ function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateA
                             
                             })
                         
-                            props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
+                            props.setAllSchedules((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
                           
                             return  props.setQRReaderOpen(false)   
                         },error=>{
@@ -89,19 +89,19 @@ function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateA
   
 
 return(
-
-    <div className="QRCodeContainer">
+    <>
+    {props.QRReaderOpen &&<div className="QRCodeContainer" onClick={()=>props.setQRReaderOpen(false)}>
 
 
         <div className="QRCodeContent">
               
-            {props.QRReaderOpen &&<QrReader 
+            <QrReader 
              onResult={handleScan}         
              constraints={{ facingMode: 'user' }}
-             scanDelay={1000}  // Tempo de espera entre as leituras em milissegundos
-             containerStyle={{ width: '100%' }}  // Estilo do container
+             scanDelay={500}  // Tempo de espera entre as leituras em milissegundos
+             containerStyle={{ width: '100%'}}  // Estilo do container
             
-          />}
+          />
          
 
         
@@ -111,8 +111,8 @@ return(
 
 
 
-    </div>
-
+    </div>}
+    </>
 
 )
 
