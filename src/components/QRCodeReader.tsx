@@ -40,21 +40,21 @@ function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateA
 
     useEffect(()=>{
         const verify = resul != undefined
-        console.log(verify)
+       
         if(verify){
             const search = DATAs.filter((it:any)=>it.id == resul.id)
 
-            const x = search[0] && search.map(Object.values)[0]
-            search[0] && x.splice(9,1)
-            let joinX = search[0] && x.join('\n')
-            const z  = [resul].map(Object.values)[0]
-             z.splice(9,1) 
-           let joinY:any = z.join('\n')
+            const schedule_List = search[0] && search.map(Object.values)[0]
+            search[0] && schedule_List.splice(9,1)
+            const join_schedule_List = search[0] && schedule_List.join('\n')
+            const schedule_Scanned  = [resul].map(Object.values)[0]
+             schedule_Scanned.splice(9,1) 
+            const joinB_schedule_Scanned = schedule_Scanned.join('\n')
             
-            if(!search[0])return AlertError("Agendamento não existe")
+            if(!search[0])return AlertError("Agendamento não encontrado!")
 
-            if(joinX === joinY){
-                     const id = resul.id
+            if(join_schedule_List === joinB_schedule_Scanned){
+                    const id = resul.id
                     API.put("/validateSchedule",{id}).then(
                         res=>{
                             Swal.fire({
@@ -70,15 +70,17 @@ function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateA
                         
                             props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
                           
-                            return   props.setQRReaderOpen(false)   
+                            return  props.setQRReaderOpen(false)   
                         },error=>{
                             console.log(error.reponse.data)
                         }
                     )
-  
+                        
+            }else{
+                AlertError("Agendamento já finalizado!")
             }
            
-    
+            
         
         }
 
@@ -92,11 +94,9 @@ return(
 
 
         <div className="QRCodeContent">
-
-                
+              
             {props.QRReaderOpen &&<QrReader 
-             onResult={handleScan}
-            
+             onResult={handleScan}         
              constraints={{ facingMode: 'user' }}
              scanDelay={1000}  // Tempo de espera entre as leituras em milissegundos
              containerStyle={{ width: '100%' }}  // Estilo do container
