@@ -10,8 +10,7 @@ function QRReader(props:{data:any,setAllSchudeles:React.Dispatch<React.SetStateA
   const [resul, setResul] = useState<any>(undefined);
     const DATAs = props.data
 
-
-const handleScan = (result:any)=>{
+    const handleScan = (result:any)=>{
 
     if(result){
         const data = JSON.parse(result)
@@ -23,21 +22,37 @@ const handleScan = (result:any)=>{
 
 } 
 
+    const AlertError = ((data:string)=>{
+
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: `${data}`,
+            confirmButtonColor:'#3085d6',
+            // width:"400px",
+            customClass:'swal-wide',
+            confirmButtonText:"Fechar",
+         
+          })
+
+
+    })
 
     useEffect(()=>{
         const verify = resul != undefined
         console.log(verify)
-  
         if(verify){
             const search = DATAs.filter((it:any)=>it.id == resul.id)
 
-            const x =  search.map(Object.values)[0]
-            x.splice(9,1)
-            const joinX = x.join('\n')
+            const x = search[0] && search.map(Object.values)[0]
+            search[0] && x.splice(9,1)
+            let joinX = search[0] && x.join('\n')
             const z  = [resul].map(Object.values)[0]
-            z.splice(9,1)
-            const joinY = z.join('\n')
+             z.splice(9,1) 
+           let joinY:any = z.join('\n')
             
+            if(!search[0])return AlertError("Agendamento não existe")
+
             if(joinX === joinY){
                      const id = resul.id
                     API.put("/validateSchedule",{id}).then(
@@ -54,33 +69,17 @@ const handleScan = (result:any)=>{
                             })
                         
                             props.setAllSchudeles((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
-                         
+                          
                             return   props.setQRReaderOpen(false)   
                         },error=>{
                             console.log(error.reponse.data)
                         }
                     )
-                 
-     
-                 
+  
             }
-         
-            if(joinX !== joinY){
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: "Cadastro não existe!",
-                    confirmButtonColor:'#3085d6',
-                    // width:"400px",
-                    customClass:'swal-wide',
-                    confirmButtonText:"Fechar",
-                 
-                  })
+           
     
-             
-            }
-         
-            
+        
         }
 
     },[resul])
