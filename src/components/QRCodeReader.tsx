@@ -14,10 +14,8 @@ function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateA
 
     if(result){
         const data = JSON.parse(result)
-  
         setResul(data)
       
-    
     }
 
 } 
