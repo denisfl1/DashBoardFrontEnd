@@ -7,14 +7,15 @@ import {API} from "../Api"
 function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
 
 
-  const [resul, setResul] = useState<any>(undefined);
+  const [result, setResult] = useState<any>(undefined);
     const DATAs = props.data
 
-    const handleScan = (result:any)=>{
+    const handleScan = (QR_result:any)=>{
 
-    if(result){
-        const data = JSON.parse(result)
-        setResul(data)
+    if( QR_result){
+        const data = JSON.parse(QR_result)
+        console.log(data)
+        setResult(data)
       
     }
 
@@ -37,24 +38,27 @@ function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateA
     })
 
     useEffect(()=>{
-        const verify = resul != undefined
+        const verify = result != undefined
        
         if(verify){
-            const search = DATAs.filter((it:any)=>it.id == resul.id)
+            // const search = DATAs.filter((it:any)=>it.id == resul.id)
 
-            const schedule_List = search[0] && search.map(Object.values)[0]
-            search[0] && schedule_List.splice(9,1)
-            const join_schedule_List = search[0] && schedule_List.join('\n')
-            const schedule_Scanned  = [resul].map(Object.values)[0]
-             schedule_Scanned.splice(9,1) 
-            const joinB_schedule_Scanned = schedule_Scanned.join('\n')
+            // const schedule_List = search[0] && search.map(Object.values)[0]
+            // search[0] && schedule_List.splice(9,1)
+            // const join_schedule_List = search[0] && schedule_List.join('\n')
+            // const schedule_Scanned  = [resul].map(Object.values)[0]
+            //  schedule_Scanned.splice(9,1) 
+            // const joinB_schedule_Scanned = schedule_Scanned.join('\n')
             
-            if(!search[0])return AlertError("Agendamento não encontrado!")
+            // if(!search[0])return AlertError("Agendamento não encontrado!")
 
-            if(join_schedule_List === joinB_schedule_Scanned){
-                    const id = resul.id
-                    API.put("/validateSchedule",{id}).then(
+            // if(join_schedule_List === joinB_schedule_Scanned){
+                    const id = result.id
+                    console.log(result)
+                    API.put("/validateSchedule",{id,result}).then(
+                     
                         res=>{
+                            console.log(res)
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
@@ -66,23 +70,27 @@ function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateA
                             
                             })
                         
-                            props.setAllSchedules((data:any)=>data.map((it:any)=>{return  it.id == resul.id ? {...it,status:"Finished"}:it}))
+                            props.setAllSchedules((data:any)=>data.map((it:any)=>{return  it.id == result.id ? {...it,status:"Finished"}:it}))
                           
                             return  props.setQRReaderOpen(false)   
                         },error=>{
-                            console.log(error.reponse.data)
+
+                            console.log(error)
+                            AlertError(error.response.data)
                         }
                     )
                         
-            }else{
-                AlertError("Agendamento já finalizado!")
-            }
+            // }
+            
+            // else{
+            //     AlertError("Agendamento já finalizado!")
+            // }
            
             
         
         }
 
-    },[resul])
+    },[result])
 
   
 

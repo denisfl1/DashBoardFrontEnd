@@ -15,6 +15,8 @@ function Schedules(){
     const key = ["patient_Name","patient_Email","status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
     const [QRReaderOpen,setQRReaderOpen] = useState<boolean>(false)
+    const [My_QR_Code,setMy_QR_Code] = useState<object>([])
+    const [My_QR,setMy_My_QR] = useState<boolean>(false)
 
     useEffect(()=>{
 
@@ -99,6 +101,21 @@ function Schedules(){
     }
 
 
+    
+    const Handle_MyQR= (data:object)=>{
+
+        if(!My_QR){
+            setMy_My_QR(true)
+            setMy_QR_Code(data)
+        }else{
+            setMy_My_QR(false)
+            setMy_QR_Code([])
+        }
+
+
+    }
+
+
 return(
 
     <div className="SchedulesContainer">
@@ -154,6 +171,7 @@ return(
                             <th>Status</th>
 
                             <th></th>
+                            <th></th>
 
                         </tr>
 
@@ -179,7 +197,7 @@ return(
                                  <td>{data.hour}</td>
                                  <td><div className={`statusSchedule ${data.status}`}></div></td>
                                  <td><Link to={`/editschedule/${data.id}`}><button className="tableButton Edit" >Editar</button></Link><button className="tableButton Delete" id={data.id} onClick={handleDelete}>Excluir</button></td>
-                    
+                                <td><img onClick={()=>Handle_MyQR(data)} style={{height:"30px",width:"30px",cursor:"pointer"}}src={qrCodeIMG}></img></td>
                                 </tr>
 
                             )
@@ -195,7 +213,7 @@ return(
 
             </div>
            { <QRReader data={AllSchedules}  QRReaderOpen={QRReaderOpen}   setAllSchedules={setAllSchedules}  setQRReaderOpen={setQRReaderOpen}/>}
-            {/* <MyQRCODE/> */}
+            {My_QR &&<MyQRCODE My_QR_Code={My_QR_Code} setMy_My_QR={setMy_My_QR}/>}
     </div>
   
 
