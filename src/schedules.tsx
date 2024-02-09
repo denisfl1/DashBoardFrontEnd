@@ -48,7 +48,7 @@ function Schedules(){
     const Alert2 =(res:string)=>{                
         return Swal.fire({
         position: 'center',
-        icon: 'success',
+        icon: 'error',
         title: `${res}`,
         confirmButtonColor:'#3085d6',
         // width:"400px",

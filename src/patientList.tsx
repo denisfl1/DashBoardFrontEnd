@@ -25,6 +25,18 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
     })} 
 
 
+    const AlertError =(res:string)=>{                
+        return Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `${res}`,
+        confirmButtonColor:'#3085d6',
+        // width:"400px",
+        customClass:'swal-wide',
+        confirmButtonText:"Fechar",
+    
+    })} 
+
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
         if(e.target instanceof HTMLButtonElement){
@@ -46,7 +58,7 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
                         setPatientList((data:any)=>data.filter((it:any)=>it.id != id))
                     },error=>{
 
-                        Alert2(error.response.data)
+                        AlertError(error.response.data)
                     }
                  )
             }
@@ -68,7 +80,7 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
                 
                 },error=>{
 
-                    console.log(error.response)
+                    AlertError(error.response)
                 }
             )
 
