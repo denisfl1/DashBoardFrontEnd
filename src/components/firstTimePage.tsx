@@ -10,7 +10,7 @@ function FirtTimePage(){
     const [password,setPassword]= useState<string>()
     const [password_Confirm,setPasswordConfirm]= useState<string>()
     const {Logged}= useContext(AuthContext)
-    const x = ["1","2","3"]
+
 
     const SendLogin= async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
