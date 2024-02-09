@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Agendado from '../Icons/agendado.png'
 import ConsultasAgendas from '../Icons/adicionar-evento.png'
 import addPacient from "../Icons/adicionar-amigo.png"
 import addUser from "../Icons/equipe-medica.png"
 import UserList from "../Icons/lista-de-usuarios.png"
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/authContext";
 
 const Menu = ()=>{
 
+    const {admin} = useContext(AuthContext)
 
 
 return(
@@ -24,7 +26,9 @@ return(
                     </Link>   
             </div>
 
-            <div className="schedulingContainer">
+            {admin &&
+                <>
+                <div className="schedulingContainer">
             <Link to="/to_schedule">
                 <img height={'180px'} width="180px" src={ConsultasAgendas}></img>
                 <h1>Agendar Consulta</h1>
@@ -65,9 +69,11 @@ return(
                 <h1>Lista de Médicos</h1>
             </Link>  
             </div>
+            </>
+            }
             
 
-      
+                
        </div>
 
 
