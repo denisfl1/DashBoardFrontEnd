@@ -81,7 +81,7 @@ return(
                         </select>
                         
                         </div>
-        <div className="SchedulesContent" style={{display:"flex"}}>
+        <div className="SchedulesContent" style={{display:"flex",justifyContent:"start",flexWrap:"wrap"}}>
                 
             <UserSchedule data={search2} setMy_QR_Code={setMy_QR_Code} My_QR={My_QR} setMy_My_QR={setMy_My_QR}/>
                  

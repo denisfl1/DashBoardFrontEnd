@@ -539,9 +539,9 @@ margin-right: 10px;
     display: flex;
     border: 1px solid rgb(179, 179, 179);
     border-radius: 10px;
-    margin: auto;
     background-color:#ffffff;
-    position:relative
+    position:relative;
+    margin-left:20px;
  }
 
  .userScheduleContent{
@@ -584,6 +584,6 @@ margin-right: 10px;
     position: absolute;
     right: 15px;
     top:20px;
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
 }
