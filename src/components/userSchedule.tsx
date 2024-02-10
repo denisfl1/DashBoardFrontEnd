@@ -26,9 +26,9 @@ return(
 
 
             <div className="userScheduleContent">
-            <div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px",alignItems:"center"}}><img onClick={()=>Handle_MyQR(items)} style={{height:"60px",width:"60px",cursor:"pointer"}}src={qrCodeIMG}></img><div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule Active forUser`}></div></div>
+            <div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px",alignItems:"center"}}><img onClick={()=>Handle_MyQR(items)} style={{height:"60px",width:"60px",cursor:"pointer"}}src={qrCodeIMG}></img><div style={{margin:"0",marginRight:"5px"}} className={`statusSchedule ${items.status} forUser`}></div></div>
                 <ul>
-                    <li><span style={{fontWeight:"bold",fontSize:"20px"}}>Psicologia</span></li>
+                    <li><span style={{fontWeight:"bold",fontSize:"20px"}}>{items.specialty}</span></li>
                     <li><span style={{fontWeight:"bold"}}>Médico: </span>{items.doctor}</li>
                 
                     <li><span style={{fontWeight:"bold"}}>Data: </span>{items.date}</li>

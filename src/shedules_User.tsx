@@ -13,7 +13,7 @@ function  Schedules_User(){
 
     const[AllSchedules,setAllSchedules] = useState<Object[]>([])
     const [search,setSearch] = useState<string[]>([])
-    const key = ["patient_Name","patient_Email","status"]
+    const key = ["status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
     const [My_QR_Code,setMy_QR_Code] = useState<object>([])
     const [My_QR,setMy_My_QR] = useState<boolean>(false)
@@ -56,7 +56,7 @@ return(
     <div className="SchedulesContainer">
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
                         <div style={{display:"flex",alignItems:"center"}}>
-                        <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
+              
                         <div style={{display:"flex",flexDirection:"column",border:"1px solid black",marginLeft:"5px"}}>
                                                    
     
