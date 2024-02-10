@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext} from "react";
 import {API} from './Api'
 import lupa from "./Icons/lupa.png"
 import Swal from "sweetalert2";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import  MyQRCODE from "./components/QRCodePage"
 import QRReader from "./components/QRCodeReader";
 import qrCodeIMG from "./Icons/licensed-image.jpeg"
-import QRCode from "react-qr-code";
+import { UserContext } from "./contexts/context";
 
 function Schedules(){
 
@@ -17,6 +17,7 @@ function Schedules(){
     const [QRReaderOpen,setQRReaderOpen] = useState<boolean>(false)
     const [My_QR_Code,setMy_QR_Code] = useState<object>([])
     const [My_QR,setMy_My_QR] = useState<boolean>(false)
+    const {Alert} = useContext(UserContext)
 
     useEffect(()=>{
 
@@ -44,18 +45,6 @@ function Schedules(){
 
 
     },[])
-
-    const Alert2 =(res:string)=>{                
-        return Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: `${res}`,
-        confirmButtonColor:'#3085d6',
-        // width:"400px",
-        customClass:'swal-wide',
-        confirmButtonText:"Fechar",
-     
-      })} 
     
 
 
@@ -75,11 +64,11 @@ function Schedules(){
             if (result.isConfirmed) {
                 await API.delete(`/deleteSchedules/${id}`).then(
                     res=>{
-                        Alert2(res.data)
+                        Alert && Alert(res.data,"success")
                         setAllSchedules((data)=>data.filter((it:any)=>it.id !=id))
                     },error=>{
 
-                        Alert2(error.response.data)
+                        Alert && Alert(error.response.data,"error")
                     }
                  )
             }

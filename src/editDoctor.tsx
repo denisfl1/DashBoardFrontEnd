@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useContext} from "react";
 import { useState } from "react";
 import { API } from "./Api";
 import { useParams } from "react-router-dom";
-
+import { UserContext } from "./contexts/context";
 
 function EditDoctor(){
 
@@ -12,7 +12,7 @@ function EditDoctor(){
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
     const [sex,setSex] = useState<string>('')
-
+    const {Alert} = useContext(UserContext)
     const param = useParams()
     const id = param.id
 
@@ -42,7 +42,7 @@ function EditDoctor(){
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
-            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() || !sex?.trim() )return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() || !sex?.trim() )return Alert && Alert("Preencha os campos em branco!","error")
 
             let name = ''
             if(sex === "Masculino" && specialty !== "Psicologia"){
@@ -56,12 +56,12 @@ function EditDoctor(){
             await API.put('/editdoctor',{id,name,email,crm,specialty,number,sex}).then(
                 res=>{
                     if(res.status == 200){
-                        alert("Registrado com sucesso")
+                      Alert &&  Alert("Registrado com sucesso","success")
                     }
             
 
                 },error=>{
-                  alert(error.response.data)
+                    Alert &&  Alert(error.response.data,"error")
                 }
             )
 
@@ -94,7 +94,7 @@ function EditDoctor(){
                   
 
                 },error=>{
-                    alert(error.response.data)
+                    Alert &&  Alert(error.response.data,"error")
                 }
             )
 

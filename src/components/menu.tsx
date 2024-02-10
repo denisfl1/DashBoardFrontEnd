@@ -10,24 +10,30 @@ import { AuthContext } from "../contexts/authContext";
 const Menu = ()=>{
 
     const {admin} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
 
+    const id = user.id
 
 return(
     
        <div className="ConsultsContainerMenu">
 
 
+         
+
+            {admin ?
+                <>
+
             <div className="schedulingContainer">
 
-                  
-                    <Link to="/schedules">
-                    <img height={'180px'} width="180px" src={Agendado}></img>
-                    <h1>Consultas Agendadas</h1>
-                    </Link>   
+                            
+            <Link to="/schedules">
+            <img height={'180px'} width="180px" src={Agendado}></img>
+            <h1>Consultas Agendadas</h1>
+            </Link>   
             </div>
 
-            {admin &&
-                <>
+
                 <div className="schedulingContainer">
             <Link to="/to_schedule">
                 <img height={'180px'} width="180px" src={ConsultasAgendas}></img>
@@ -68,6 +74,25 @@ return(
             <img width="150px" src={UserList}></img>
                 <h1>Lista de Médicos</h1>
             </Link>  
+            </div>
+            </>
+            :
+                
+            <>
+            <div className="schedulingContainer">
+                       
+            <Link to="/schedulesUser">
+            <img height={'180px'} width="180px" src={Agendado}></img>
+            <h1>Consultas Agendadas</h1>
+            </Link>   
+            </div>
+
+            
+            <div className="schedulingContainer">
+            <Link to={`/edituser/${id}`}>    
+            <img width="180px" src={UserList}></img>
+                <h1>Minha Conta</h1>
+                </Link>  
             </div>
             </>
             }

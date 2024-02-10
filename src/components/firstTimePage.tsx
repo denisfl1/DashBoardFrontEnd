@@ -3,20 +3,20 @@ import folha from "../Icons/folha.jpg"
 import { useState } from "react";
 import {API} from "../Api"
 import { AuthContext } from "../contexts/authContext"
-
+import { UserContext } from "../contexts/context";
 
 function FirtTimePage(){
 
     const [password,setPassword]= useState<string>()
     const [password_Confirm,setPasswordConfirm]= useState<string>()
     const {Logged}= useContext(AuthContext)
-
+    const {Alert} = useContext(UserContext)
 
     const SendLogin= async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
 
-        if(password !== password_Confirm)return alert("Senhas Diferentes")
+        if(password !== password_Confirm)return Alert &&Alert("Senhas Diferentes","error")
         
         const email =  "denisfl3@hotmail.com"
 

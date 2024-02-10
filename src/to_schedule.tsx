@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import {API} from "./Api"
-import Swal from "sweetalert2";
+import { UserContext } from "./contexts/context";
 
 function To_schedule(){
 
@@ -15,7 +15,7 @@ function To_schedule(){
     const key = ["name","cpf"]
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
     data[keys].includes(search))):patientList
-
+    const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -141,23 +141,12 @@ function To_schedule(){
      
     }
 
-    const Alert2 =(res:string)=>{                
-    return Swal.fire({
-    position: 'center',
-    icon: 'error',
-    title: `${res}`,
-    confirmButtonColor:'#3085d6',
-    // width:"400px",
-    customClass:'swal-wide',
-    confirmButtonText:"Fechar",
- 
-  })} 
 
     const sendSchedule= async()=>{
 
-        if(!doctorName)return Alert2("Selecione um Médico!")
-        if(!patientName)return Alert2("Selecione um Paciente!")
-        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert2("Preencha os campos em branco!")
+        if(!doctorName)return   Alert && Alert("Selecione um Médico!","error")
+        if(!patientName)return   Alert && Alert("Selecione um Paciente!","error")
+        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert && Alert("Preencha os campos em branco!","Error")
         
         const doctor = doctorName.name
         const crm = doctorName.crm
@@ -170,23 +159,12 @@ function To_schedule(){
         await API.post("/newschedule",{doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email}).then(
             res=>{
                            
-            Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: `${res.data}`,
-            confirmButtonColor:'#3085d6',
-            // width:"400px",
-            customClass:'swal-wide',
-            confirmButtonText:"Fechar",
-            // showConfirmButton:false,
-            // timer:1500  
-         
-          })
+                Alert && Alert(res.data,"success")
          
             setDoctors((data)=>data.filter((datas:any)=>datas.id != doctorName.id))
             },error=>{
-                                
-                Alert2(error.response.data)
+             
+                Alert && Alert(error.response.data,"error")
                 
             }
         )

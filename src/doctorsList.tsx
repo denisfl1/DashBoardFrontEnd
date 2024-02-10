@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useContext} from "react";
 import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
 import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
+import { UserContext } from "./contexts/context";
 
 function DoctorsList(){
 
@@ -12,19 +13,8 @@ const [search,setSearch] = useState<string[]>([])
 const key = ["name","crm"]
 const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList
 
+const {Alert} = useContext(UserContext)
 
-    
-  const Alert2 =(res:string)=>{                
-    return Swal.fire({
-    position: 'center',
-    icon: 'success',
-    title: `${res}`,
-    confirmButtonColor:'#3085d6',
-    // width:"400px",
-    customClass:'swal-wide',
-    confirmButtonText:"Fechar",
-
-})} 
 
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
@@ -44,11 +34,11 @@ const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.
             if (result.isConfirmed) {
                 await API.delete(`http://localhost:5000/deletedoctor/${id}`).then(
                     res=>{
-                        Alert2(res.data)
+                        Alert && Alert(res.data,"success")
                         setDoctorList((prev:any)=>prev.filter((data:any)=>data.id != id))
                     },error=>{
         
-                        Alert2(error.response.data)
+                        Alert && Alert(error.response.data,"error")
                     }
                  )
             }

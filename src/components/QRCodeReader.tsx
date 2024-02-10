@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader";
-import Swal from "sweetalert2";
+import { UserContext } from "../contexts/context"
 import {API} from "../Api"
 
 
 function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateAction<any>>,QRReaderOpen:boolean,setQRReaderOpen:React.Dispatch<React.SetStateAction<boolean>>}){
 
+    const {Alert} = useContext(UserContext)
 
   const [result, setResult] = useState<any>(undefined);
     const DATAs = props.data
@@ -21,21 +22,6 @@ function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateA
 
 } 
 
-    const AlertError = ((data:string)=>{
-
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: `${data}`,
-            confirmButtonColor:'#3085d6',
-            // width:"400px",
-            customClass:'swal-wide',
-            confirmButtonText:"Fechar",
-         
-          })
-
-
-    })
 
     useEffect(()=>{
         const verify = result != undefined
@@ -59,24 +45,15 @@ function QRReader(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateA
                      
                         res=>{
                             console.log(res)
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: `${res.data}`,
-                                confirmButtonColor:'#3085d6',
-                                // width:"400px",
-                                customClass:'swal-wide',
-                                confirmButtonText:"Fechar",
-                            
-                            })
-                        
+
+                            Alert && Alert(res.data,"success")
+                                     
                             props.setAllSchedules((data:any)=>data.map((it:any)=>{return  it.id == result.id ? {...it,status:"Finished"}:it}))
                           
                             return  props.setQRReaderOpen(false)   
                         },error=>{
-
                             console.log(error)
-                            AlertError(error.response.data)
+                            Alert && Alert(error.response.data,"error")
                         }
                     )
                         

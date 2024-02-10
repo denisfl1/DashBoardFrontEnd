@@ -21,17 +21,6 @@ function MyQRCODE (props:{My_QR_Code:object,setMy_My_QR:React.Dispatch<React.Set
 // }
 
 
-  const [resul, setResul] = useState(null);
-
-
-
-const handleError = (error:any)=>{
-
-    console.log(error)
-
-}
-
-
 
 return(
     <>

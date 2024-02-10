@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import {API} from "./Api"
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { UserContext } from "./contexts/context"
 
 function Edit_schedule(){
 
@@ -18,10 +18,12 @@ function Edit_schedule(){
     const key = ["name","cpf"]
     const search2 = search ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||
     data[keys].includes(search))):patientList
+  
 
     const param = useParams()
     const id = param.id
     const navigate = useNavigate()
+    const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -87,7 +89,6 @@ function Edit_schedule(){
     
             }else{
                 console.log(promise1.reason.response.data)
-                Alert2(promise1.reason.response.data)
                 navigate('/schedules')
             }
 
@@ -98,7 +99,7 @@ function Edit_schedule(){
 
             }else{
                 console.log(promise2.reason.response.data)
-                Alert2(promise2.reason.response.data)
+             
             }
 
 
@@ -198,34 +199,6 @@ function Edit_schedule(){
      
     }
 
-    const Alert2 =(res:string)=>{                
-    return Swal.fire({
-    position: 'center',
-    icon: 'error',
-    title: `${res}`,
-    confirmButtonColor:'#3085d6',
-    // width:"400px",
-    customClass:'swal-wide',
-    confirmButtonText:"Fechar",
- 
-  })}
-
-
-  const AlertSuccess =(res:string)=>{
-
-        Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: `${res}`,
-        confirmButtonColor:'#3085d6',
-        // width:"400px",
-        customClass:'swal-wide',
-        confirmButtonText:"Fechar",
-        // showConfirmButton:false,
-        // timer:1500  
-     
-      })
-  }
 
   const AlertQuestion =(data:any)=>{
 
@@ -241,9 +214,10 @@ function Edit_schedule(){
         if (result.isConfirmed) {
           
             if(data.status == 200){
-                AlertSuccess(data.data)
+                Alert && Alert(data.data,"success")
+                console.log(data)
             }else{
-                Alert2(data.response.data)
+                Alert && Alert(data.response.data,"error")
                 console.log(data.response.data)
             }
            
@@ -254,9 +228,9 @@ function Edit_schedule(){
 
     const sendSchedule= async()=>{
 
-        if(!doctorName)return Alert2("Selecione um Médico!")
-        if(!patientName)return Alert2("Selecione um Paciente!")
-        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert2("Preencha os campos em branco!")
+        if(!doctorName)return  Alert && Alert("Selecione um Médico!","error")
+        if(!patientName)return Alert && Alert("Selecione um Paciente!","error")
+        if(!specialty.trim()||!date?.trim()||!timeSchedule?.trim()|| timeSchedule == "Selecionar" ||!doctorName||!patientName)return Alert && Alert("Preencha os campos em branco!","error")
      
         const doctor = doctorName.name
         const crm = doctorName.crm

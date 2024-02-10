@@ -1,7 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { API } from "./Api";
-
+import { UserContext } from "./contexts/context";
 
 function  CreateDoctor(){
 
@@ -11,7 +11,7 @@ function  CreateDoctor(){
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [number,setNumber] = useState<string>()
     const [sex,setSex] = useState<string>('')
-
+    const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
         'ClínicaGeral',         
@@ -39,7 +39,7 @@ function  CreateDoctor(){
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
-            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() ||!sex.trim())return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !nameFull?.trim() || !crm?.trim() ||!sex.trim())return  Alert && Alert("Preencha os campos em branco!","error")
             let name = ''
             if(sex === "Masculino" && specialty !== "Psicologia"){
             name = "Dr. " + nameFull
@@ -52,12 +52,12 @@ function  CreateDoctor(){
             await API.post('/newdoctor',{name,email,crm,specialty,number}).then(
                 res=>{
                     if(res.status == 200){
-                        alert("Registrado com sucesso")
+                        Alert && Alert("Registrado com sucesso","success")
                     }
             
 
                 },error=>{
-                  alert(error.response.data.error)
+                    Alert && Alert(error.response.data.error,"error")
                 }
             )
 

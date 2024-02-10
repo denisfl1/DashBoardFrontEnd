@@ -6,6 +6,7 @@ import Login from './components/login'
 import {Routes,Route,BrowserRouter,Navigate} from 'react-router-dom'
 import Register from './components/register';
 import { AuthContext, AuthProvider } from './contexts/authContext';
+import { UserProvider } from './contexts/context';
 import CreateDoctor from './createDoctor';
 import CreatePatient from './createPatient';
 import FirtTimePage from './components/firstTimePage';
@@ -15,6 +16,7 @@ import EditPatient from './editPatient';
 import EditDoctor from './editDoctor';
 import To_schedule from './to_schedule';
 import Schedules from './schedules';
+import Schedules_User from './shedules_User'
 import Edit_schedule from './editSchedules'
 
 
@@ -79,7 +81,9 @@ function App() {
     <div className="App">
 
         <BrowserRouter>
+        <UserProvider>
         <AuthProvider>
+      
         <Routes>
         <Route path="*" element={<Private><HomePage></HomePage></Private>}></Route>
         <Route path="/home" element={<Private><HomePage></HomePage></Private>}></Route>
@@ -94,11 +98,13 @@ function App() {
         <Route path="/editdoctor/:id" element={<Private><EditDoctor/></Private>}></Route>
         <Route path="/to_schedule" element={<Private><To_schedule/></Private>}></Route>
         <Route path="/schedules" element={<Private><Schedules/></Private>}></Route>
-        <Route path="/editschedule/:id" element={<Private><Edit_schedule/></Private>}></Route>
+        <Route path="/schedulesuser" element={<Private><Schedules_User/></Private>}></Route>
 
+        <Route path="/editschedule/:id" element={<Private><Edit_schedule/></Private>}></Route>
 
         </Routes>
         </AuthProvider>
+        </UserProvider>   
         </BrowserRouter>
     </div>
   );

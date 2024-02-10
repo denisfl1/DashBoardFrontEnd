@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useContext} from "react";
 import { useState } from "react";
 import lupa from "./Icons/lupa.png"
 import { API } from "./Api";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { UserContext } from "./contexts/context";
 
 function PatientList(){
 
@@ -11,31 +12,7 @@ const [patientList,setPatientList] = useState<Object[]>([])
 const [search,setSearch] = useState<string[]>([])
 const key = ["name","email"]
 const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):patientList
-
-    const Alert2 =(res:string)=>{                
-        return Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: `${res}`,
-        confirmButtonColor:'#3085d6',
-        // width:"400px",
-        customClass:'swal-wide',
-        confirmButtonText:"Fechar",
-    
-    })} 
-
-
-    const AlertError =(res:string)=>{                
-        return Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: `${res}`,
-        confirmButtonColor:'#3085d6',
-        // width:"400px",
-        customClass:'swal-wide',
-        confirmButtonText:"Fechar",
-    
-    })} 
+const {Alert} = useContext(UserContext)
 
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
@@ -54,11 +31,11 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
             if (result.isConfirmed) {
                 await API.delete(`http://localhost:5000/deleteuser/${id}`).then(
                     res=>{
-                        Alert2(res.data)
+                        Alert &&  Alert(res.data,"success")
                         setPatientList((data:any)=>data.filter((it:any)=>it.id != id))
                     },error=>{
 
-                        AlertError(error.response.data)
+                        Alert &&  Alert(error.response.data,"error")
                     }
                  )
             }
@@ -80,7 +57,7 @@ const search2 = typeof search !== undefined ? patientList.filter((data:any)=>key
                 
                 },error=>{
 
-                    AlertError(error.response)
+                      Alert &&  Alert(error.response.data,"error")
                 }
             )
 

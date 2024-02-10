@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext} from "react";
 import { useState } from "react";
 import folha from "./Icons/folha.jpg"
 import axios from "axios";
 import {API} from "./Api"
-
+import { UserContext } from "./contexts/context";
 
 function CreatePatient(){
 
@@ -15,22 +15,23 @@ function CreatePatient(){
     const [adress,setAdress] = useState<string>()
     const [neighborhood,setNeighborhood] = useState<string>()
     const [cpf,setCPF] = useState<string>()
+    const {Alert} = useContext(UserContext)
 
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
         console.log(name,email,contact_number,number_adress,zipCode,adress,neighborhood)
-            if(!email?.trim() || !name?.trim() || !contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim())return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !name?.trim() || !contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim())return   Alert && Alert("Preencha os campos em branco!","error")
 
             await API.post('/registerAdmin',{name,email,contact_number,number_adress,zipCode,adress,neighborhood,cpf}).then(
                 res=>{
                     if(res.status == 200){
-                        alert("Registrado com sucesso")
+                        Alert && Alert("Registrado com sucesso","success")
                     }
             
 
                 },error=>{
-                    alert(error.response.data)
+                    Alert && Alert(error.response.data,"error")
                 }
             )
 
@@ -50,10 +51,11 @@ function CreatePatient(){
                     setAdress(res.data.logradouro)
                     setNeighborhood(res.data.bairro)
                     setContactNumber(`(${res.data.ddd}) `)
-     
+                    Alert && Alert(res.data,"success")    
                 }
                 },error=>{
                     
+                    Alert && Alert(error.response.data,"error")
                    
                 }
                )

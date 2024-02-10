@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import {API} from "./Api"
 import { useParams } from "react-router-dom";
-
+import { UserContext } from "./contexts/context"
 
 function  EditPatient(){
 
@@ -15,25 +15,29 @@ function  EditPatient(){
     const [adress,setAdress] = useState<string>()
     const [neighborhood,setNeighborhood] = useState<string>()
     const [cpf,setCPF] = useState<string>()
+    const [password,setPassword] = useState<string>()
 
     const param = useParams()
     const id = param.id
+    const {Alert} = useContext(UserContext)
 
     const SendData = async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
         e.preventDefault()
         console.log(name,email,contact_number,number_adress,zipCode,adress,neighborhood)
-            if(!email?.trim() || !name?.trim() || !cpf?.trim() ||!contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim())return alert("Preencha os campos em branco!")
+            if(!email?.trim() || !name?.trim() || !cpf?.trim() ||!contact_number?.trim() || !number_adress?.trim() || !zipCode?.trim() || !adress?.trim() || !neighborhood?.trim() || !password?.trim())return Alert && Alert("Preencha os campos em branco!","error")
 
-            await API.put('/edituser',{id,name,email,contact_number,number_adress,zipCode,adress,neighborhood,cpf}).then(
+            await API.put('/edituser',{id,name,email,contact_number,number_adress,zipCode,adress,neighborhood,cpf,password}).then(
                 res=>{
+
                     if(res.status == 200){
-                        alert("Alterado com sucesso")
+                        Alert && Alert(res.data,"success")
+                        console.log(res.data)
                     }
             
 
                 },error=>{
-                    alert(error.response.data.message)
+                    Alert && Alert(error.response.data,"error")
                 }
             )
 
@@ -56,7 +60,8 @@ function  EditPatient(){
                 }
                 },error=>{
                     
-                  
+                    console.log()
+
                 }
                )
 
@@ -83,10 +88,11 @@ function  EditPatient(){
                 setAdress(res.data.adress)
                 setNeighborhood(res.data.neighborhood)
                 setNumber(res.data.number_adress)
-
+                setPassword(res.data.password_digest)
 
             },error=>{
-                alert(error.response.data)
+                console.log(error.response.data)
+                Alert &&  Alert(error.response.data,"error")
             }
         )
     })()      
@@ -136,8 +142,12 @@ return(
     <label>Número</label>
     <input value={number_adress} required type="text" onChange={(e)=>setNumber(e.target.value)}  name="adress" ></input>
 
-          
-    <button type={"submit"} style={{marginTop:'26px'}} onClick={SendData}>Registrar</button>
+        
+    <label>Senha</label>
+    <input  required type="text" onChange={(e)=>setPassword(e.target.value)}  name="password" ></input>
+
+   
+    <button type={"submit"} style={{marginTop:'26px'}} onClick={SendData}>Salvar</button>
 
 
     </form>
