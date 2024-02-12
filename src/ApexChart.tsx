@@ -6,7 +6,7 @@ const Chart:React.FC=()=>{
 
     const [Options,setOptions] = useState<String>('')
     const GetData:String|null = localStorage.getItem('apex') 
-    const a = ["1","2","3","4","5"]
+   
     let Dates:String[] = []
     let OpenX:String[] = []
     let HighX:String[] = []
