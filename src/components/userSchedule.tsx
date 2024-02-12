@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, {  useContext } from "react"
 import qrCodeIMG from "../Icons/licensed-image.jpeg"
 import MyQRCODE from "./QRCodePage"
+import Swal from "sweetalert2";
+import { UserContext } from "../contexts/context";
+import { API } from "../Api";
 
-function userSchedule(props:{data:any,My_QR:boolean,setMy_My_QR:React.Dispatch<React.SetStateAction<boolean>>,setMy_QR_Code:React.Dispatch<React.SetStateAction<object>>}){
+
+function UserSchedule(props:{data:any,setAllSchedules:React.Dispatch<React.SetStateAction<object[]>>,My_QR:boolean,setMy_My_QR:React.Dispatch<React.SetStateAction<boolean>>,setMy_QR_Code:React.Dispatch<React.SetStateAction<object>>}){
+
+    const {Alert} = useContext(UserContext)
+
 
     const Handle_MyQR= (data:object)=>{
 
@@ -15,6 +22,50 @@ function userSchedule(props:{data:any,My_QR:boolean,setMy_My_QR:React.Dispatch<R
         }
 
 
+    }
+
+
+    const handleCancell:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
+
+        if(e.target instanceof HTMLButtonElement){
+        const id  = e.target.id
+       
+        Swal.fire({
+
+            title: "Deseja mesmo cancelar?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText:"Cancelar",
+          }).then((result) => {
+            if (result.isConfirmed) {
+                
+                API.put('/cancell_scheduling',{id}).then(
+
+                res=>{
+
+                    if(res.status == 200){
+
+                        Alert && Alert("Cancelado com sucesso","success")
+                        props.setAllSchedules((data:any)=>data.map((items:any)=>{return items.id == id ?{...items,status:"Canceled"}:items}))
+                    }
+
+                },error=>{
+
+                        Alert && Alert(error.response.data,"error")
+
+                }
+
+
+                )
+
+               
+            }
+          })
+
+        }
     }
 
 return(
@@ -33,7 +84,7 @@ return(
                 
                     <li><span style={{fontWeight:"bold"}}>Data: </span>{items.date}</li>
                     <li><span style={{fontWeight:"bold"}}>Horário: </span>{items.hour}</li>
-                    <button>Cancelar</button>
+                    <button id={items.id} style={{cursor:"pointer"}} onClick={handleCancell}>Cancelar</button>
                 </ul>
 
 
@@ -60,4 +111,4 @@ return(
 
 
 }
-export default userSchedule
+export default UserSchedule

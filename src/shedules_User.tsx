@@ -11,7 +11,7 @@ import UserSchedule from "./components/userSchedule";
 
 function  Schedules_User(){
 
-    const[AllSchedules,setAllSchedules] = useState<Object[]>([])
+    const [AllSchedules,setAllSchedules] = useState<Object[]>([])
     const [search,setSearch] = useState<string[]>([])
     const key = ["status"]
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
@@ -83,7 +83,7 @@ return(
                         </div>
         <div className="SchedulesContent" style={{display:"flex",justifyContent:"start",flexWrap:"wrap"}}>
                 
-            <UserSchedule data={search2} setMy_QR_Code={setMy_QR_Code} My_QR={My_QR} setMy_My_QR={setMy_My_QR}/>
+            <UserSchedule data={search2} setAllSchedules={setAllSchedules} setMy_QR_Code={setMy_QR_Code} My_QR={My_QR} setMy_My_QR={setMy_My_QR}/>
                  
             </div>
             {My_QR &&<MyQRCODE My_QR_Code={My_QR_Code} setMy_My_QR={setMy_My_QR}/>}

@@ -49,9 +49,9 @@ const Login:React.FC=()=>{
                     <form>
                     <img src={hand}></img>
                     <label>E-mail</label>
-                    <input type="email" name="email" onChange={(e)=>setEmail(e.target.value)}></input>
+                    <input placeholder="Digite seu e-mail" type="email" name="email" onChange={(e)=>setEmail(e.target.value)}></input>
                     <label>Senha</label>
-                    <input type="password" name="password" onChange={(e)=>setPassword(e.target.value)}></input>
+                    <input placeholder="Digite sua senha" type="password" name="password" onChange={(e)=>setPassword(e.target.value)}></input>
 
                     <button onClick={SendLogin}>Login</button>
                     
