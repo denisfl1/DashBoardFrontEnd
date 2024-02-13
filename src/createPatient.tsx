@@ -1,6 +1,6 @@
 import React, { useEffect,useContext} from "react";
 import { useState } from "react";
-import folha from "./Icons/folha.jpg"
+import addUser from "./Icons/addUser.png"
 import axios from "axios";
 import {API} from "./Api"
 import { UserContext } from "./contexts/context";
@@ -70,7 +70,7 @@ function CreatePatient(){
 return(
 
     <div className="EmployeeContainer" >
-    <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Paciente / Novo Cadastro</h1></div>
+    <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Paciente / Novo Cadastro</h1><img style={{marginLeft:"10px"}} height={"40px"} width={"40px"} src={addUser}></img></div>
 <div className="RegisterContent" style={{width:"90%",marginTop:"50px"}}>
   
     <form>

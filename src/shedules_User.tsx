@@ -55,6 +55,8 @@ return(
 
     <div className="SchedulesContainer">
                         <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
+                        <div style={{width:"80%",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
+
                         <div style={{display:"flex",alignItems:"center"}}>
               
                         <div style={{display:"flex",flexDirection:"column",border:"1px solid black",marginLeft:"5px"}}>

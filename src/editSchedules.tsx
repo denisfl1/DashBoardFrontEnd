@@ -259,6 +259,8 @@ return(
 
 <div className="To_scheduleContainer">
        <div style={{display:"flex",marginLeft:"100px"}}><h1 >Editar Consulta</h1></div>
+       <div style={{width:"80%",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
+
     <div className="To_scheduleContent" style={{display:"flex"}}>
 
 
@@ -296,19 +298,20 @@ return(
 
            
     </div>
+    <div style={{width:"60%",height:"1px",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
 
     <div style={{width:"100%",display:"flex",marginBottom:"50px",justifyContent:"center"}}>
             
                 <div>
            <h1>Disponibilidade:</h1>
-
+           <div className="scheduling_doctor" style={{maxHeight:"195px"}}>     
           <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
            
                <thead>
                    <tr>
                    <th>Médico</th>
                    <th>{specialty != "Psicologia" ? "CRM" : "CRP"}</th>
-                   <th></th>
+                   <th style={{borderTopRightRadius:'0'}}></th>
                    </tr>
                    
                </thead>
@@ -339,12 +342,13 @@ return(
                       
            </table>
            </div>
+           </div>
 
-
+                   
             <div style={{width:"800px"}}>
            <h1 style={{marginLeft:"80px"}}>Selecione um Paciente:</h1>   
                    {patientList && <table style={{margin:"auto"}}>
-                  
+                   
                        <thead>
                        <tr>
                    <th>Nome</th>

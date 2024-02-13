@@ -7,6 +7,7 @@ import  MyQRCODE from "./components/QRCodePage"
 import QRReader from "./components/QRCodeReader";
 import qrCodeIMG from "./Icons/licensed-image.jpeg"
 import { UserContext } from "./contexts/context";
+import markshedule from "./Icons/listCheck.png"
 
 function Schedules(){
 
@@ -108,7 +109,8 @@ function Schedules(){
 return(
 
     <div className="SchedulesContainer">
-                        <h1 style={{marginLeft:"140px"}}>Agendamentos</h1>
+                        <div style={{display:"flex",alignItems:'center'}}><h1 style={{marginLeft:"140px"}}>Agendamentos</h1><img style={{marginLeft:"10px"}} width="40px" height="40px" src={markshedule}></img></div>
+
                         <div style={{display:"flex",alignItems:"center"}}>
                         <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
                         <div style={{display:"flex",flexDirection:"column",border:"1px solid black",marginLeft:"5px"}}>

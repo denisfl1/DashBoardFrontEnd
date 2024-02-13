@@ -3,6 +3,7 @@ import { useState } from "react";
 import { API } from "./Api";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./contexts/context";
+import editUser from "./Icons/configuracoes.png"
 
 function EditDoctor(){
 
@@ -107,7 +108,10 @@ function EditDoctor(){
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Editar Dados</h1></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Editar Dados</h1>
+        <img style={{marginLeft:"10px"}} height={"40px"} width={"40px"} src={editUser}></img>
+
+        </div>
     <div className="RegisterContent" >
       
         <form>

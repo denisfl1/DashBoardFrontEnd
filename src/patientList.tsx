@@ -5,6 +5,7 @@ import { API } from "./Api";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "./contexts/context";
+import list from "./Icons/lista.png"
 
 function PatientList(){
 
@@ -70,7 +71,7 @@ const {Alert} = useContext(UserContext)
 return(
 
     <div className="containerTable">
-        <h1 style={{marginLeft:"160px"}}>Lista de Pacientes</h1>
+       <div style={{display:'flex',alignItems:"center"}}> <h1 style={{marginLeft:"160px"}}>Lista de Pacientes</h1></div>
         <div className="container_Input_DoctorList"><input placeholder="Nome ou Email" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
         <div className="table-Subcontainer">
         <table style={{width:"90%"}}>

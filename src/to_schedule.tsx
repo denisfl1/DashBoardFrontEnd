@@ -1,7 +1,7 @@
 import { useEffect, useState ,useContext} from "react";
 import {API} from "./Api"
 import { UserContext } from "./contexts/context";
-
+import markshedule from "./Icons/list.png"
 function To_schedule(){
 
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
@@ -175,10 +175,11 @@ function To_schedule(){
 return(
 
 <div className="To_scheduleContainer">
-       <div style={{display:"flex",marginLeft:"100px"}}><h1 >Agendar Consulta</h1></div>
+       <div style={{display:"flex",marginLeft:"100px",alignItems:"center"}}><h1 >Agendar Consulta</h1><img style={{marginLeft:"10px"}} width="40px" height="40px" src={markshedule}></img></div>
+    
     <div className="To_scheduleContent" style={{display:"flex"}}>
 
-
+    
             <div className="InputsContent">
             <label>Especialidade</label>   
             <select onChange={(e)=>setSpecialty(e.target.value)} style={{marginBottom:"10px"}}>
@@ -213,19 +214,19 @@ return(
 
            
     </div>
-
+                    <div style={{width:"60%",height:"1px",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
     <div style={{width:"100%",display:"flex",marginBottom:"50px",justifyContent:"center"}}>
             
-                <div>
+            <div>
            <h1 >Disponibilidade:</h1>
-           
+           <div className="scheduling_doctor">
           <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
-           
+        
                <thead>
                    <tr>
                    <th>Médico</th>
                    <th>{specialty != "Psicologia" ? "CRM" : "CRP"}</th>
-                   <th></th>
+                   <th style={{borderTopRightRadius:'0'}}></th>
                    </tr>
                    
                </thead>
@@ -253,24 +254,24 @@ return(
                  
                  
                </tbody>
-                      
+                  
            </table>
            </div>
-
+           </div>  
 
             <div style={{width:"800px"}}>
            <h1 style={{marginLeft:"80px"}}>Selecione um Paciente:</h1>   
                    {patientList && <table style={{margin:"auto"}}>
-                  
+                   <div  className="schedulingTbody" >
                        <thead>
                        <tr>
                    <th>Nome</th>
                    <th>CPF</th>
                    <th>Email</th>
-                   <th></th>
+                   <th style={{borderTopRightRadius:'0'}}></th>
                    </tr>
                        </thead>
-
+                   
                        <tbody>
                            {patientList && search2.map((data:any)=>{
                                const SorD = typeof patientName !== 'undefined' &&  data.id == patientName.id 
@@ -286,7 +287,7 @@ return(
                            })}
                                                
                        </tbody>
-
+                       </div>
                    </table>}
                    </div>
 

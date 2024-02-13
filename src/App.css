@@ -3,6 +3,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&display=swap');
 
+h1{
+font-family: "Poppins";
+}
+
 .LoginContainer{
     min-height: 100vh;
     width: 100%;
@@ -335,6 +339,15 @@ table {
 
   }
 
+table th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+table th:last-child {
+    border-top-right-radius: 10px;
+
+  }
+
 
   .container_Input_DoctorList{
     display: flex;
@@ -593,3 +606,47 @@ margin-right: 10px;
     width: 15px;
     height: 15px;
 }
+
+.schedulingTbody{
+    overflow-y: auto;
+    max-height: 400px; 
+}
+
+.schedulingTbody::-webkit-scrollbar{
+    background-color: #e5e9f2;
+    width: 5px;
+  }
+
+
+.schedulingTbody::-webkit-scrollbar-thumb{
+    background-color: #000000;
+
+  }
+
+.schedulingTbody::-webkit-scrollbar-button{
+    display: none;
+    
+  }
+
+
+.scheduling_doctor{
+    overflow-y: auto;
+    overflow-x:hidden;
+    max-height: 250px;  
+}
+
+.scheduling_doctor::-webkit-scrollbar{
+    background-color: #e5e9f2;
+    width: 5px;
+  }
+
+
+.scheduling_doctor::-webkit-scrollbar-thumb{
+    background-color: #000000;
+
+  }
+
+.scheduling_doctor::-webkit-scrollbar-button{
+    display: none;
+    
+  }

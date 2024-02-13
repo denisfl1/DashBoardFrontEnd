@@ -2,6 +2,7 @@ import React from "react";
 import { useState,useContext } from "react";
 import { API } from "./Api";
 import { UserContext } from "./contexts/context";
+import addUser from "./Icons/addUser.png"
 
 function  CreateDoctor(){
 
@@ -69,7 +70,7 @@ function  CreateDoctor(){
 return(
 
     <div className="EmployeeContainer" >
-        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Novo Cadastro</h1></div>
+        <div style={{display:'flex',alignItems:"center"}}><h1 style={{marginLeft:"50px"}}>Médicos / Novo Cadastro</h1><img style={{marginLeft:"10px"}} height={"40px"} width={"40px"} src={addUser}></img></div>
     <div className="RegisterContent" >
       
         <form>
