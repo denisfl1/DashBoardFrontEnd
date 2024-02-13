@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
     const [OPEN_BAR,setOPEN_BAR] = useState(false)
     const {Logout} = useContext(AuthContext)
 
+    const a = ["1"]
+
     const Handle_Window:React.MouseEventHandler<HTMLImageElement> = (e)=>{
         
         if(e.target instanceof HTMLElement){
