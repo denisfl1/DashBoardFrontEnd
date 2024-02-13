@@ -48,7 +48,7 @@ function UserSchedule(props:{data:any,setAllSchedules:React.Dispatch<React.SetSt
 
                     if(res.status == 200){
 
-                        Alert && Alert("Cancelado com sucesso","success")
+                        Alert && Alert(res.data,"success")
                         props.setAllSchedules((data:any)=>data.map((items:any)=>{return items.id == id ?{...items,status:"Canceled"}:items}))
                     }
 

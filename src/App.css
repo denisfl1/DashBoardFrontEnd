@@ -542,6 +542,12 @@ margin-right: 10px;
     background-color:#ffffff;
     position:relative;
     margin-left:20px;
+    transition: all 200ms;
+ }
+
+ .userSchedule:hover{
+    transform: scale(1.1);
+    cursor: pointer;
  }
 
  .userScheduleContent{
