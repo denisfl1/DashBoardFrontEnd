@@ -7,6 +7,8 @@ import { UserContext } from "./contexts/context"
 import editUser from "./Icons/configuracoes.png"
 
 function  EditPatient(){
+    
+    const x = ["1"]
 
     const [email,setEmail]= useState<string>()
     const [name,setName] = useState<string>()
