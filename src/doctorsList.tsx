@@ -10,11 +10,32 @@ function DoctorsList(){
 
 const [doctorList,setDoctorList] = useState<any>([])
 const [search,setSearch] = useState<string[]>([])
-const key = ["name","crm"]
+const key = ["name","crm","specialty"]
 const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList
 
 const {Alert} = useContext(UserContext)
 
+const SPECIALTY = [
+    'Clínica Geral',         
+    'Cardiologia',
+    'Ortopedia',            
+    'Dermatologia',
+    'Neurologia',           
+    'Ginecologia Obstetricia',
+    'Oftalmologia',         
+    'Pediatria',
+    'Psiquiatria',          
+    'Endocrinologia',
+    'Otorrinolaringologia', 
+    'Radiologia',
+    'Urologia',             
+    'Cirurgia Geral',
+    'Hematologia',          
+    'Gastroenterologia',
+    'Nefrologia',           
+    'Reumatologia',
+    'Psicologia'
+]
 
 
     const handleDelete:React.MouseEventHandler<HTMLButtonElement> =(e)=>{
@@ -70,9 +91,22 @@ return(
 
     <div className="containerTable">
         <h1 style={{marginLeft:"160px"}}>Lista de Médicos</h1>
-        <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>
+        <div style={{display:"flex"}}>
+        <div className="container_Input_DoctorList"><input placeholder="Nome, CRM ou CRP" onChange={(e)=>setSearch([e.target.value])}></input><img src={lupa}></img></div>         
+         <select onChange={(e:any)=>setSearch(e.target.value)
+                        
+                    } style={{width:"125px",fontSize:"20px",marginLeft:"10px"}}>
+                     <option selected value={[]}>Todos</option>
+                    {SPECIALTY.map((datas)=>{
+                    return (
+                          <option >{datas}</option>
+                        )
+                    })}
+
+                    </select>
+        </div>
         <div className="table-Subcontainer">
-        <table>
+        <table style={{width:"85%"}}>
 
             <thead>
 

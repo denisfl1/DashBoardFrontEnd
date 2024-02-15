@@ -18,7 +18,7 @@ function EditDoctor(){
     const id = param.id
 
     const SPECIALTY = [
-        'ClínicaGeral',         
+        'Clínica Geral',         
         'Cardiologia',
         'Ortopedia',            
         'Dermatologia',
@@ -31,7 +31,7 @@ function EditDoctor(){
         'Otorrinolaringologia', 
         'Radiologia',
         'Urologia',             
-        'CirurgiaGeral',
+        'Cirurgia Geral',
         'Hematologia',          
         'Gastroenterologia',
         'Nefrologia',           

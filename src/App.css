@@ -554,8 +554,9 @@ margin-right: 10px;
     border-radius: 10px;
     background-color:#ffffff;
     position:relative;
-    margin-left:20px;
+    margin-left:25px;
     transition: all 200ms;
+    z-index: 1;
  }
 
  .userSchedule:hover{
@@ -609,6 +610,7 @@ margin-right: 10px;
 
 .schedulingTbody{
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 400px; 
 }
 
@@ -632,7 +634,7 @@ margin-right: 10px;
 .scheduling_doctor{
     overflow-y: auto;
     overflow-x:hidden;
-    max-height: 250px;  
+    max-height: 200px;  
 }
 
 .scheduling_doctor::-webkit-scrollbar{

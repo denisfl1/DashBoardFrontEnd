@@ -103,12 +103,18 @@ return(
               
             
                 {search2 &&  search2.map((data:any)=>{
+                    const mycpf = data.cpf
+                    const cpf = mycpf.replace(/(\d{3})(\d)/, '$1.$2')
+                    const cpf1 = cpf.replace(/(\d{3})(\d)/, '$1.$2')
+                    const cpf2 = cpf1.replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+                  
+
                     return(
                         <tr>
 
                         <td>{data.name}</td>
                         <td>{data.email}</td>
-                        <td>{data.cpf}</td>
+                        <td>{cpf2}</td>
                         <td>{data.adress}</td>
                         <td>{data.neighborhood}</td>
                         <td>{data.zipCode}</td>

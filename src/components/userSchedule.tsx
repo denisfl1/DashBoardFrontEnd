@@ -72,7 +72,10 @@ return(
 
     <>
         {props.data.map((items:any)=>{
+            const itemStatus = items.status == "Canceled" ? "Cancelado" : items.status == "Finished" && "Finalizado"
+          
     return(
+        
             <div className="userSchedule">
 
 
@@ -84,7 +87,7 @@ return(
                 
                     <li><span style={{fontWeight:"bold"}}>Data: </span>{items.date}</li>
                     <li><span style={{fontWeight:"bold"}}>Horário: </span>{items.hour}</li>
-                    <button id={items.id} style={{cursor:"pointer"}} onClick={handleCancell}>Cancelar</button>
+                    {items.status == "Active" ?<button id={items.id} style={{cursor:"pointer"}} onClick={handleCancell}>Cancelar</button> : <button style={{backgroundColor:"white",color:"black"}}>{itemStatus}</button>}
                 </ul>
 
 

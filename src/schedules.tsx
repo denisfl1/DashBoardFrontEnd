@@ -180,7 +180,7 @@ return(
                                 <tr>
 
                                  <td>{data.doctor}</td>
-                                 <td>{data.specialty}</td>
+                                 <td style={{maxWidth:"60px",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{data.specialty}</td>
                                  <td>{data.crm}</td>
                                  <td>{data.patient_Name}</td>
                                  <td>{data.patient_Email}</td>                            

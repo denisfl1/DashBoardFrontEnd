@@ -26,7 +26,7 @@ function Edit_schedule(){
     const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
-        'ClínicaGeral',         
+        'Clínica Geral',         
         'Cardiologia',
         'Ortopedia',            
         'Dermatologia',
@@ -39,7 +39,7 @@ function Edit_schedule(){
         'Otorrinolaringologia', 
         'Radiologia',
         'Urologia',             
-        'CirurgiaGeral',
+        'Cirurgia Geral',
         'Hematologia',          
         'Gastroenterologia',
         'Nefrologia',           
@@ -304,7 +304,7 @@ return(
             
                 <div>
            <h1>Disponibilidade:</h1>
-           <div className="scheduling_doctor" style={{maxHeight:"195px"}}>     
+           <div className="scheduling_doctor" style={{maxHeight:"195px",boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>     
           <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
            
                <thead>

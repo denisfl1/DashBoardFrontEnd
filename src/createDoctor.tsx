@@ -15,7 +15,7 @@ function  CreateDoctor(){
     const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
-        'ClínicaGeral',         
+        'Clínica Geral',         
         'Cardiologia',
         'Ortopedia',            
         'Dermatologia',
@@ -28,7 +28,7 @@ function  CreateDoctor(){
         'Otorrinolaringologia', 
         'Radiologia',
         'Urologia',             
-        'CirurgiaGeral',
+        'Cirurgia Geral',
         'Hematologia',          
         'Gastroenterologia',
         'Nefrologia',           

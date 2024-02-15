@@ -4,7 +4,7 @@ import { UserContext } from "./contexts/context";
 import markshedule from "./Icons/list.png"
 function To_schedule(){
 
-    const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
+    const [specialty,setSpecialty] = useState<string>('Clínica Geral')
     const [date,setDate] = useState<string>()
     const [timeSchedule,setTimeSchedule] = useState<string>()
     const [search,setSearch] = useState<string>()
@@ -18,7 +18,7 @@ function To_schedule(){
     const {Alert} = useContext(UserContext)
 
     const SPECIALTY = [
-        'ClínicaGeral',         
+        'Clínica Geral',         
         'Cardiologia',
         'Ortopedia',            
         'Dermatologia',
@@ -31,7 +31,7 @@ function To_schedule(){
         'Otorrinolaringologia', 
         'Radiologia',
         'Urologia',             
-        'CirurgiaGeral',
+        'Cirurgia Geral',
         'Hematologia',          
         'Gastroenterologia',
         'Nefrologia',           
@@ -215,12 +215,12 @@ return(
            
     </div>
                     <div style={{width:"60%",height:"1px",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
-    <div style={{width:"100%",display:"flex",marginBottom:"50px",justifyContent:"center"}}>
+    <div style={{width:"100%",display:"flex",justifyContent:"center",marginBottom:"100px"}}>
             
             <div>
            <h1 >Disponibilidade:</h1>
-           <div className="scheduling_doctor">
-          <table style={{width:"400px",marginTop:"0",marginBottom:"auto"}}>
+           <div className="scheduling_doctor" style={{boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
+          <table style={{width:"400px",marginTop:"0"}}>
         
                <thead>
                    <tr>
@@ -261,8 +261,8 @@ return(
 
             <div style={{width:"800px"}}>
            <h1 style={{marginLeft:"80px"}}>Selecione um Paciente:</h1>   
-                   {patientList && <table style={{margin:"auto"}}>
-                   <div  className="schedulingTbody" >
+                   {patientList && <table style={{margin:"auto",width:"0"}}>
+                   <div className="schedulingTbody" style={{}}>
                        <thead>
                        <tr>
                    <th>Nome</th>
