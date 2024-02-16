@@ -17,7 +17,6 @@ function  Schedules_User(){
     const search2 = typeof search !== undefined ? AllSchedules.filter((data:any)=>key.find(keys=>data[keys].toLowerCase().includes(search))): AllSchedules
     const [My_QR_Code,setMy_QR_Code] = useState<object>([])
     const [My_QR,setMy_My_QR] = useState<boolean>(false)
-    const {Alert} = useContext(UserContext)
 
     useEffect(()=>{
 

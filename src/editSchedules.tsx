@@ -3,6 +3,7 @@ import {API} from "./Api"
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "./contexts/context"
+import editUser from "./Icons/configuracoes.png"
 
 function Edit_schedule(){
 
@@ -70,7 +71,7 @@ function Edit_schedule(){
         const [promise1,promise2] = await Promise.allSettled(
             [
                 API.get(`/findschedules/${id}`),
-                API.get("http://localhost:5000/getUsers"),
+                API.get("/getUsers"),
 
             ]
         )
@@ -258,7 +259,9 @@ function Edit_schedule(){
 return(
 
 <div className="To_scheduleContainer">
-       <div style={{display:"flex",marginLeft:"100px"}}><h1 >Editar Consulta</h1></div>
+       <div style={{display:"flex",marginLeft:"100px",alignItems:"center"}}><h1 >Editar Consulta</h1>
+       <img style={{marginLeft:"10px"}} height={"40px"} width={"40px"} src={editUser}></img>
+       </div>
        <div style={{width:"80%",borderBottom:"0.5px solid #D3D3D3",margin:"auto"}}></div>
 
     <div className="To_scheduleContent" style={{display:"flex"}}>
