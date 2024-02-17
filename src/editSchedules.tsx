@@ -10,10 +10,10 @@ function Edit_schedule(){
     const [specialty,setSpecialty] = useState<string>('ClínicaGeral')
     const [date,setDate] = useState<string>()
     const [timeSchedule,setTimeSchedule] = useState<string>()
-    const [schedule,setSchedule] = useState<any>()
+    const [schedule,setSchedule] = useState<any>([])
     const [search,setSearch] = useState<string>()
-    const [doctors,setDoctors] = useState([])
-    const [patientList,setPatientList] = useState([])
+    const [doctors,setDoctors] = useState<object[]>([])
+    const [patientList,setPatientList] = useState<object[]>([])
     const [patientName,setPatientName] = useState<any>(undefined)
     const [doctorName,setDoctorName] = useState<any>(undefined)
     const key = ["name","cpf"]
@@ -239,8 +239,6 @@ function Edit_schedule(){
         const patient_Email = patientName.email
    
 
-        // console.log(id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email)
-
         try {
             const resp = await API.put("/editscheduling",{id,doctor,specialty,date,timeSchedule,crm,patient_Name,patient_Email})
             AlertQuestion(resp)
@@ -250,9 +248,7 @@ function Edit_schedule(){
             AlertQuestion(error)
            
         }
-        
-
-        
+            
 
     }
 

@@ -8,7 +8,7 @@ import { UserContext } from "./contexts/context";
 
 function DoctorsList(){
 
-const [doctorList,setDoctorList] = useState<any>([])
+const [doctorList,setDoctorList] = useState<object[]>([])
 const [search,setSearch] = useState<string[]>([])
 const key = ["name","crm","specialty"]
 const search2 = typeof search !== undefined ? doctorList.filter((data:any)=>key.some(keys=>data[keys].toLowerCase().includes(search)||data[keys].includes(search))):doctorList

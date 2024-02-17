@@ -8,7 +8,7 @@ function To_schedule(){
     const [date,setDate] = useState<string>()
     const [timeSchedule,setTimeSchedule] = useState<string>()
     const [search,setSearch] = useState<string>()
-    const [doctors,setDoctors] = useState([])
+    const [doctors,setDoctors] = useState<object[]>([])
     const [patientList,setPatientList] = useState<object[]>([])
     const [patientName,setPatientName] = useState<any>(undefined)
     const [doctorName,setDoctorName] = useState<any>(undefined)
